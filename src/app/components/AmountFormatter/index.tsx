@@ -17,17 +17,26 @@ interface Props {
 
 export const AmountFormatter = memo((props: Props) => {
   const amount = Number(props.amount) / 10 ** 9
-  const amountString = new Intl.NumberFormat('en-US', {
+
+  const amountParts = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: props.minimumFractionDigits ?? 1,
     maximumFractionDigits: props.maximumFractionDigits ?? 15,
-  }).format(amount)
+  }).formatToParts(amount)
+
+  let decimalIx = amountParts.findIndex(({ type }) => type === 'decimal')
+  if (decimalIx < 0) decimalIx = Infinity
+  const amountPartsValues = amountParts.map(({ value }) => value)
+
+  const amountInteger = amountPartsValues.slice(0, decimalIx).join('')
+  const amountFraction = amountPartsValues.slice(decimalIx).join('')
 
   const ticker = useSelector(selectTicker)
 
   if (props.amount == null) return <>-</>
   return (
-    <>
-      {amountString} {!props.hideTicker && <>{ticker}</>}
-    </>
+    <span>
+      {amountInteger}
+      <span style={{ fontSize: '70%' }}>{amountFraction}</span>&nbsp;{!props.hideTicker && <>{ticker}</>}
+    </span>
   )
 })
