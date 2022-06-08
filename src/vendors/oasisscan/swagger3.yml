@@ -124,6 +124,50 @@ paths:
                         type: integer
                       totalSize:
                         type: integer
+  '/runtime/transaction/info':
+    get:
+      tags:
+        - Runtime
+      operationId: getRuntimeTransactionInfo
+      parameters:
+        - name: id
+          schema:
+            type: string
+          required: true
+          in: query
+        - name: hash
+          schema:
+            type: string
+          required: true
+          in: query
+        - name: round
+          schema:
+            type: integer
+          required: true
+          in: query
+      responses:
+        '200':
+          description: Get details for ParaTime transaction
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ["code", "data"]
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+                    required: ["ctx", "runtimeName", "runtimeId", "round"]
+                    properties:
+                      ctx:
+                        $ref: '#/components/schemas/CtxRow'
+                      runtimeName:
+                        type: string
+                      runtimeId:
+                        type: string
+                      round:
+                        type: integer
   '/chain/account/delegations':
     get:
       tags:
@@ -505,3 +549,25 @@ components:
         - epochLeft
         - validatorName
         - icon
+    CtxRow:
+      type: object
+      properties:
+        amount:
+          type: integer
+        method:
+          type: string
+          enum:
+            - consensus.Deposit
+            - consensus.Withdraw
+            - consensus_accounts.Parameters
+            - consensus.Balance
+            - consensus.Account
+        from:
+          type: string
+        to:
+          type: string
+      required:
+        - amount
+        - method
+        - to
+        - from

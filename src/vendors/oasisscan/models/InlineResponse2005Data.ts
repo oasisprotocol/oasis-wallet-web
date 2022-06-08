@@ -14,61 +14,61 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    DelegationRow,
-    DelegationRowFromJSON,
-    DelegationRowFromJSONTyped,
-    DelegationRowToJSON,
+    DebondingDelegationRow,
+    DebondingDelegationRowFromJSON,
+    DebondingDelegationRowFromJSONTyped,
+    DebondingDelegationRowToJSON,
 } from './';
 
 /**
  * 
  * @export
- * @interface InlineResponse2004Data
+ * @interface InlineResponse2005Data
  */
-export interface InlineResponse2004Data {
+export interface InlineResponse2005Data {
     /**
      * 
-     * @type {Array<DelegationRow>}
-     * @memberof InlineResponse2004Data
+     * @type {Array<DebondingDelegationRow>}
+     * @memberof InlineResponse2005Data
      */
-    list: Array<DelegationRow>;
+    list: Array<DebondingDelegationRow>;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse2004Data
+     * @memberof InlineResponse2005Data
      */
     page: number;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse2004Data
+     * @memberof InlineResponse2005Data
      */
     size: number;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse2004Data
+     * @memberof InlineResponse2005Data
      */
     maxPage: number;
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse2004Data
+     * @memberof InlineResponse2005Data
      */
     totalSize: number;
 }
 
-export function InlineResponse2004DataFromJSON(json: any): InlineResponse2004Data {
-    return InlineResponse2004DataFromJSONTyped(json, false);
+export function InlineResponse2005DataFromJSON(json: any): InlineResponse2005Data {
+    return InlineResponse2005DataFromJSONTyped(json, false);
 }
 
-export function InlineResponse2004DataFromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineResponse2004Data {
+export function InlineResponse2005DataFromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineResponse2005Data {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
-        'list': ((json['list'] as Array<any>).map(DelegationRowFromJSON)),
+        'list': ((json['list'] as Array<any>).map(DebondingDelegationRowFromJSON)),
         'page': json['page'],
         'size': json['size'],
         'maxPage': json['maxPage'],
@@ -76,7 +76,7 @@ export function InlineResponse2004DataFromJSONTyped(json: any, ignoreDiscriminat
     };
 }
 
-export function InlineResponse2004DataToJSON(value?: InlineResponse2004Data | null): any {
+export function InlineResponse2005DataToJSON(value?: InlineResponse2005Data | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -85,7 +85,7 @@ export function InlineResponse2004DataToJSON(value?: InlineResponse2004Data | nu
     }
     return {
         
-        'list': ((value.list as Array<any>).map(DelegationRowToJSON)),
+        'list': ((value.list as Array<any>).map(DebondingDelegationRowToJSON)),
         'page': value.page,
         'size': value.size,
         'maxPage': value.maxPage,

@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    DelegationRow,
-    DelegationRowFromJSON,
-    DelegationRowFromJSONTyped,
-    DelegationRowToJSON,
+    CtxRow,
+    CtxRowFromJSON,
+    CtxRowFromJSONTyped,
+    CtxRowToJSON,
 } from './';
 
 /**
@@ -28,34 +28,22 @@ import {
 export interface InlineResponse2003Data {
     /**
      * 
-     * @type {Array<DelegationRow>}
+     * @type {CtxRow}
      * @memberof InlineResponse2003Data
      */
-    list: Array<DelegationRow>;
+    ctx: CtxRow;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2003Data
+     */
+    runtimeName: string;
     /**
      * 
      * @type {number}
      * @memberof InlineResponse2003Data
      */
-    page: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2003Data
-     */
-    size: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2003Data
-     */
-    maxPage: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof InlineResponse2003Data
-     */
-    totalSize: number;
+    round: number;
 }
 
 export function InlineResponse2003DataFromJSON(json: any): InlineResponse2003Data {
@@ -68,11 +56,9 @@ export function InlineResponse2003DataFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'list': ((json['list'] as Array<any>).map(DelegationRowFromJSON)),
-        'page': json['page'],
-        'size': json['size'],
-        'maxPage': json['maxPage'],
-        'totalSize': json['totalSize'],
+        'ctx': CtxRowFromJSON(json['ctx']),
+        'runtimeName': json['runtimeName'],
+        'round': json['round'],
     };
 }
 
@@ -85,11 +71,9 @@ export function InlineResponse2003DataToJSON(value?: InlineResponse2003Data | nu
     }
     return {
         
-        'list': ((value.list as Array<any>).map(DelegationRowToJSON)),
-        'page': value.page,
-        'size': value.size,
-        'maxPage': value.maxPage,
-        'totalSize': value.totalSize,
+        'ctx': CtxRowToJSON(value.ctx),
+        'runtimeName': value.runtimeName,
+        'round': value.round,
     };
 }
 
