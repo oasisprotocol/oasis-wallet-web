@@ -21,6 +21,8 @@ export const config = {
     [BackendAPIs.OasisScan]: {
       explorer: 'https://api.oasisscan.com/testnet',
       blockExplorer: 'https://testnet.oasisscan.com/transactions/{{txHash}}',
+      blockExplorerParatimes:
+        'https://testnet.oasisscan.com/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
     },
   },
   local: {

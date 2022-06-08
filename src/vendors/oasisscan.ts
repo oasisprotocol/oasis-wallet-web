@@ -10,9 +10,11 @@ import {
   DelegationRow,
   DebondingDelegationRow,
   OperationsListApi,
+  RuntimeApi,
   ValidatorRow,
   OperationsRow,
   OperationsRowMethodEnum,
+  CtxRowMethodEnum,
 } from 'vendors/oasisscan/index'
 
 import { throwAPIErrors, sortByStatus } from './helpers'
@@ -25,6 +27,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
 
   const accounts = new AccountsApi(explorerConfig)
   const operations = new OperationsListApi(explorerConfig)
+  const runtime = new RuntimeApi(explorerConfig)
 
   async function getAccount(address: string): Promise<Account> {
     const account = await accounts.getAccount({ accountId: address })
@@ -42,10 +45,37 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     const transactionsList = await operations.getTransactionsList({
       address: params.accountId,
       size: params.limit,
-      runtime: false,
+      runtime: true,
     })
     if (!transactionsList || transactionsList.code !== 0) throw new Error('Wrong response code') // TODO
-    return parseTransactionsList(transactionsList.data.list)
+    const tmp = await Promise.all(
+      transactionsList.data.list.map(async tx => {
+        if ('runtimeId' in tx && tx.runtimeId !== undefined) {
+          const param = {
+            id: tx.runtimeId,
+            hash: tx.txHash,
+            round: tx.round!, // should be there
+          }
+          // TODO: improve swagger return type
+          const txInfo = await runtime.getRuntimeTransactionInfo(param)
+          // plug ParaTime values
+          const { amount, method, to, from, ...rest } = tx
+          const newTx: Transaction = {
+            amount: (txInfo.data as any).ctx.amount,
+            from: (txInfo.data as any).ctx.from,
+            to: (txInfo.data as any).ctx.to,
+            method: (txInfo.data as any).ctx.method,
+            runtimeName: (txInfo.data as any).runtimeName,
+            runtimeId: (txInfo.data as any).runtimeId,
+            round: (txInfo.data as any).round,
+            ...rest,
+          }
+          return newTx
+        }
+        return tx
+      }),
+    )
+    return parseTransactionsList(tmp)
   }
 
   async function getDelegations(params: { accountId: string; nic: oasis.client.NodeInternal }): Promise<{
@@ -99,7 +129,7 @@ export function parseValidatorsList(validators: ValidatorRow[]): Validator[] {
     .sort(sortByStatus)
 }
 
-export const transactionMethodMap: { [k in OperationsRowMethodEnum]: TransactionType } = {
+export const transactionMethodMap: { [k in OperationsRowMethodEnum | CtxRowMethodEnum]: TransactionType } = {
   [OperationsRowMethodEnum.StakingTransfer]: TransactionType.StakingTransfer,
   [OperationsRowMethodEnum.StakingTransfer]: TransactionType.StakingTransfer,
   [OperationsRowMethodEnum.StakingAddEscrow]: TransactionType.StakingAddEscrow,
@@ -117,6 +147,11 @@ export const transactionMethodMap: { [k in OperationsRowMethodEnum]: Transaction
   [OperationsRowMethodEnum.BeaconPvssCommit]: TransactionType.BeaconPvssCommit,
   [OperationsRowMethodEnum.BeaconPvssReveal]: TransactionType.BeaconPvssReveal,
   [OperationsRowMethodEnum.BeaconVrfProve]: TransactionType.BeaconVrfProve,
+  [CtxRowMethodEnum.ConsensusDeposit]: TransactionType.ConsensusDeposit,
+  [CtxRowMethodEnum.ConsensusWithdraw]: TransactionType.ConsensusWithdraw,
+  [CtxRowMethodEnum.ConsensusAccountsParameters]: TransactionType.ConsensusAccountsParameters,
+  [CtxRowMethodEnum.ConsensusBalance]: TransactionType.ConsensusBalance,
+  [CtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
 export function parseTransactionsList(transactionsList: OperationsRow[]): Transaction[] {
@@ -131,6 +166,10 @@ export function parseTransactionsList(transactionsList: OperationsRow[]): Transa
       timestamp: t.timestamp,
       to: t.to ?? undefined,
       type: transactionMethodMap[t.method],
+      method: t.method,
+      runtimeName: t.runtimeName,
+      runtimeId: t.runtimeId,
+      round: t.round,
     }
     return parsed
   })

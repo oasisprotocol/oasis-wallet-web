@@ -553,7 +553,7 @@ components:
       type: object
       properties:
         amount:
-          type: integer
+          type: string
         method:
           type: string
           enum:

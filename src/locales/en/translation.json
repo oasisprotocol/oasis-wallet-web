@@ -54,6 +54,9 @@
         "received": "Received <0></0> delegation in escrow",
         "sent": "Delegated <0></0> to validator"
       },
+      "consensusDeposit": {
+        "sent": "<0></0> deposit"
+      },
       "loadingError": "Couldn't load transactions.",
       "reclaimEscrow": {
         "received": "<0></0> reclaimed by delegator",
