@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { Transaction } from 'app/state/transaction/types'
+import { WalletType } from 'app/state/wallet/types'
 import { createSlice } from 'utils/@reduxjs/toolkit'
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors'
 import { accountSaga } from './saga'
@@ -22,7 +23,7 @@ const slice = createSlice({
     clearAccount(state, action: PayloadAction<void>) {
       Object.assign(state, initialState)
     },
-    fetchAccount(state, action: PayloadAction<string>) {},
+    fetchAccount(state, action: PayloadAction<{ address: string; type: WalletType }>) {},
     accountLoaded(state, action: PayloadAction<Account>) {
       state.accountError = null
       Object.assign(state, action.payload)

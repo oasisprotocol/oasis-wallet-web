@@ -19,6 +19,10 @@ const slice = createSlice({
     openWalletFromMnemonic(state, action: PayloadAction<string>) {},
     openWalletFromPrivateKey(state, action: PayloadAction<string>) {},
     openWalletsFromLedger(state, action: PayloadAction<LedgerAccount[]>) {},
+    openWalletFromEthereumPrivateKey(
+      state,
+      action: PayloadAction<{ priBuffer: Buffer; privateKey: string }>,
+    ) {},
     selectWallet(state, action: PayloadAction<number>) {},
     closeWallet(state, action: PayloadAction<void>) {},
     fetchWallet(state, action: PayloadAction<Wallet>) {},

@@ -4,6 +4,9 @@ import { hex2uint, parseRpcBalance, publicKeyToAddress, shortPublicKey, uint2hex
 import { push } from 'connected-react-router'
 import nacl from 'tweetnacl'
 import { call, fork, put, select, take, takeEvery, takeLatest } from 'typed-redux-saga'
+import * as EthUtils from 'ethereumjs-util'
+import * as oasis from '@oasisprotocol/client'
+import * as oasisRT from '@oasisprotocol/client-rt'
 
 import { walletActions as actions, walletActions } from '.'
 import { LedgerAccount } from '../ledger/types'
@@ -27,6 +30,7 @@ export function* rootWalletSaga() {
   yield* takeEvery(walletActions.openWalletFromPrivateKey, openWalletFromPrivateKey)
   yield* takeEvery(walletActions.openWalletFromMnemonic, openWalletFromMnemonic)
   yield* takeEvery(walletActions.openWalletsFromLedger, openWalletsFromLedger)
+  yield* takeEvery(walletActions.openWalletFromEthereumPrivateKey, openWalletFromEthereumPrivateKey)
   yield* takeEvery(walletActions.addWallet, addWallet)
 
   // Reload balance of matching wallets when a transaction occurs
@@ -116,6 +120,63 @@ export function* openWalletFromMnemonic({ payload: mnemonic }: PayloadAction<str
       publicKey,
       privateKey,
       type: type!,
+      balance,
+      selectImmediately: true,
+    }),
+  )
+}
+
+export async function getEvmBech32Address(evmAddress: any) {
+  if (!evmAddress) {
+    return ''
+  }
+  let newEvmAddress = evmAddress
+  if (newEvmAddress.indexOf('0x') === 0) {
+    newEvmAddress = newEvmAddress.substr(2)
+  }
+  const evmBytes = oasis.misc.fromHex(newEvmAddress) //YSZ here split to saga
+  let address = await oasis.address.fromData(
+    oasisRT.address.V0_SECP256K1ETH_CONTEXT_IDENTIFIER,
+    oasisRT.address.V0_SECP256K1ETH_CONTEXT_VERSION,
+    evmBytes,
+  )
+  const bech32Address = oasisRT.address.toBech32(address)
+  return bech32Address
+}
+
+export function* openWalletFromEthereumPrivateKey({payload}:{ payload: { priBuffer: Buffer, privateKey: string } }) {
+  console.log({ mytmp: payload })
+  const { priBuffer, privateKey } = payload
+  let publicKeyBuffer = EthUtils.privateToPublic(priBuffer)
+  let publicKeyHex = publicKeyBuffer.toString('hex')
+  //let publicKey = EthUtils.addHexPrefix(publicKeyHex)
+  const publicKey = publicKeyHex
+
+  let addressBuffer = EthUtils.privateToAddress(priBuffer)
+  let addressHex = addressBuffer.toString('hex')
+  let address = EthUtils.addHexPrefix(addressHex)
+  let walletAddress = EthUtils.toChecksumAddress(address)
+
+  const oasisAddress = yield* call(getEvmBech32Address, walletAddress)
+
+  const tmp = {
+    privKey_hex: privateKey,
+    publicKey,
+    address: oasisAddress,
+    evmAddress: walletAddress,
+  }
+
+  console.log({ tmp })
+
+  const balance = yield* call(getBalance, tmp.publicKey)
+
+  yield* put(
+    actions.addWallet({
+      id: walletId++,
+      address: tmp.address,
+      publicKey: tmp.publicKey,
+      privateKey: tmp.privKey_hex,
+      type: WalletType.ParaTime,
       balance,
       selectImmediately: true,
     }),

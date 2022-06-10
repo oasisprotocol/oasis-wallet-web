@@ -21,7 +21,7 @@ import { TransitionGroup } from 'react-transition-group'
 import { useAccountSlice } from '../../state/account'
 import { selectAccount } from '../../state/account/selectors'
 import { BalanceDetails } from '../../state/account/types'
-import { selectAddress, selectStatus, selectWallets } from '../../state/wallet/selectors'
+import { selectAddress, selectStatus, selectWallets, selectType } from '../../state/wallet/selectors'
 import { ActiveDelegationList } from '../StakingPage/Features/DelegationList/ActiveDelegationList'
 import { DebondingDelegationList } from '../StakingPage/Features/DelegationList/DebondingDelegationList'
 import { ValidatorList } from '../StakingPage/Features/ValidatorList'
@@ -76,6 +76,7 @@ export function AccountPage(props: Props) {
 
   const walletIsOpen = useSelector(selectStatus)
   const walletAddress = useSelector(selectAddress)
+  const walletType = useSelector(selectType)
   const selectedNetwork = useSelector(selectSelectedNetwork)
   const { active } = useSelector(selectTransaction)
   const wallets = useSelector(selectWallets)
@@ -91,7 +92,7 @@ export function AccountPage(props: Props) {
 
   // Reload account balances if address or network changes
   useEffect(() => {
-    dispatch(accountActions.fetchAccount(address))
+    dispatch(accountActions.fetchAccount({address,type:walletType}))
     dispatch(stakeActions.fetchAccount(address))
     return () => {
       dispatch(accountActions.clearAccount())

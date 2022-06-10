@@ -17,4 +17,5 @@ export const selectWallets = createSelector([selectSlice], state => state.wallet
 export const selectAddress = createSelector([selectActiveWallet], wallet => wallet?.address ?? '')
 export const selectPublicKey = createSelector([selectActiveWallet], wallet => wallet?.publicKey ?? '')
 export const selectBalance = createSelector([selectActiveWallet], wallet => wallet?.balance)
+export const selectType = createSelector([selectActiveWallet], wallet => wallet?.type)
 export const selectStatus = createSelector([selectSlice], wallet => wallet.isOpen)

@@ -14,6 +14,7 @@ import { FromLedger } from './Features/FromLedger'
 
 import { FromMnemonic } from './Features/FromMnemonic'
 import { FromPrivateKey } from './Features/FromPrivateKey'
+import { FromEthereumPrivateKey } from './Features/FromEthereumPrivateKey'
 
 export function SelectOpenMethod() {
   const { t } = useTranslation()
@@ -41,6 +42,14 @@ export function SelectOpenMethod() {
           <Button
             type="submit"
             label={t('openWallet.method.privateKey', 'Private key')}
+            style={{ borderRadius: '4px' }}
+            primary
+          />
+        </NavLink>
+        <NavLink to="/open-wallet/ethereum-private-key">
+          <Button
+            type="submit"
+            label={t('openWallet.method.ethereumPrivateKey', 'Ethereum Private key')}
             style={{ borderRadius: '4px' }}
             primary
           />
@@ -81,6 +90,7 @@ export function OpenWalletPage(props: Props) {
         <TransitionRoute exact path="/open-wallet" component={SelectOpenMethod} />
         <TransitionRoute exact path="/open-wallet/mnemonic" component={FromMnemonic} />
         <TransitionRoute exact path="/open-wallet/private-key" component={FromPrivateKey} />
+        <TransitionRoute exact path="/open-wallet/ethereum-private-key" component={FromEthereumPrivateKey} />
         <TransitionRoute exact path="/open-wallet/ledger" component={FromLedger} />
       </Switch>
     </TransitionGroup>
