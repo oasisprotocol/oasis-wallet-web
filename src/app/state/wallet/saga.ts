@@ -27,6 +27,7 @@ export function* rootWalletSaga() {
   yield* takeEvery(walletActions.openWalletFromPrivateKey, openWalletFromPrivateKey)
   yield* takeEvery(walletActions.openWalletFromMnemonic, openWalletFromMnemonic)
   yield* takeEvery(walletActions.openWalletsFromLedger, openWalletsFromLedger)
+  yield* takeEvery(walletActions.openWalletFromEthereumPrivateKey, openWalletFromEthereumPrivateKey)
   yield* takeEvery(walletActions.addWallet, addWallet)
 
   // Reload balance of matching wallets when a transaction occurs
@@ -116,6 +117,22 @@ export function* openWalletFromMnemonic({ payload: mnemonic }: PayloadAction<str
       publicKey,
       privateKey,
       type: type!,
+      balance,
+      selectImmediately: true,
+    }),
+  )
+}
+
+export function* openWalletFromEthereumPrivateKey({ payload: tmp }: PayloadAction<any>) {
+  const balance = yield* call(getBalance, tmp.publicKey)
+
+  yield* put(
+    actions.addWallet({
+      id: walletId++,
+      address: tmp.address,
+      publicKey: tmp.publicKey,
+      privateKey: tmp.privKey_hex,
+      type: WalletType.ParaTime,
       balance,
       selectImmediately: true,
     }),
