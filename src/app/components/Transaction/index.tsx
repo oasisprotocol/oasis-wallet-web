@@ -240,8 +240,10 @@ export function Transaction(props: TransactionProps) {
   const icon = matchingConfiguration.icon()
   const header = matchingConfiguration.header()
   const designation = matchingConfiguration.designation
-  const blockExplorerLink = config[props.network][backend()]?.blockExplorer
-  const blockExplorerParatimesLink = config[props.network][backend()]?.blockExplorerParatimes
+  const backendLinks = config[props.network][backend()]
+  const blockExplorerLink = backendLinks?.blockExplorer
+  const blockExplorerParatimesLink = backendLinks?.blockExplorerParatimes
+
   return (
     <Card round="small" background="background-front" gap="none" elevation="xsmall">
       <CardHeader
@@ -299,7 +301,7 @@ export function Transaction(props: TransactionProps) {
             href={
               transaction.runtimeId
                 ? blockExplorerParatimesLink
-                    .replace('{{txHash}}', encodeURIComponent(transaction.hash))
+                    ?.replace('{{txHash}}', encodeURIComponent(transaction.hash))
                     .replace('{{runtimeId}}', encodeURIComponent(transaction.runtimeId))
                 : blockExplorerLink.replace('{{txHash}}', encodeURIComponent(transaction.hash))
             }
