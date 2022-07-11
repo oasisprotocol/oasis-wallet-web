@@ -71,8 +71,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
             amount,
             from,
             to,
-            // method: OperationsRowMethodEnum.BeaconPvssCommit,
-            method,
+            type: method,
             runtimeName,
             runtimeId,
             round: round,
@@ -163,11 +162,11 @@ export const transactionMethodMap: { [k in OperationsRowMethodEnum | CtxRowMetho
   [CtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-type Foo = Omit<OperationsRow, 'method'> & {
+type TransactionsListRow = Omit<OperationsRow, 'method'> & {
   method: TransactionMethod
 }
 
-export function parseTransactionsList(transactionsList: Foo[]): Transaction[] {
+export function parseTransactionsList(transactionsList: TransactionsListRow[]): Transaction[] {
   return transactionsList.map(t => {
     const parsed: Transaction = {
       amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),
@@ -179,7 +178,6 @@ export function parseTransactionsList(transactionsList: Foo[]): Transaction[] {
       timestamp: t.timestamp,
       to: t.to ?? undefined,
       type: transactionMethodMap[t.method],
-      method: t.method,
       runtimeName: t.runtimeName,
       runtimeId: t.runtimeId,
       round: t.round,

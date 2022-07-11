@@ -155,7 +155,6 @@ export function parseTransactionsList(transactionsList: OperationsRow[]): Transa
       timestamp: t.timestamp,
       to: t.to,
       type: transactionMethodMap[t.type!],
-      method: undefined,
       runtimeName: undefined,
       runtimeId: undefined,
       round: undefined,
