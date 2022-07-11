@@ -55,6 +55,8 @@ export const config: BackendAPIsConfig = {
     [BackendAPIs.OasisScan]: {
       explorer: 'http://localhost:9001',
       blockExplorer: 'http://localhost:9001/data/transactions?operation_id={{txHash}}',
+      blockExplorerParatimes:
+        'http://localhost:9001/data/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
     },
   },
 }

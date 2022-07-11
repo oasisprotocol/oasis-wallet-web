@@ -1,7 +1,7 @@
 import * as oasis from '@oasisprotocol/client'
 import { Account } from 'app/state/account/types'
 import { DebondingDelegation, Delegation, Validator } from 'app/state/staking/types'
-import { Transaction, TransactionType } from 'app/state/transaction/types'
+import { Transaction, TransactionType, TransactionMethod } from 'app/state/transaction/types'
 import { parseStringValueToInt } from 'app/lib/helpers'
 import {
   AccountsApi,
@@ -48,6 +48,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
       runtime: true,
     })
     if (!transactionsList || transactionsList.code !== 0) throw new Error('Wrong response code') // TODO
+
     const tmp = await Promise.all(
       transactionsList.data.list.map(async tx => {
         if ('runtimeId' in tx && tx.runtimeId !== undefined) {
@@ -57,21 +58,31 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
             round: tx.round!, // should be there
           }
           // TODO: improve swagger return type
-          const txInfo = await runtime.getRuntimeTransactionInfo(param)
+          const {
+            data: {
+              ctx: { amount, from, to, method },
+              runtimeName,
+              round,
+            },
+          } = await runtime.getRuntimeTransactionInfo(param)
           // plug ParaTime values
-          const { amount, method, to, from, ...rest } = tx
-          const newTx: Transaction = {
-            amount: (txInfo.data as any).ctx.amount,
-            from: (txInfo.data as any).ctx.from,
-            to: (txInfo.data as any).ctx.to,
-            method: (txInfo.data as any).ctx.method,
-            runtimeName: (txInfo.data as any).runtimeName,
-            runtimeId: (txInfo.data as any).runtimeId,
-            round: (txInfo.data as any).round,
+          const { runtimeId, ...rest } = tx
+          const newTx = {
             ...rest,
+            amount: amount,
+            // amount: amount.toString(),
+            from,
+            to,
+            // method: OperationsRowMethodEnum.BeaconPvssCommit,
+            method,
+            runtimeName,
+            runtimeId,
+            round: round,
           }
+          console.log('newTx', newTx)
           return newTx
         }
+        console.log('tx', tx)
         return tx
       }),
     )
@@ -154,7 +165,11 @@ export const transactionMethodMap: { [k in OperationsRowMethodEnum | CtxRowMetho
   [CtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-export function parseTransactionsList(transactionsList: OperationsRow[]): Transaction[] {
+type Foo = Omit<OperationsRow, 'method'> & {
+  method: TransactionMethod
+}
+
+export function parseTransactionsList(transactionsList: Foo[]): Transaction[] {
   return transactionsList.map(t => {
     const parsed: Transaction = {
       amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),

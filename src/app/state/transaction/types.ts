@@ -1,4 +1,5 @@
 import { ErrorPayload } from 'types/errors'
+import { OperationsRowMethodEnum, CtxRowMethodEnum } from 'vendors/oasisscan/index'
 
 export enum TransactionType {
   StakingTransfer = 'staking.Transfer',
@@ -24,6 +25,8 @@ export enum TransactionType {
   ConsensusAccount = 'consensus.account',
 }
 
+export type TransactionMethod = OperationsRowMethodEnum | CtxRowMethodEnum | undefined
+
 export interface Transaction {
   amount: number | undefined
   fee: number | undefined
@@ -34,7 +37,7 @@ export interface Transaction {
   timestamp: number | undefined
   to: string | undefined
   type: TransactionType
-  method: string | undefined
+  method: TransactionMethod
   // These are undefined on consensus transaction
   // Only appear on ParaTime transaction
   runtimeName: string | undefined

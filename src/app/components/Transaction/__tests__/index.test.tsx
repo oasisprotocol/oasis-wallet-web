@@ -8,6 +8,7 @@ import { createMemoryHistory } from 'history'
 import { Provider, useSelector } from 'react-redux'
 import { configureAppStore } from 'store/configureStore'
 import { BackendAPIs, backend } from 'vendors/backend'
+import { OperationsRowMethodEnum } from 'vendors/oasisscan/index'
 
 import { Transaction } from '..'
 import * as transactionTypes from 'app/state/transaction/types'
@@ -115,6 +116,10 @@ describe('<Transaction  />', () => {
         fee: undefined,
         level: undefined,
         status: true,
+        method: OperationsRowMethodEnum.StakingTransfer,
+        runtimeName: undefined,
+        runtimeId: undefined,
+        round: undefined,
       },
       network,
     )
@@ -135,6 +140,10 @@ describe('<Transaction  />', () => {
         fee: undefined,
         level: undefined,
         status: true,
+        method: OperationsRowMethodEnum.StakingTransfer,
+        runtimeName: undefined,
+        runtimeId: undefined,
+        round: undefined,
       },
       network,
     )
