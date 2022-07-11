@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    CtxRow,
-    CtxRowFromJSON,
-    CtxRowFromJSONTyped,
-    CtxRowToJSON,
+    ParaTimeCtxRow,
+    ParaTimeCtxRowFromJSON,
+    ParaTimeCtxRowFromJSONTyped,
+    ParaTimeCtxRowToJSON,
 } from './';
 
 /**
@@ -28,10 +28,10 @@ import {
 export interface InlineResponse2003Data {
     /**
      * 
-     * @type {CtxRow}
+     * @type {ParaTimeCtxRow}
      * @memberof InlineResponse2003Data
      */
-    ctx: CtxRow;
+    ctx: ParaTimeCtxRow;
     /**
      * 
      * @type {string}
@@ -62,7 +62,7 @@ export function InlineResponse2003DataFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'ctx': CtxRowFromJSON(json['ctx']),
+        'ctx': ParaTimeCtxRowFromJSON(json['ctx']),
         'runtimeName': json['runtimeName'],
         'runtimeId': json['runtimeId'],
         'round': json['round'],
@@ -78,7 +78,7 @@ export function InlineResponse2003DataToJSON(value?: InlineResponse2003Data | nu
     }
     return {
         
-        'ctx': CtxRowToJSON(value.ctx),
+        'ctx': ParaTimeCtxRowToJSON(value.ctx),
         'runtimeName': value.runtimeName,
         'runtimeId': value.runtimeId,
         'round': value.round,

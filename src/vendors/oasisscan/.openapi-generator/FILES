@@ -4,7 +4,6 @@ apis/RuntimeApi.ts
 apis/index.ts
 index.ts
 models/AccountsRow.ts
-models/CtxRow.ts
 models/DebondingDelegationRow.ts
 models/DelegationRow.ts
 models/InlineResponse200.ts
@@ -19,6 +18,7 @@ models/InlineResponse2004Data.ts
 models/InlineResponse2005.ts
 models/InlineResponse2005Data.ts
 models/OperationsRow.ts
+models/ParaTimeCtxRow.ts
 models/ValidatorRow.ts
 models/index.ts
 runtime.ts

@@ -1,9 +1,8 @@
 openapi: '3.0.1'
 info:
   title: Oasisscan API
-  version: "1"
-  description:
-    https://github.com/bitcat365/oasisscan-backend#readme
+  version: '1'
+  description: https://github.com/bitcat365/oasisscan-backend#readme
 paths:
   '/chain/account/info/{account_id}':
     get:
@@ -23,7 +22,7 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
@@ -46,13 +45,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["active", "delegators", "inactive", "list"]
+                    required: ['active', 'delegators', 'inactive', 'list']
                     properties:
                       active:
                         type: integer
@@ -104,13 +103,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["list", "maxPage", "page", "size", "totalSize", "tags"]
+                    required: ['list', 'maxPage', 'page', 'size', 'totalSize', 'tags']
                     properties:
                       list:
                         type: array
@@ -152,16 +151,16 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["ctx", "runtimeName", "runtimeId", "round"]
+                    required: ['ctx', 'runtimeName', 'runtimeId', 'round']
                     properties:
                       ctx:
-                        $ref: '#/components/schemas/CtxRow'
+                        $ref: '#/components/schemas/ParaTimeCtxRow'
                       runtimeName:
                         type: string
                       runtimeId:
@@ -202,13 +201,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["list", "maxPage", "page", "size", "totalSize", "tags"]
+                    required: ['list', 'maxPage', 'page', 'size', 'totalSize', 'tags']
                     properties:
                       list:
                         type: array
@@ -251,13 +250,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["list", "maxPage", "page", "size", "totalSize", "tags"]
+                    required: ['list', 'maxPage', 'page', 'size', 'totalSize', 'tags']
                     properties:
                       list:
                         type: array
@@ -308,8 +307,7 @@ components:
       properties:
         active:
           type: boolean
-          description:
-            If "true", entity is part of validator set
+          description: If "true", entity is part of validator set
             (top <scheduler.params.max_validators> by stake).
         balance:
           type: string
@@ -376,8 +374,7 @@ components:
           type: integer
         status:
           type: boolean
-          description:
-            If "true", an entity has a node that is registered for being a
+          description: If "true", an entity has a node that is registered for being a
             validator, node is up to date, and has successfully registered itself.
             However, it may or may not be part of validator set
             (top <scheduler.params.max_validators> by stake).
@@ -549,7 +546,7 @@ components:
         - epochLeft
         - validatorName
         - icon
-    CtxRow:
+    ParaTimeCtxRow:
       type: object
       properties:
         amount:

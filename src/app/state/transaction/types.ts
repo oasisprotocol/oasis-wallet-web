@@ -1,7 +1,7 @@
 import { ErrorPayload } from 'types/errors'
-import { OperationsRowMethodEnum, CtxRowMethodEnum } from 'vendors/oasisscan/index'
+import { OperationsRowMethodEnum, ParaTimeCtxRowMethodEnum } from 'vendors/oasisscan/index'
 
-export type TransactionMethod = OperationsRowMethodEnum | CtxRowMethodEnum
+export type TransactionMethod = OperationsRowMethodEnum | ParaTimeCtxRowMethodEnum
 
 export enum TransactionType {
   StakingTransfer = 'staking.Transfer',
@@ -20,11 +20,11 @@ export enum TransactionType {
   BeaconPvssCommit = 'beacon.PVSSCommit',
   BeaconPvssReveal = 'beacon.PVSSReveal',
   BeaconVrfProve = 'beacon.VRFProve',
-  ConsensusDeposit = 'consensus.deposit',
-  ConsensusWithdraw = 'consensus.withdraw',
-  ConsensusAccountsParameters = 'consensus.parameters',
-  ConsensusBalance = 'consensus.balance',
-  ConsensusAccount = 'consensus.account',
+  ConsensusDeposit = 'consensus.Deposit',
+  ConsensusWithdraw = 'consensus.Withdraw',
+  ConsensusAccountsParameters = 'consensus.Parameters',
+  ConsensusBalance = 'consensus.Balance',
+  ConsensusAccount = 'consensus.Account',
 }
 
 export interface Transaction {

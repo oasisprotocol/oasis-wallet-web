@@ -14,7 +14,7 @@ import {
   ValidatorRow,
   OperationsRow,
   OperationsRowMethodEnum,
-  CtxRowMethodEnum,
+  ParaTimeCtxRowMethodEnum,
 } from 'vendors/oasisscan/index'
 
 import { throwAPIErrors, sortByStatus } from './helpers'
@@ -72,14 +72,13 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
             from,
             to,
             type: method,
+            method,
             runtimeName,
             runtimeId,
             round: round,
           }
-          console.log('newTx', newTx)
           return newTx
         }
-        console.log('tx', tx)
         return tx
       }),
     )
@@ -137,7 +136,9 @@ export function parseValidatorsList(validators: ValidatorRow[]): Validator[] {
     .sort(sortByStatus)
 }
 
-export const transactionMethodMap: { [k in OperationsRowMethodEnum | CtxRowMethodEnum]: TransactionType } = {
+export const transactionMethodMap: {
+  [k in OperationsRowMethodEnum | ParaTimeCtxRowMethodEnum]: TransactionType
+} = {
   [OperationsRowMethodEnum.StakingTransfer]: TransactionType.StakingTransfer,
   [OperationsRowMethodEnum.StakingTransfer]: TransactionType.StakingTransfer,
   [OperationsRowMethodEnum.StakingAddEscrow]: TransactionType.StakingAddEscrow,
@@ -155,11 +156,11 @@ export const transactionMethodMap: { [k in OperationsRowMethodEnum | CtxRowMetho
   [OperationsRowMethodEnum.BeaconPvssCommit]: TransactionType.BeaconPvssCommit,
   [OperationsRowMethodEnum.BeaconPvssReveal]: TransactionType.BeaconPvssReveal,
   [OperationsRowMethodEnum.BeaconVrfProve]: TransactionType.BeaconVrfProve,
-  [CtxRowMethodEnum.ConsensusDeposit]: TransactionType.ConsensusDeposit,
-  [CtxRowMethodEnum.ConsensusWithdraw]: TransactionType.ConsensusWithdraw,
-  [CtxRowMethodEnum.ConsensusAccountsParameters]: TransactionType.ConsensusAccountsParameters,
-  [CtxRowMethodEnum.ConsensusBalance]: TransactionType.ConsensusBalance,
-  [CtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
+  [ParaTimeCtxRowMethodEnum.ConsensusDeposit]: TransactionType.ConsensusDeposit,
+  [ParaTimeCtxRowMethodEnum.ConsensusWithdraw]: TransactionType.ConsensusWithdraw,
+  [ParaTimeCtxRowMethodEnum.ConsensusAccountsParameters]: TransactionType.ConsensusAccountsParameters,
+  [ParaTimeCtxRowMethodEnum.ConsensusBalance]: TransactionType.ConsensusBalance,
+  [ParaTimeCtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
 type TransactionsListRow = Omit<OperationsRow, 'method'> & {
