@@ -257,12 +257,15 @@ export function Transaction(props: TransactionProps) {
   const header = matchingConfiguration.header()
   const designation = matchingConfiguration.designation
   const backendLinks = config[props.network][backend()]
-  const externalExplorerLink = (
+  let externalExplorerLink = (
     transaction.runtimeId ? backendLinks.blockExplorerParatimes : backendLinks.blockExplorer
   )?.replace('{{txHash}}', encodeURIComponent(transaction.hash))
 
   if (transaction.runtimeId) {
-    externalExplorerLink?.replace('{{runtimeId}}', encodeURIComponent(transaction.runtimeId))
+    externalExplorerLink = externalExplorerLink?.replace(
+      '{{runtimeId}}',
+      encodeURIComponent(transaction.runtimeId),
+    )
   }
 
   return (
