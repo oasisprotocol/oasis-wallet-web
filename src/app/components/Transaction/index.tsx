@@ -175,7 +175,7 @@ export function Transaction(props: TransactionProps) {
             i18nKey="account.transaction.consensusDeposit.sent"
             t={t}
             values={{ runtimeName: transaction.runtimeName }}
-            defaults={`{{runtimeName}} deposit`}
+            defaults="{{runtimeName}} deposit"
           />
         ),
       },
@@ -257,8 +257,13 @@ export function Transaction(props: TransactionProps) {
   const header = matchingConfiguration.header()
   const designation = matchingConfiguration.designation
   const backendLinks = config[props.network][backend()]
-  const blockExplorerLink = backendLinks?.blockExplorer
-  const blockExplorerParatimesLink = backendLinks?.blockExplorerParatimes
+  const externalExplorerLink = (
+    transaction.runtimeId ? backendLinks.blockExplorerParatimes : backendLinks.blockExplorer
+  )?.replace('{{txHash}}', encodeURIComponent(transaction.hash))
+
+  if (transaction.runtimeId) {
+    externalExplorerLink?.replace('{{runtimeId}}', encodeURIComponent(transaction.runtimeId))
+  }
 
   return (
     <Card round="small" background="background-front" gap="none" elevation="xsmall">
@@ -295,15 +300,11 @@ export function Transaction(props: TransactionProps) {
               value={t('common.unavailable', 'Unavailable')}
             />
           )}
-          {transaction.runtimeName ? (
-            <InfoBox label="Round" value={transaction.round} />
-          ) : (
-            <InfoBox
-              icon={<Cube color="brand" />}
-              label={t('common.block', 'Block')}
-              value={transaction.level}
-            />
-          )}
+          <InfoBox
+            icon={<Cube color="brand" />}
+            label={transaction.runtimeId ? t('common.round', 'Round') : t('common.block', 'Block')}
+            value={transaction[transaction.runtimeId ? 'round' : 'level']}
+          />
         </Grid>
       </CardBody>
       <CardFooter background="background-contrast" pad={{ horizontal: 'medium' }}>
@@ -314,13 +315,7 @@ export function Transaction(props: TransactionProps) {
           <Button
             icon={<CircleInformation color="dark-3" />}
             hoverIndicator
-            href={
-              transaction.runtimeId
-                ? blockExplorerParatimesLink
-                    ?.replace('{{txHash}}', encodeURIComponent(transaction.hash))
-                    .replace('{{runtimeId}}', encodeURIComponent(transaction.runtimeId))
-                : blockExplorerLink.replace('{{txHash}}', encodeURIComponent(transaction.hash))
-            }
+            href={externalExplorerLink}
             target="_blank"
             rel="noopener"
             data-testid="explorer-link"

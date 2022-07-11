@@ -57,7 +57,6 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
             hash: tx.txHash,
             round: tx.round!, // should be there
           }
-          // TODO: improve swagger return type
           const {
             data: {
               ctx: { amount, from, to, method },

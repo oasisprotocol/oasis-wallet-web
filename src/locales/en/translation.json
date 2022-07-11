@@ -55,7 +55,7 @@
         "sent": "Delegated <0></0> to validator"
       },
       "consensusDeposit": {
-        "sent": "<0></0> deposit"
+        "sent": "{{runtimeName}} deposit"
       },
       "loadingError": "Couldn't load transactions.",
       "reclaimEscrow": {
@@ -86,6 +86,7 @@
     "confirm": "Confirm",
     "delegator": "Delegator",
     "from": "From",
+    "round": "Round",
     "to": "To",
     "unavailable": "Unavailable",
     "validator": "Validator",
