@@ -1,5 +1,9 @@
 import * as monitor from 'vendors/monitor'
 import * as oasisscan from 'vendors/oasisscan'
+import {
+  OperationsRowMethodEnum,
+} from 'vendors/oasisscan/index'
+
 
 function ignoreTimeoutError() {
   // Note: This is strongly discouraged. If it stops working, we converted to
@@ -35,7 +39,7 @@ describe('check all transaction methods from API are mapped in transactionMethod
     ignoreTimeoutError() // Ignore if API is not responding
 
     cy.request({
-      url: 'https://api.oasisscan.com/mainnet/chain/methods',
+      url: 'https://api.oasisscan.com/mainnet/chain/methods', // does not include consensus methods
       retryOnNetworkFailure: false,
       failOnStatusCode: false,
       timeout: 5000,
@@ -43,8 +47,9 @@ describe('check all transaction methods from API are mapped in transactionMethod
       if (!response.isOkStatusCode) return // Ignore if API is broken
 
       const allApiMethods = response.body.data.list
-      expect(allApiMethods).to.have.length(Object.keys(oasisscan.transactionMethodMap).length)
-      expect(oasisscan.transactionMethodMap).to.have.keys(allApiMethods)
+
+      expect(allApiMethods).to.have.length(Object.keys(OperationsRowMethodEnum).length)
+      expect(oasisscan.transactionMethodMap).to.include.keys(allApiMethods)
     })
   })
 })
