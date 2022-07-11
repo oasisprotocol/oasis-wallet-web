@@ -21,10 +21,10 @@ import { exists, mapValues } from '../runtime';
 export interface CtxRow {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof CtxRow
      */
-    amount: number;
+    amount: string;
     /**
      * 
      * @type {string}

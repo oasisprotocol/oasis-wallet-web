@@ -40,6 +40,12 @@ export interface InlineResponse2003Data {
     runtimeName: string;
     /**
      * 
+     * @type {string}
+     * @memberof InlineResponse2003Data
+     */
+    runtimeId: string;
+    /**
+     * 
      * @type {number}
      * @memberof InlineResponse2003Data
      */
@@ -58,6 +64,7 @@ export function InlineResponse2003DataFromJSONTyped(json: any, ignoreDiscriminat
         
         'ctx': CtxRowFromJSON(json['ctx']),
         'runtimeName': json['runtimeName'],
+        'runtimeId': json['runtimeId'],
         'round': json['round'],
     };
 }
@@ -73,6 +80,7 @@ export function InlineResponse2003DataToJSON(value?: InlineResponse2003Data | nu
         
         'ctx': CtxRowToJSON(value.ctx),
         'runtimeName': value.runtimeName,
+        'runtimeId': value.runtimeId,
         'round': value.round,
     };
 }

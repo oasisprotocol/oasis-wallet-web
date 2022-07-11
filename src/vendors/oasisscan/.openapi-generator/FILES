@@ -1,8 +1,10 @@
 apis/AccountsApi.ts
 apis/OperationsListApi.ts
+apis/RuntimeApi.ts
 apis/index.ts
 index.ts
 models/AccountsRow.ts
+models/CtxRow.ts
 models/DebondingDelegationRow.ts
 models/DelegationRow.ts
 models/InlineResponse200.ts
@@ -14,6 +16,8 @@ models/InlineResponse2003.ts
 models/InlineResponse2003Data.ts
 models/InlineResponse2004.ts
 models/InlineResponse2004Data.ts
+models/InlineResponse2005.ts
+models/InlineResponse2005Data.ts
 models/OperationsRow.ts
 models/ValidatorRow.ts
 models/index.ts

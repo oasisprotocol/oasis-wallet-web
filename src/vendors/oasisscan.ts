@@ -69,8 +69,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
           const { runtimeId, ...rest } = tx
           const newTx = {
             ...rest,
-            amount: amount,
-            // amount: amount.toString(),
+            amount,
             from,
             to,
             // method: OperationsRowMethodEnum.BeaconPvssCommit,
