@@ -1,29 +1,23 @@
 import { BackendAPIs } from 'vendors/backend'
 import { NetworkType } from 'app/state/network/types'
 
-type BackendAPIsUrls = {
-  [key in BackendAPIs]: {
-    explorer: string
-    blockExplorer: string
-    blockExplorerParatimes?: string
-  }
+type BackendApiUrls = {
+  explorer: string
+  blockExplorer: string
+  blockExplorerParatimes?: string
 }
 
-type BackendAPIsConfig = {
-  [key in NetworkType]: BackendAPIsUrls
+type BackendProviders = {
+  grpc: string
+  [BackendAPIs.OasisMonitor]: BackendApiUrls
+  [BackendAPIs.OasisScan]: BackendApiUrls
 }
 
-type GrpcApiConfig = {
-  [key in NetworkType]: string
+type BackendConfig = {
+  [key in NetworkType]: BackendProviders
 }
 
-export const grpcApi: GrpcApiConfig = {
-  mainnet: 'https://grpc.oasis.dev',
-  testnet: 'https://testnet.grpc.oasis.dev',
-  local: 'http://localhost:42280',
-}
-
-export const config: BackendAPIsConfig = {
+export const config: BackendConfig = {
   mainnet: {
     [BackendAPIs.OasisMonitor]: {
       explorer: 'https://monitor.oasis.dev',
@@ -34,8 +28,10 @@ export const config: BackendAPIsConfig = {
       blockExplorer: 'https://oasisscan.com/transactions/{{txHash}}',
       blockExplorerParatimes: 'https://oasisscan.com/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
     },
+    grpc: 'https://grpc.oasis.dev',
   },
   testnet: {
+    grpc: 'https://testnet.grpc.oasis.dev',
     [BackendAPIs.OasisMonitor]: {
       explorer: 'https://monitor.oasis.dev/api/testnet',
       blockExplorer: 'https://testnet.oasismonitor.com/operation/{{txHash}}',
@@ -48,6 +44,7 @@ export const config: BackendAPIsConfig = {
     },
   },
   local: {
+    grpc: 'http://localhost:42280',
     [BackendAPIs.OasisMonitor]: {
       explorer: 'http://localhost:9001',
       blockExplorer: 'http://localhost:9001/data/transactions?operation_id={{txHash}}',

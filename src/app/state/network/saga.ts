@@ -1,6 +1,6 @@
 import * as oasis from '@oasisprotocol/client'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { config, grpcApi } from 'config'
+import { config } from 'config'
 import { call, put, select, takeLatest } from 'typed-redux-saga'
 import { backend, backendApi } from 'vendors/backend'
 
@@ -14,7 +14,7 @@ import { NetworkType } from './types'
  */
 export function* getOasisNic(network?: NetworkType) {
   const selectedNetwork = network ? network : yield* select(selectSelectedNetwork)
-  const url = grpcApi[selectedNetwork]
+  const url = config[selectedNetwork].grpc
 
   const nic = new oasis.client.NodeInternal(url)
   return nic
