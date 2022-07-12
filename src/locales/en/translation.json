@@ -55,7 +55,7 @@
         "sent": "Delegated <0></0> to validator"
       },
       "consensusDeposit": {
-        "sent": "{{runtimeName}} deposit"
+        "sent": "{{runtimeName}} ParaTime deposit"
       },
       "loadingError": "Couldn't load transactions.",
       "reclaimEscrow": {

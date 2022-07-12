@@ -175,7 +175,7 @@ export function Transaction(props: TransactionProps) {
             i18nKey="account.transaction.consensusDeposit.sent"
             t={t}
             values={{ runtimeName: transaction.runtimeName }}
-            defaults="{{runtimeName}} deposit"
+            defaults="{{runtimeName}} ParaTime deposit"
           />
         ),
       },
