@@ -164,15 +164,19 @@ export const transactionMethodMap: {
   [ParaTimeCtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-type TransactionsListRow = Omit<OperationsRow, 'method'> & {
+type TransactionsListRow = Omit<OperationsRow, 'add' | 'fee' | 'height' | 'method' | 'time'> & {
   method: TransactionMethod
+  add: boolean | undefined
+  fee: string | undefined
+  height: number | undefined
+  time: number | undefined
 }
 
 export function parseTransactionsList(transactionsList: TransactionsListRow[]): Transaction[] {
   return transactionsList.map(t => {
     const parsed: Transaction = {
       amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),
-      fee: parseStringValueToInt(t.fee),
+      fee: t.fee ? parseStringValueToInt(t.fee) : undefined,
       from: t.from,
       hash: t.txHash,
       level: t.height,
