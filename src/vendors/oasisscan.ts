@@ -49,7 +49,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     })
     if (!transactionsList || transactionsList.code !== 0) throw new Error('Wrong response code') // TODO
 
-    const tmp = await Promise.all(
+    const enhancedTransactionsList = await Promise.all(
       transactionsList.data.list.map(async tx => {
         if ('runtimeId' in tx && tx.runtimeId !== undefined) {
           const param = {
@@ -65,7 +65,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
             },
           } = await runtime.getRuntimeTransactionInfo(param)
           // plug ParaTime values
-          const { runtimeId, ...rest } = tx
+          const { runtimeId, result, ...rest } = tx
           const newTx = {
             ...rest,
             amount,
@@ -76,13 +76,14 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
             runtimeName,
             runtimeId,
             round: round,
+            status: result!,
           }
           return newTx
         }
         return tx
       }),
     )
-    return parseTransactionsList(tmp)
+    return parseTransactionsList(enhancedTransactionsList)
   }
 
   async function getDelegations(params: { accountId: string; nic: oasis.client.NodeInternal }): Promise<{
