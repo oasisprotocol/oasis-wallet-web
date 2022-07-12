@@ -129,6 +129,75 @@ exports[`<ReclaimEscrowForm /> should match snapshot 1`] = `
   border: 0;
 }
 
+.c7 {
+  display: inline-block;
+  box-sizing: border-box;
+  cursor: pointer;
+  font: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  margin: 0;
+  background: transparent;
+  overflow: visible;
+  text-transform: none;
+  border: 2px solid #7D4CDB;
+  border-radius: 18px;
+  color: #444444;
+  padding: 4px 22px;
+  font-size: 18px;
+  line-height: 24px;
+  -webkit-transition-property: color,background-color,border-color,box-shadow;
+  transition-property: color,background-color,border-color,box-shadow;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+}
+
+.c7:hover {
+  box-shadow: 0px 0px 0px 2px #7D4CDB;
+}
+
+.c7:focus {
+  outline: none;
+  box-shadow: 0 0 2px 2px #6FFFB0;
+}
+
+.c7:focus > circle,
+.c7:focus > ellipse,
+.c7:focus > line,
+.c7:focus > path,
+.c7:focus > polygon,
+.c7:focus > polyline,
+.c7:focus > rect {
+  outline: none;
+  box-shadow: 0 0 2px 2px #6FFFB0;
+}
+
+.c7:focus::-moz-focus-inner {
+  border: 0;
+}
+
+.c7:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+.c7:focus:not(:focus-visible) > circle,
+.c7:focus:not(:focus-visible) > ellipse,
+.c7:focus:not(:focus-visible) > line,
+.c7:focus:not(:focus-visible) > path,
+.c7:focus:not(:focus-visible) > polygon,
+.c7:focus:not(:focus-visible) > polyline,
+.c7:focus:not(:focus-visible) > rect {
+  outline: none;
+  box-shadow: none;
+}
+
+.c7:focus:not(:focus-visible)::-moz-focus-inner {
+  border: 0;
+}
+
 .c4 {
   box-sizing: border-box;
   font-size: inherit;
@@ -249,6 +318,16 @@ exports[`<ReclaimEscrowForm /> should match snapshot 1`] = `
       type="submit"
     >
       account.reclaimEscrow.reclaim
+    </button>
+    <div
+      class="c5"
+    />
+    <button
+      class="c7"
+      style="border-radius: 4px;"
+      type="button"
+    >
+      account.reclaimEscrow.reclaimAll
     </button>
   </div>
 </form>

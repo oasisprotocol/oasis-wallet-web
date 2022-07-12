@@ -18,7 +18,8 @@
       "header": "Unrecognized transaction, method '{{method}}'"
     },
     "reclaimEscrow": {
-      "reclaim": "Reclaim"
+      "reclaim": "Reclaim",
+      "reclaimAll": "Reclaim all"
     },
     "sendTransaction": {
       "confirmSendingToValidator": {
