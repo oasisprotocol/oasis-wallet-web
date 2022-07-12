@@ -97,10 +97,7 @@ export const DelegationList = memo((props: Props) => {
           : t('delegations.reclaimedAmount', 'Amount to reclaim'),
       id: 'amount',
       selector: 'amount',
-      cell: datum =>
-        datum.amount && (
-          <AmountFormatter amount={datum.amount} minimumFractionDigits={1} maximumFractionDigits={4} />
-        ),
+      cell: datum => datum.amount && <AmountFormatter amount={datum.amount} />,
       sortable: true,
       sortFunction: (row1, row2) => Number(row1.amount) - Number(row2.amount),
     },

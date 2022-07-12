@@ -549,7 +549,7 @@ exports[`<ActiveDelegationList  /> should match snapshot 1`] = `
                   id="cell-amount-test-validator"
                   role="gridcell"
                 >
-                  0.0
+                  0.0000001
                    
                   
                 </div>
