@@ -76,4 +76,22 @@ describe('<ReclaimEscrowForm />', () => {
       type: 'transaction/reclaimEscrow',
     })
   })
+
+  it('reclaim all should not lose precision', () => {
+    const spy = jest.spyOn(store, 'dispatch')
+    renderComponent(store, 'dummy-address', '20000000000000002', '10000000000000001')
+    userEvent.click(screen.getByRole('button', { name: 'account.reclaimEscrow.reclaimAll' }))
+
+    expect(spy).toHaveBeenCalledWith({
+      payload: {
+        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+        amount: 20000000.000000002,
+        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
+        shares: 10000000.000000001,
+        type: 'reclaimEscrow',
+        validator: 'dummy-address',
+      },
+      type: 'transaction/reclaimEscrow',
+    })
+  })
 })
