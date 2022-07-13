@@ -1,6 +1,6 @@
 import { Signer } from '@oasisprotocol/client/dist/signature'
 import { PayloadAction } from '@reduxjs/toolkit'
-import { hex2uint, isValidAddress, parseNumberToBigInt, uint2bigintString } from 'app/lib/helpers'
+import { hex2uint, isValidAddress, uint2bigintString } from 'app/lib/helpers'
 import { LedgerSigner } from 'app/lib/ledger'
 import { OasisTransaction, signerFromPrivateKey, TW } from 'app/lib/transaction'
 import { call, put, race, select, take, takeEvery } from 'typed-redux-saga'
@@ -116,19 +116,14 @@ export function* doTransaction(action: PayloadAction<TransactionPayload>) {
     let tw: TW<any>
     switch (action.payload.type) {
       case 'transfer':
-        tw = yield* call(
-          prepareTransfer,
-          signer as Signer,
-          parseNumberToBigInt(action.payload.amount),
-          action.payload.to,
-        )
+        tw = yield* call(prepareTransfer, signer as Signer, BigInt(action.payload.amount), action.payload.to)
         break
 
       case 'addEscrow':
         tw = yield* call(
           prepareAddEscrow,
           signer as Signer,
-          parseNumberToBigInt(action.payload.amount),
+          BigInt(action.payload.amount),
           action.payload.validator,
         )
         break
@@ -137,7 +132,7 @@ export function* doTransaction(action: PayloadAction<TransactionPayload>) {
         tw = yield* call(
           prepareReclaimEscrow,
           signer as Signer,
-          parseNumberToBigInt(action.payload.shares),
+          BigInt(action.payload.shares),
           action.payload.validator,
         )
         break

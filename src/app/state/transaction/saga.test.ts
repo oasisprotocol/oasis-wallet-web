@@ -54,12 +54,12 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 10, to: validAddress }),
+        actions.sendTransaction({ type: 'transfer', amount: '10000000000', to: validAddress }),
       )
         .withState(makeState(wallet))
         .provide(providers)
         .provide(sendProviders)
-        .dispatch(actions.sendTransaction({ type: 'transfer', amount: 123, to: 'testaddress' }))
+        .dispatch(actions.sendTransaction({ type: 'transfer', amount: '123000000000', to: 'testaddress' }))
         .dispatch(actions.confirmTransaction())
         .put.actionType(actions.transactionSent.type)
         .run()
@@ -74,12 +74,12 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 10, to: validAddress }),
+        actions.sendTransaction({ type: 'transfer', amount: '10000000000', to: validAddress }),
       )
         .withState(makeState(wallet))
         .provide(providers)
         .provide(sendProviders)
-        .dispatch(actions.sendTransaction({ type: 'transfer', amount: 123, to: 'testaddress' }))
+        .dispatch(actions.sendTransaction({ type: 'transfer', amount: '123000000000', to: 'testaddress' }))
         .dispatch(actions.confirmTransaction())
         .put.actionType(actions.transactionSent.type)
         .run()
@@ -94,12 +94,12 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 10, to: validAddress }),
+        actions.sendTransaction({ type: 'transfer', amount: '10000000000', to: validAddress }),
       )
         .withState(makeState(wallet))
         .provide(providers)
         .provide(sendProviders)
-        .dispatch(actions.sendTransaction({ type: 'transfer', amount: 123, to: 'testaddress' }))
+        .dispatch(actions.sendTransaction({ type: 'transfer', amount: '123000000000', to: 'testaddress' }))
         .dispatch(actions.abortTransaction())
         .not.put.actionType(actions.transactionSent.type)
         .put.actionType(actions.clearTransaction.type)
@@ -115,7 +115,7 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 200, to: validAddress }),
+        actions.sendTransaction({ type: 'transfer', amount: '200000000000', to: validAddress }),
       )
         .withState(makeState(wallet))
         .put(
@@ -136,7 +136,7 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 10, to: validAddress }),
+        actions.sendTransaction({ type: 'transfer', amount: '10000000000', to: validAddress }),
       )
         .withState(makeState(wallet))
         .put(
@@ -158,7 +158,7 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 10, to: 'oasis1notvalid' }),
+        actions.sendTransaction({ type: 'transfer', amount: '10000000000', to: 'oasis1notvalid' }),
       )
         .withState(makeState(wallet))
         .put(
@@ -180,7 +180,7 @@ describe('Transaction Sagas', () => {
 
       return expectSaga(
         doTransaction,
-        actions.sendTransaction({ type: 'transfer', amount: 10, to: matchingAddress }),
+        actions.sendTransaction({ type: 'transfer', amount: '10000000000', to: matchingAddress }),
       )
         .withState(makeState(wallet))
         .put(

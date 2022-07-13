@@ -3,6 +3,7 @@
  * ReclaimEscrowForm
  *
  */
+import { parseNumberToBigInt } from 'app/lib/helpers'
 import { transactionActions } from 'app/state/transaction'
 import { selectTransaction } from 'app/state/transaction/selectors'
 import { Box, Button, Form, TextInput, Text } from 'grommet'
@@ -48,8 +49,8 @@ export const ReclaimEscrowForm = memo((props: Props) => {
     dispatch(
       transactionActions.reclaimEscrow({
         type: 'reclaimEscrow',
-        amount: Number(amount),
-        shares: shares,
+        amount: parseNumberToBigInt(Number(amount)).toString(),
+        shares: parseNumberToBigInt(Number(shares)).toString(),
         validator: props.address,
       }),
     )
@@ -59,8 +60,8 @@ export const ReclaimEscrowForm = memo((props: Props) => {
     dispatch(
       transactionActions.reclaimEscrow({
         type: 'reclaimEscrow',
-        amount: Number(props.maxAmount) / 10 ** 9,
-        shares: Number(props.shares) / 10 ** 9,
+        amount: props.maxAmount,
+        shares: props.shares,
         validator: props.address,
       }),
     )

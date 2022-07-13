@@ -1,4 +1,5 @@
 import { ErrorPayload } from 'types/errors'
+import { StringifiedBigInt } from 'types/StringifiedBigInt'
 
 export enum TransactionType {
   StakingTransfer = 'staking.Transfer',
@@ -67,7 +68,7 @@ export interface TransferPayload {
   to: string
 
   /* Token amount */
-  amount: number
+  amount: StringifiedBigInt
 }
 
 export interface AddEscrowPayload {
@@ -77,7 +78,7 @@ export interface AddEscrowPayload {
   validator: string
 
   /* Token amount */
-  amount: number
+  amount: StringifiedBigInt
 }
 
 export interface ReclaimEscrowPayload {
@@ -87,8 +88,8 @@ export interface ReclaimEscrowPayload {
   validator: string
 
   /* Shares to be reclaimed */
-  shares: number
+  shares: StringifiedBigInt
 
-  /* Amount to be reclaimed */
-  amount: number
+  /* Displayed token equivalent */
+  amount: StringifiedBigInt
 }

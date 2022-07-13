@@ -60,12 +60,12 @@ export const TransactionPreview = memo((props: Props) => {
       )}
       <ResponsiveGridRow
         label={t('transaction.preview.amount', 'Amount')}
-        value={<AmountFormatter amount={preview.transaction.amount * 10 ** 9} />}
+        value={<AmountFormatter amount={preview.transaction.amount} />}
       />
       {preview.transaction.type === 'reclaimEscrow' && (
         <ResponsiveGridRow
           label={t('transaction.preview.shares', 'Shares')}
-          value={<AmountFormatter amount={preview.transaction.shares * 10 ** 9} hideTicker />}
+          value={<AmountFormatter amount={preview.transaction.shares} hideTicker />}
         />
       )}
       <ResponsiveGridRow

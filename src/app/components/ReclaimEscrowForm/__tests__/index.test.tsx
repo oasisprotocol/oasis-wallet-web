@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { transactionActions } from 'app/state/transaction'
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import { configureAppStore } from 'store/configureStore'
@@ -52,13 +53,13 @@ describe('<ReclaimEscrowForm />', () => {
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
-        amount: 500,
-        shares: 250,
+        amount: '500000000000',
+        shares: '250000000000',
         type: 'reclaimEscrow',
         validator: 'dummy-address',
       },
       type: 'transaction/reclaimEscrow',
-    })
+    } as ReturnType<typeof transactionActions.reclaimEscrow>)
   })
 
   it('reclaim all should submit the transaction', () => {
@@ -68,13 +69,13 @@ describe('<ReclaimEscrowForm />', () => {
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
-        amount: 2000,
-        shares: 1000,
+        amount: '2000000000000',
+        shares: '1000000000000',
         type: 'reclaimEscrow',
         validator: 'dummy-address',
       },
       type: 'transaction/reclaimEscrow',
-    })
+    } as ReturnType<typeof transactionActions.reclaimEscrow>)
   })
 
   it('reclaim all should not lose precision', () => {
@@ -84,10 +85,8 @@ describe('<ReclaimEscrowForm />', () => {
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
-        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-        amount: 20000000.000000002,
-        // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
-        shares: 10000000.000000001,
+        amount: '20000000000000002',
+        shares: '10000000000000001',
         type: 'reclaimEscrow',
         validator: 'dummy-address',
       },

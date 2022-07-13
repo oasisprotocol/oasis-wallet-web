@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/dom'
 import { render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { networkActions } from 'app/state/network'
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import { configureAppStore } from 'store/configureStore'
@@ -38,6 +39,6 @@ describe('<NetworkSelector  />', () => {
     expect(dispatchSpy).toHaveBeenCalledWith({
       payload: 'testnet',
       type: 'network/selectNetwork',
-    })
+    } as ReturnType<typeof networkActions.selectNetwork>)
   })
 })
