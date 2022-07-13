@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { transactionActions } from 'app/state/transaction'
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import { configureAppStore } from 'store/configureStore'
@@ -52,13 +53,13 @@ describe('<ReclaimEscrowForm />', () => {
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
-        amount: 500,
-        shares: 250,
+        amount: '500000000000',
+        shares: '250000000000',
         type: 'reclaimEscrow',
         validator: 'dummy-address',
       },
       type: 'transaction/reclaimEscrow',
-    })
+    } as ReturnType<typeof transactionActions.reclaimEscrow>)
   })
 
   it('reclaim all should submit the transaction', () => {
@@ -68,8 +69,24 @@ describe('<ReclaimEscrowForm />', () => {
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
-        amount: 2000,
-        shares: 1000,
+        amount: '2000000000000',
+        shares: '1000000000000',
+        type: 'reclaimEscrow',
+        validator: 'dummy-address',
+      },
+      type: 'transaction/reclaimEscrow',
+    } as ReturnType<typeof transactionActions.reclaimEscrow>)
+  })
+
+  it('reclaim all should not lose precision', () => {
+    const spy = jest.spyOn(store, 'dispatch')
+    renderComponent(store, 'dummy-address', '20000000000000002', '10000000000000001')
+    userEvent.click(screen.getByRole('button', { name: 'account.reclaimEscrow.reclaimAll' }))
+
+    expect(spy).toHaveBeenCalledWith({
+      payload: {
+        amount: '20000000000000002',
+        shares: '10000000000000001',
         type: 'reclaimEscrow',
         validator: 'dummy-address',
       },

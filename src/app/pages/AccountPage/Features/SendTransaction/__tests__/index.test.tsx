@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { transactionActions } from 'app/state/transaction'
 import * as React from 'react'
 import { Provider } from 'react-redux'
 import { configureAppStore } from 'store/configureStore'
@@ -29,11 +30,11 @@ describe('<SendTransaction />', () => {
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
-        amount: 10,
+        amount: '10000000000',
         to: 'walletAddress',
         type: 'transfer',
       },
       type: 'transaction/sendTransaction',
-    })
+    } as ReturnType<typeof transactionActions.sendTransaction>)
   })
 })
