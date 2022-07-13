@@ -60,12 +60,6 @@ export enum TransactionStep {
   Sent = 'sent',
 }
 
-export interface TransactionSent {
-  from: string
-  to: string
-  amount: number
-}
-
 export interface TransferPayload {
   type: 'transfer'
 
