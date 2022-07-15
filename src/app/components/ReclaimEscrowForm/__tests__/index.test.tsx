@@ -27,16 +27,16 @@ describe('<ReclaimEscrowForm />', () => {
   })
 
   it('should error without an open wallet', () => {
-    renderComponent(store, 'dummy-address', '1000', '1000')
+    renderComponent(store, 'dummy-address', '1000000000000', '1000000000000')
 
     userEvent.type(screen.getByTestId('amount'), '1000')
-    userEvent.click(screen.getByRole('button'))
+    userEvent.click(screen.getByRole('button', { name: 'account.reclaimEscrow.reclaim' }))
 
     expect(screen.getByText('errors.noOpenWallet')).toBeInTheDocument()
   })
 
   it('should display the number of shares', () => {
-    renderComponent(store, 'dummy-address', '1000', '1000')
+    renderComponent(store, 'dummy-address', '1000000000000', '1000000000000')
 
     expect(screen.queryByTestId('numberOfShares')).toBeNull()
     userEvent.type(screen.getByTestId('amount'), '500')
@@ -45,15 +45,31 @@ describe('<ReclaimEscrowForm />', () => {
 
   it('should submit the transaction', () => {
     const spy = jest.spyOn(store, 'dispatch')
-    renderComponent(store, 'dummy-address', '2000', '1000')
+    renderComponent(store, 'dummy-address', '2000000000000', '1000000000000')
 
     userEvent.type(screen.getByTestId('amount'), '500')
-    userEvent.click(screen.getByRole('button'))
+    userEvent.click(screen.getByRole('button', { name: 'account.reclaimEscrow.reclaim' }))
 
     expect(spy).toHaveBeenCalledWith({
       payload: {
         amount: 500,
         shares: 250,
+        type: 'reclaimEscrow',
+        validator: 'dummy-address',
+      },
+      type: 'transaction/reclaimEscrow',
+    })
+  })
+
+  it('reclaim all should submit the transaction', () => {
+    const spy = jest.spyOn(store, 'dispatch')
+    renderComponent(store, 'dummy-address', '2000000000000', '1000000000000')
+    userEvent.click(screen.getByRole('button', { name: 'account.reclaimEscrow.reclaimAll' }))
+
+    expect(spy).toHaveBeenCalledWith({
+      payload: {
+        amount: 2000,
+        shares: 1000,
         type: 'reclaimEscrow',
         validator: 'dummy-address',
       },
