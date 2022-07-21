@@ -1,7 +1,7 @@
 import * as oasis from '@oasisprotocol/client'
 import { Account } from 'app/state/account/types'
 import { DebondingDelegation, Delegation, Validator } from 'app/state/staking/types'
-import { Transaction, TransactionType, TransactionMethod } from 'app/state/transaction/types'
+import { Transaction, TransactionType } from 'app/state/transaction/types'
 import { parseStringValueToInt } from 'app/lib/helpers'
 import {
   AccountsApi,
@@ -41,6 +41,15 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     return parseValidatorsList(validators.data.list)
   }
 
+  async function getRuntimeTransactionInfo(tx: OperationsRow) {
+    const { data } = await runtime.getRuntimeTransactionInfo({
+      id: tx.runtimeId!,
+      hash: tx.txHash,
+      round: tx.round!,
+    })
+    return data
+  }
+
   async function getTransactionsList(params: { accountId: string; limit: number }): Promise<Transaction[]> {
     const transactionsList = await operations.getTransactionsList({
       address: params.accountId,
@@ -49,41 +58,13 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     })
     if (!transactionsList || transactionsList.code !== 0) throw new Error('Wrong response code') // TODO
 
-    const enhancedTransactionsList = await Promise.all(
-      transactionsList.data.list.map(async tx => {
-        if ('runtimeId' in tx && tx.runtimeId !== undefined) {
-          const param = {
-            id: tx.runtimeId,
-            hash: tx.txHash,
-            round: tx.round!, // should be there
-          }
-          const {
-            data: {
-              ctx: { amount, from, to, method },
-              runtimeName,
-              round,
-            },
-          } = await runtime.getRuntimeTransactionInfo(param)
-          // plug ParaTime values
-          const { runtimeId, result, ...rest } = tx
-          const newTx = {
-            ...rest,
-            amount,
-            from,
-            to,
-            type: method,
-            method,
-            runtimeName,
-            runtimeId,
-            round: round,
-            status: result!,
-          }
-          return newTx
-        }
-        return tx
-      }),
-    )
-    return parseTransactionsList(enhancedTransactionsList)
+    const list = await Promise.all(
+      transactionsList.data.list.map(async tx => (tx.runtimeId ? getRuntimeTransactionInfo(tx) : tx)),
+    ).then(transaction => {
+      return transaction
+    })
+
+    return parseTransactionsList(list)
   }
 
   async function getDelegations(params: { accountId: string; nic: oasis.client.NodeInternal }): Promise<{
@@ -164,11 +145,17 @@ export const transactionMethodMap: {
   [ParaTimeCtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-export type TransactionsListRow = Omit<OperationsRow, 'method'> & {
-  method: TransactionMethod
-}
+export function parseTransactionsList(list: (OperationsRow | any)[]): Transaction[] {
+  const transactionsList: OperationsRow[] = list.reduce((acc, curr) => {
+    if (curr.ctx) {
+      const { ctx, result, ...row } = curr
+      acc.push({ ...row, ...ctx, status: curr.result })
+    } else {
+      acc.push(curr)
+    }
+    return acc
+  }, [])
 
-export function parseTransactionsList(transactionsList: TransactionsListRow[]): Transaction[] {
   return transactionsList.map(t => {
     const parsed: Transaction = {
       amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),

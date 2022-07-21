@@ -167,6 +167,12 @@ paths:
                         type: string
                       round:
                         type: integer
+                      timestamp:
+                        type: integer
+                      txHash:
+                        type: string
+                      result:
+                        type: boolean
   '/chain/account/delegations':
     get:
       tags:

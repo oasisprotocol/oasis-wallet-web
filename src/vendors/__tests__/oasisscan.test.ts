@@ -1,6 +1,4 @@
-import { TransactionMethod } from 'app/state/transaction/types'
 import { OperationsRowMethodEnum } from 'vendors/oasisscan/index'
-import { TransactionsListRow } from '../oasisscan'
 import {
   parseValidatorsList,
   parseAccount,
@@ -141,19 +139,19 @@ describe('oasisscan', () => {
       parseTransactionsList([
         // Emerald ParaTime Object
         {
-          amount: '200',
-          from: 'oasis1qqnk4au603zs94k0d0n7c0hkx8t4p6r87s60axru',
-          method: 'consensus.Deposit' as TransactionMethod,
-          round: 997775,
-          runtimeId: '000000000000000000000000000000000000000000000000e2eaa99fc008f87f',
+          ctx: {
+            amount: '200',
+            method: 'consensus.Deposit',
+            from: 'oasis1qqnk4au603zs94k0d0n7c0hkx8t4p6r87s60axru',
+            to: 'oasis1qzgc7dvlls36q47z5y6dvu6ylaa78rkrduqtxgdr',
+          },
           runtimeName: 'Emerald',
-          shares: undefined,
-          status: true,
+          runtimeId: '000000000000000000000000000000000000000000000000e2eaa99fc008f87f',
+          round: 997775,
           timestamp: 1649604086,
-          to: 'oasis1qzgc7dvlls36q47z5y6dvu6ylaa78rkrduqtxgdr',
           txHash: '25b84ca4582f6e3140c384ad60b98415d2c3079d1fc5f2221e45da7b13c70817',
-          type: 'consensus.Deposit',
-        } as TransactionsListRow,
+          result: true,
+        },
 
         // https://api.oasisscan.com/mainnet/chain/transactions?size=200&runtime=false&method=staking.Transfer&address=oasis1qz086axf5hreqpehv5hlgmtw7sfem79gz55v68wp
         {

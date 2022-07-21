@@ -50,6 +50,24 @@ export interface InlineResponse2003Data {
      * @memberof InlineResponse2003Data
      */
     round: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineResponse2003Data
+     */
+    timestamp?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InlineResponse2003Data
+     */
+    txHash?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof InlineResponse2003Data
+     */
+    result?: boolean;
 }
 
 export function InlineResponse2003DataFromJSON(json: any): InlineResponse2003Data {
@@ -66,6 +84,9 @@ export function InlineResponse2003DataFromJSONTyped(json: any, ignoreDiscriminat
         'runtimeName': json['runtimeName'],
         'runtimeId': json['runtimeId'],
         'round': json['round'],
+        'timestamp': !exists(json, 'timestamp') ? undefined : json['timestamp'],
+        'txHash': !exists(json, 'txHash') ? undefined : json['txHash'],
+        'result': !exists(json, 'result') ? undefined : json['result'],
     };
 }
 
@@ -82,6 +103,9 @@ export function InlineResponse2003DataToJSON(value?: InlineResponse2003Data | nu
         'runtimeName': value.runtimeName,
         'runtimeId': value.runtimeId,
         'round': value.round,
+        'timestamp': value.timestamp,
+        'txHash': value.txHash,
+        'result': value.result,
     };
 }
 
