@@ -68,6 +68,24 @@ export interface RuntimeTransactionInfoRow {
      * @memberof RuntimeTransactionInfoRow
      */
     result: boolean;
+    /**
+     * 
+     * @type {any}
+     * @memberof RuntimeTransactionInfoRow
+     */
+    message?: any | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof RuntimeTransactionInfoRow
+     */
+    etx?: any | null;
+    /**
+     * 
+     * @type {any}
+     * @memberof RuntimeTransactionInfoRow
+     */
+    events?: any | null;
 }
 
 export function RuntimeTransactionInfoRowFromJSON(json: any): RuntimeTransactionInfoRow {
@@ -87,6 +105,9 @@ export function RuntimeTransactionInfoRowFromJSONTyped(json: any, ignoreDiscrimi
         'timestamp': json['timestamp'],
         'txHash': json['txHash'],
         'result': json['result'],
+        'message': !exists(json, 'message') ? undefined : json['message'],
+        'etx': !exists(json, 'etx') ? undefined : json['etx'],
+        'events': !exists(json, 'events') ? undefined : json['events'],
     };
 }
 
@@ -106,6 +127,9 @@ export function RuntimeTransactionInfoRowToJSON(value?: RuntimeTransactionInfoRo
         'timestamp': value.timestamp,
         'txHash': value.txHash,
         'result': value.result,
+        'message': value.message,
+        'etx': value.etx,
+        'events': value.events,
     };
 }
 

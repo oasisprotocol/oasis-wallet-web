@@ -43,6 +43,12 @@ export interface ParaTimeCtxRow {
      * @memberof ParaTimeCtxRow
      */
     to: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ParaTimeCtxRow
+     */
+    nonce?: number;
 }
 
 /**
@@ -71,6 +77,7 @@ export function ParaTimeCtxRowFromJSONTyped(json: any, ignoreDiscriminator: bool
         'method': json['method'],
         'from': json['from'],
         'to': json['to'],
+        'nonce': !exists(json, 'nonce') ? undefined : json['nonce'],
     };
 }
 
@@ -87,6 +94,7 @@ export function ParaTimeCtxRowToJSON(value?: ParaTimeCtxRow | null): any {
         'method': value.method,
         'from': value.from,
         'to': value.to,
+        'nonce': value.nonce,
     };
 }
 

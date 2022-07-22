@@ -554,6 +554,9 @@ components:
           type: string
         result:
           type: boolean
+        message: {} # any type
+        etx: {} # any type
+        events: {} # any type
       required: ['ctx', 'result', 'runtimeName', 'runtimeId', 'round', 'timestamp', 'txHash']
     ParaTimeCtxRow:
       type: object
@@ -572,6 +575,8 @@ components:
           type: string
         to:
           type: string
+        nonce:
+          type: integer
       required:
         - amount
         - method
