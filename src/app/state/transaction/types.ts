@@ -1,7 +1,4 @@
 import { ErrorPayload } from 'types/errors'
-import { OperationsRowMethodEnum, ParaTimeCtxRowMethodEnum } from 'vendors/oasisscan/index'
-
-export type TransactionMethod = OperationsRowMethodEnum | ParaTimeCtxRowMethodEnum
 
 export enum TransactionType {
   StakingTransfer = 'staking.Transfer',
