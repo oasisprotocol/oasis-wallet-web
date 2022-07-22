@@ -92,35 +92,11 @@ export interface OperationsRow {
      */
     to: string | null;
     /**
-     * 
-     * @type {number}
-     * @memberof OperationsRow
-     */
-    round?: number;
-    /**
      * ParaTime only
      * @type {string}
      * @memberof OperationsRow
      */
     runtimeId?: string;
-    /**
-     * ParaTime only
-     * @type {string}
-     * @memberof OperationsRow
-     */
-    runtimeName?: string;
-    /**
-     * ParaTime only
-     * @type {boolean}
-     * @memberof OperationsRow
-     */
-    result?: boolean;
-    /**
-     * ParaTime only
-     * @type {string}
-     * @memberof OperationsRow
-     */
-    type?: string;
 }
 
 /**
@@ -168,11 +144,7 @@ export function OperationsRowFromJSONTyped(json: any, ignoreDiscriminator: boole
         'status': json['status'],
         'from': json['from'],
         'to': json['to'],
-        'round': !exists(json, 'round') ? undefined : json['round'],
         'runtimeId': !exists(json, 'runtimeId') ? undefined : json['runtimeId'],
-        'runtimeName': !exists(json, 'runtimeName') ? undefined : json['runtimeName'],
-        'result': !exists(json, 'result') ? undefined : json['result'],
-        'type': !exists(json, 'type') ? undefined : json['type'],
     };
 }
 
@@ -197,11 +169,7 @@ export function OperationsRowToJSON(value?: OperationsRow | null): any {
         'status': value.status,
         'from': value.from,
         'to': value.to,
-        'round': value.round,
         'runtimeId': value.runtimeId,
-        'runtimeName': value.runtimeName,
-        'result': value.result,
-        'type': value.type,
     };
 }
 

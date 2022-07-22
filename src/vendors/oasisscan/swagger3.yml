@@ -458,18 +458,7 @@ components:
         to:
           type: string
           nullable: true
-        round:
-          type: integer
         runtimeId:
-          type: string
-          description: ParaTime only
-        runtimeName:
-          type: string
-          description: ParaTime only
-        result:
-          type: boolean
-          description: ParaTime only
-        type:
           type: string
           description: ParaTime only
       required:
