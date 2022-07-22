@@ -46,7 +46,6 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     const { data } = await runtime.getRuntimeTransactionInfo({
       id: tx.runtimeId!,
       hash: tx.txHash,
-      round: tx.round!,
     })
     return data
   }

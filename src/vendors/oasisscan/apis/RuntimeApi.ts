@@ -23,7 +23,7 @@ import {
 export interface GetRuntimeTransactionInfoRequest {
     id: string;
     hash: string;
-    round: number;
+    round?: number;
 }
 
 /**
@@ -40,10 +40,6 @@ export class RuntimeApi extends runtime.BaseAPI {
 
         if (requestParameters.hash === null || requestParameters.hash === undefined) {
             throw new runtime.RequiredError('hash','Required parameter requestParameters.hash was null or undefined when calling getRuntimeTransactionInfo.');
-        }
-
-        if (requestParameters.round === null || requestParameters.round === undefined) {
-            throw new runtime.RequiredError('round','Required parameter requestParameters.round was null or undefined when calling getRuntimeTransactionInfo.');
         }
 
         const queryParameters: any = {};

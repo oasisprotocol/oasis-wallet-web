@@ -142,7 +142,6 @@ paths:
         - name: round
           schema:
             type: integer
-          required: true
           in: query
       responses:
         '200':
