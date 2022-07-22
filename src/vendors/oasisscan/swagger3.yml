@@ -157,22 +157,7 @@ paths:
                     type: integer
                   data:
                     type: object
-                    required: ['ctx', 'runtimeName', 'runtimeId', 'round']
-                    properties:
-                      ctx:
-                        $ref: '#/components/schemas/ParaTimeCtxRow'
-                      runtimeName:
-                        type: string
-                      runtimeId:
-                        type: string
-                      round:
-                        type: integer
-                      timestamp:
-                        type: integer
-                      txHash:
-                        type: string
-                      result:
-                        type: boolean
+                    $ref: '#/components/schemas/RuntimeTransactionInfoRow'
   '/chain/account/delegations':
     get:
       tags:
@@ -552,6 +537,24 @@ components:
         - epochLeft
         - validatorName
         - icon
+    RuntimeTransactionInfoRow:
+      type: object
+      properties:
+        ctx:
+          $ref: '#/components/schemas/ParaTimeCtxRow'
+        runtimeName:
+          type: string
+        runtimeId:
+          type: string
+        round:
+          type: integer
+        timestamp:
+          type: integer
+        txHash:
+          type: string
+        result:
+          type: boolean
+      required: ['ctx', 'result', 'runtimeName', 'runtimeId', 'round', 'timestamp', 'txHash']
     ParaTimeCtxRow:
       type: object
       properties:
