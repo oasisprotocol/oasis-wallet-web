@@ -15,6 +15,7 @@ import {
   OperationsRow,
   OperationsRowMethodEnum,
   ParaTimeCtxRowMethodEnum,
+  RuntimeTransactionInfoRow,
 } from 'vendors/oasisscan/index'
 
 import { throwAPIErrors, sortByStatus } from './helpers'
@@ -145,33 +146,41 @@ export const transactionMethodMap: {
   [ParaTimeCtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-export function parseTransactionsList(list: (OperationsRow | any)[]): Transaction[] {
-  const transactionsList: OperationsRow[] = list.reduce((acc, curr) => {
-    if (curr.ctx) {
-      const { ctx, result, ...row } = curr
-      acc.push({ ...row, ...ctx, status: curr.result })
+export function parseTransactionsList(list: (OperationsRow | RuntimeTransactionInfoRow)[]): Transaction[] {
+  return list.map(t => {
+    if ('ctx' in t) {
+      const parsed: Transaction = {
+        amount: t.ctx.amount == null ? undefined : parseStringValueToInt(t.ctx.amount),
+        fee: undefined,
+        from: t.ctx.from,
+        hash: t.txHash,
+        level: undefined,
+        status: t.result,
+        timestamp: t.timestamp,
+        to: t.ctx.to ?? undefined,
+        type: transactionMethodMap[t.ctx.method],
+        runtimeName: t.runtimeName,
+        runtimeId: t.runtimeId,
+        round: t.round,
+      }
+      return parsed
     } else {
-      acc.push(curr)
+      const parsed: Transaction = {
+        amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),
+        fee: t.fee ? parseStringValueToInt(t.fee) : undefined,
+        from: t.from,
+        hash: t.txHash,
+        level: t.height,
+        status: t.status,
+        timestamp: t.timestamp,
+        to: t.to ?? undefined,
+        type: transactionMethodMap[t.method],
+        runtimeName: undefined,
+        runtimeId: undefined,
+        round: undefined,
+      }
+      return parsed
     }
-    return acc
-  }, [])
-
-  return transactionsList.map(t => {
-    const parsed: Transaction = {
-      amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),
-      fee: t.fee ? parseStringValueToInt(t.fee) : undefined,
-      from: t.from,
-      hash: t.txHash,
-      level: t.height,
-      status: t.status,
-      timestamp: t.timestamp,
-      to: t.to ?? undefined,
-      type: transactionMethodMap[t.method],
-      runtimeName: t.runtimeName,
-      runtimeId: t.runtimeId,
-      round: t.round,
-    }
-    return parsed
   })
 }
 
