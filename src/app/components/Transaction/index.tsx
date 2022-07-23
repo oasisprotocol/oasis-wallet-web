@@ -3,20 +3,24 @@
  * Transaction
  *
  */
-import { Box, Button, Card, CardBody, CardFooter, CardHeader, Grid, Text } from 'grommet'
+import { Anchor, Box, Card, CardBody, CardFooter, CardHeader, Grid, ResponsiveContext, Text } from 'grommet'
 import {
-  CircleInformation,
+  Package,
+  Clock,
   ContactInfo,
   Cube,
+  FormNext,
   Money,
   LineChart,
   New,
   LinkPrevious,
   LinkNext,
 } from 'grommet-icons/icons'
+import type { Icon } from 'grommet-icons/icons'
 import * as React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Trans, useTranslation } from 'react-i18next'
+import styled from 'styled-components'
 
 import { AmountFormatter } from '../AmountFormatter'
 import { DateFormatter } from '../DateFormatter'
@@ -35,12 +39,27 @@ export enum TransactionSide {
 type TransactionDictionary = {
   [type in transactionTypes.TransactionType]: {
     [side in TransactionSide]: {
-      icon: () => React.ReactNode
+      icon: Icon
       header: () => React.ReactNode
       designation: string
     }
   }
 }
+
+const StyledCardBody = styled(CardBody)`
+  flex-direction: row;
+
+  @media only screen and (min-width: ${({ theme }) =>
+      // TODO: extend theme global breakpoints with more breakpoints or at least with 1024px. Requires Sidebar refactor and Grommet lib validation
+      `${theme.global?.breakpoints?.small?.value}px`}) and (max-width: 1024px) {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+
+    > * {
+      width: 100%;
+    }
+  }
+`
 
 interface TransactionProps {
   referenceAddress: string
@@ -50,9 +69,10 @@ interface TransactionProps {
 
 export function Transaction(props: TransactionProps) {
   const { t } = useTranslation()
+  const isMobile = React.useContext(ResponsiveContext) === 'small'
   const transaction = props.transaction
   const referenceAddress = props.referenceAddress
-  const amount = <AmountFormatter amount={transaction.amount!} />
+  const amount = <AmountFormatter amount={transaction.amount!} size={isMobile ? '16px' : 'medium'} />
 
   let side: TransactionSide
   let otherAddress = ''
@@ -67,7 +87,7 @@ export function Transaction(props: TransactionProps) {
 
   const unrecognizedTransaction: TransactionDictionary[transactionTypes.TransactionType][TransactionSide] = {
     designation: t('account.otherTransaction.designation', 'Other address'),
-    icon: () => <New />,
+    icon: New,
     header: () => (
       <Trans
         i18nKey="account.otherTransaction.header"
@@ -85,7 +105,7 @@ export function Transaction(props: TransactionProps) {
     [transactionTypes.TransactionType.StakingTransfer]: {
       [TransactionSide.Received]: {
         designation: t('common.from', 'From'),
-        icon: () => <LinkPrevious />,
+        icon: LinkPrevious,
         header: () => (
           <Trans
             i18nKey="account.transaction.transfer.received"
@@ -97,7 +117,7 @@ export function Transaction(props: TransactionProps) {
       },
       [TransactionSide.Sent]: {
         designation: t('common.to', 'To'),
-        icon: () => <LinkNext />,
+        icon: LinkNext,
         header: () => (
           <Trans
             i18nKey="account.transaction.transfer.sent.header"
@@ -111,7 +131,7 @@ export function Transaction(props: TransactionProps) {
     [transactionTypes.TransactionType.StakingAddEscrow]: {
       [TransactionSide.Received]: {
         designation: t('common.delegator', 'Delegator'),
-        icon: () => <LineChart />,
+        icon: LineChart,
         header: () => (
           <Trans
             i18nKey="account.transaction.addEscrow.received"
@@ -123,7 +143,7 @@ export function Transaction(props: TransactionProps) {
       },
       [TransactionSide.Sent]: {
         designation: t('common.validator', 'Validator'),
-        icon: () => <LineChart />,
+        icon: LineChart,
         header: () => (
           <Trans
             i18nKey="account.transaction.addEscrow.sent"
@@ -137,7 +157,7 @@ export function Transaction(props: TransactionProps) {
     [transactionTypes.TransactionType.StakingReclaimEscrow]: {
       [TransactionSide.Received]: {
         designation: t('common.delegator', 'Delegator'),
-        icon: () => <Money />,
+        icon: Money,
         header: () => (
           <Trans
             i18nKey="account.transaction.reclaimEscrow.received"
@@ -149,7 +169,7 @@ export function Transaction(props: TransactionProps) {
       },
       [TransactionSide.Sent]: {
         designation: t('common.validator', 'Validator'),
-        icon: () => <Money />,
+        icon: Money,
         header: () => (
           <Trans
             i18nKey="account.transaction.reclaimEscrow.sent"
@@ -221,67 +241,115 @@ export function Transaction(props: TransactionProps) {
     ? transactionDictionary[transaction.type][side]
     : unrecognizedTransaction
 
-  const icon = matchingConfiguration.icon()
+  const Icon = matchingConfiguration.icon
   const header = matchingConfiguration.header()
   const designation = matchingConfiguration.designation
   const blockExplorerLink = config[props.network][backend()]?.blockExplorer
 
   return (
-    <Card round="small" background="background-front" gap="none" elevation="xsmall">
+    <Card
+      pad={isMobile ? { horizontal: 'small', top: 'medium', bottom: 'small' } : 'small'}
+      round="xsmall"
+      elevation="none"
+      background="background-front"
+    >
       <CardHeader
-        pad={{ horizontal: 'medium', vertical: 'small' }}
-        gap="none"
-        background={transaction.status ? 'brand' : 'status-error'}
-        wrap={true}
+        margin={{ bottom: 'medium' }}
+        pad={{ bottom: isMobile ? 'medium' : 'small' }}
+        border={{ color: 'background-front-border', side: 'bottom' }}
+        direction="row"
+        align="center"
+        justify="start"
+        gap="small"
       >
-        <Box direction="row" gap="small">
-          {icon}
-          <Text>{header}</Text>
-        </Box>
-        {!transaction.status && (
-          <Text weight="bold">{t('account.transaction.transactionFailed', 'Failed')}</Text>
-        )}
-      </CardHeader>
-      <CardBody pad={{ horizontal: 'none', vertical: 'none' }}>
-        <Grid columns={{ count: 'fit', size: 'xsmall' }} gap="none">
-          <InfoBox icon={<Money color="brand" />} label={t('common.amount', 'Amount')} value={amount} />
-          {otherAddress && (
-            <NavLink data-testid="external-wallet-address" to={`/account/${otherAddress}`}>
-              <InfoBox
-                icon={<ContactInfo color="brand" />}
-                label={designation}
-                value={<ShortAddress address={otherAddress} />}
-              />
-            </NavLink>
-          )}
-          {!otherAddress && (
-            <InfoBox
-              icon={<ContactInfo color="brand" />}
-              label={designation}
-              value={t('common.unavailable', 'Unavailable')}
-            />
-          )}
-          <InfoBox
-            icon={<Cube color="brand" />}
-            label={t('common.block', 'Block')}
-            value={transaction.level}
-          />
-        </Grid>
-      </CardBody>
-      <CardFooter background="background-contrast" pad={{ horizontal: 'medium' }}>
-        <Text size="small">
-          <DateFormatter date={transaction.timestamp!} />
+        <Icon size={isMobile ? '20px' : 'medium'} color="brand" />
+        <Text weight="bold" size={isMobile ? '16px' : 'medium'}>
+          {header}
         </Text>
-        <Box direction="row">
-          <Button
-            icon={<CircleInformation color="dark-3" />}
-            hoverIndicator
-            href={blockExplorerLink.replace('{{txHash}}', encodeURIComponent(transaction.hash))}
-            target="_blank"
-            rel="noopener"
-            data-testid="explorer-link"
-          />
+      </CardHeader>
+      <StyledCardBody margin={{ bottom: 'small' }}>
+        <Box width="75%">
+          {isMobile && (
+            <Box pad={{ left: 'small' }}>
+              <Text size="16px" margin={{ bottom: 'xsmall' }}>
+                {otherAddress ? (
+                  <ShortAddress address={otherAddress} />
+                ) : (
+                  t('common.unavailable', 'Unavailable')
+                )}
+              </Text>
+              <Text size="small">
+                <DateFormatter date={transaction.timestamp!} />
+              </Text>
+            </Box>
+          )}
+
+          {!isMobile && (
+            <Grid columns={{ count: 'fit', size: 'xsmall' }} gap="none">
+              <Box pad="none">
+                {otherAddress && (
+                  <NavLink data-testid="external-wallet-address" to={`/account/${otherAddress}`}>
+                    <InfoBox
+                      icon={ContactInfo}
+                      label={designation}
+                      value={<ShortAddress address={otherAddress} />}
+                    />
+                  </NavLink>
+                )}
+                {!otherAddress && (
+                  <InfoBox
+                    icon={ContactInfo}
+                    label={designation}
+                    value={t('common.unavailable', 'Unavailable')}
+                  />
+                )}
+                <InfoBox
+                  icon={Package}
+                  label={t('common.hash', 'Tx Hash')}
+                  value={<ShortAddress address={transaction.hash} />}
+                />
+              </Box>
+
+              <Box pad="none">
+                <InfoBox
+                  icon={Clock}
+                  label={t('common.time', 'Time')}
+                  value={<DateFormatter date={transaction.timestamp!} />}
+                />
+
+                <InfoBox icon={Cube} label={t('common.block', 'Block')} value={transaction.level} />
+              </Box>
+            </Grid>
+          )}
         </Box>
+        <Box width="25%" align="end" pad={{ right: 'small' }}>
+          <Text weight="bold" size={isMobile ? 'medium' : 'xlarge'}>
+            <AmountFormatter amount={transaction.amount!} smallTicker />
+          </Text>
+          <Text
+            color={transaction.status ? 'successful-label' : 'status-error'}
+            size={isMobile ? 'xsmall' : 'small'}
+            weight="bold"
+          >
+            {transaction.status
+              ? t('account.transaction.successful', 'Successful')
+              : t('account.transaction.failed', 'Failed')}
+          </Text>
+        </Box>
+      </StyledCardBody>
+      <CardFooter justify="center" fill="horizontal">
+        <Anchor
+          href={blockExplorerLink.replace('{{txHash}}', encodeURIComponent(transaction.hash))}
+          target="_blank"
+          rel="noopener"
+          data-testid="explorer-link"
+          color="brand"
+        >
+          <Text size={isMobile ? 'xsmall' : 'small'}>
+            {t('account.transaction.explorerLink', 'View transaction records through explorer')}
+          </Text>
+          <FormNext color="brand" size="20px" />
+        </Anchor>
       </CardFooter>
     </Card>
   )

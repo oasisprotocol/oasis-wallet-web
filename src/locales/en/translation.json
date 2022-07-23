@@ -54,12 +54,14 @@
         "received": "Received <0></0> delegation in escrow",
         "sent": "Delegated <0></0> to validator"
       },
+      "explorerLink": "View transaction records through explorer",
+      "failed": "Failed",
       "loadingError": "Couldn't load transactions.",
       "reclaimEscrow": {
         "received": "<0></0> reclaimed by delegator",
         "sent": "Reclaimed <0></0> from validator"
       },
-      "transactionFailed": "Failed",
+      "successful": "Successful",
       "transfer": {
         "received": "Received <0></0>",
         "sent": {
@@ -83,6 +85,8 @@
     "confirm": "Confirm",
     "delegator": "Delegator",
     "from": "From",
+    "hash": "Tx Hash",
+    "time": "Time",
     "to": "To",
     "unavailable": "Unavailable",
     "validator": "Validator",

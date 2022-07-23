@@ -1,41 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Transaction  /> should handle unknown transaction types gracefully 1`] = `
-.c3 {
-  display: inline-block;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: #f8f8f8;
-  stroke: #f8f8f8;
-}
-
-.c3 g {
-  fill: inherit;
-  stroke: inherit;
-}
-
-.c3 *:not([stroke])[fill="none"] {
-  stroke-width: 0;
-}
-
-.c3 *[stroke*="#"],
-.c3 *[STROKE*="#"] {
-  stroke: inherit;
-  fill: none;
-}
-
-.c3 *[fill-rule],
-.c3 *[FILL-RULE],
-.c3 *[fill*="#"],
-.c3 *[FILL*="#"] {
-  fill: inherit;
-  stroke: none;
-}
-
-.c10 {
+.c2 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -46,59 +12,59 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   stroke: #7D4CDB;
 }
 
-.c10 g {
+.c2 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c10 *:not([stroke])[fill="none"] {
+.c2 *:not([stroke])[fill="none"] {
   stroke-width: 0;
 }
 
-.c10 *[stroke*="#"],
-.c10 *[STROKE*="#"] {
+.c2 *[stroke*="#"],
+.c2 *[STROKE*="#"] {
   stroke: inherit;
   fill: none;
 }
 
-.c10 *[fill-rule],
-.c10 *[FILL-RULE],
-.c10 *[fill*="#"],
-.c10 *[FILL*="#"] {
+.c2 *[fill-rule],
+.c2 *[FILL-RULE],
+.c2 *[fill*="#"],
+.c2 *[FILL*="#"] {
   fill: inherit;
   stroke: none;
 }
 
-.c18 {
+.c12 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: #777777;
-  stroke: #777777;
+  width: 20px;
+  height: 20px;
+  fill: #7D4CDB;
+  stroke: #7D4CDB;
 }
 
-.c18 g {
+.c12 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c18 *:not([stroke])[fill="none"] {
+.c12 *:not([stroke])[fill="none"] {
   stroke-width: 0;
 }
 
-.c18 *[stroke*="#"],
-.c18 *[STROKE*="#"] {
+.c12 *[stroke*="#"],
+.c12 *[STROKE*="#"] {
   stroke: inherit;
   fill: none;
 }
 
-.c18 *[fill-rule],
-.c18 *[FILL-RULE],
-.c18 *[fill*="#"],
-.c18 *[FILL*="#"] {
+.c12 *[fill-rule],
+.c12 *[FILL-RULE],
+.c12 *[fill*="#"],
+.c12 *[FILL*="#"] {
   fill: inherit;
   stroke: none;
 }
@@ -117,9 +83,10 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  border-radius: 12px;
+  padding: 12px;
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.20);
+  box-shadow: none;
 }
 
 .c1 {
@@ -129,12 +96,12 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  margin-bottom: 24px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #7D4CDB;
-  color: #f8f8f8;
+  border-bottom: solid 1px background-front-border;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: row;
@@ -143,34 +110,32 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 12px;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   padding-bottom: 12px;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
 }
 
-.c2 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  margin-bottom: 12px;
   min-width: 0;
   min-height: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -182,13 +147,25 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex: 1 1;
-  -ms-flex: 1 1;
-  flex: 1 1;
+  width: 75%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding: 0px;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -200,10 +177,12 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  padding: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -230,7 +209,7 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   padding-right: 6px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -248,7 +227,27 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   justify-content: center;
 }
 
-.c14 {
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 25%;
+  padding-right: 12px;
+}
+
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -259,7 +258,6 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #33333310;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: row;
@@ -268,15 +266,14 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
-.c4 {
+.c3 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -286,164 +283,158 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   width: 12px;
 }
 
-.c16 {
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
-  align-self: stretch;
-  width: 24px;
-}
-
-.c5 {
-  font-size: 18px;
-  line-height: 24px;
-}
-
-.c12 {
+.c4 {
   font-size: 18px;
   line-height: 24px;
   font-weight: bold;
 }
 
-.c13 {
-  margin-left: 3px;
+.c14 {
   font-size: 18px;
   line-height: 24px;
 }
 
-.c15 {
+.c16 {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: bold;
+}
+
+.c17 {
+  margin-left: 3px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #a3a3a3;
+  font-weight: 600;
+}
+
+.c18 {
+  font-size: 14px;
+  line-height: 20px;
+  color: successful-label;
+  font-weight: bold;
+}
+
+.c21 {
   font-size: 14px;
   line-height: 20px;
 }
 
-.c17 {
-  display: inline-block;
+.c20 {
   box-sizing: border-box;
-  cursor: pointer;
-  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: #7D4CDB;
+  font-weight: 600;
   -webkit-text-decoration: none;
   text-decoration: none;
-  margin: 0;
-  background: transparent;
-  overflow: visible;
-  text-transform: none;
-  color: inherit;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
-  line-height: 0;
-  padding: 12px;
+  cursor: pointer;
 }
 
-.c17:hover {
-  background-color: rgba(221,221,221,0.4);
-  color: #000000;
+.c20:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
-.c17:focus {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c17:focus > circle,
-.c17:focus > ellipse,
-.c17:focus > line,
-.c17:focus > path,
-.c17:focus > polygon,
-.c17:focus > polyline,
-.c17:focus > rect {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c17:focus::-moz-focus-inner {
-  border: 0;
-}
-
-.c17:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.c17:focus:not(:focus-visible) > circle,
-.c17:focus:not(:focus-visible) > ellipse,
-.c17:focus:not(:focus-visible) > line,
-.c17:focus:not(:focus-visible) > path,
-.c17:focus:not(:focus-visible) > polygon,
-.c17:focus:not(:focus-visible) > polyline,
-.c17:focus:not(:focus-visible) > rect {
-  outline: none;
-  box-shadow: none;
-}
-
-.c17:focus:not(:focus-visible)::-moz-focus-inner {
-  border: 0;
-}
-
-.c7 {
+.c8 {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: repeat( auto-fit,minmax(min(96px,100%),1fr) );
   grid-gap: 0px 0px;
 }
 
+.c6 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
 @media only screen and (max-width:768px) {
   .c0 {
-    border-radius: 6px;
+    padding: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c0 {
+    border-radius: 3px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c1 {
-    padding-left: 12px;
-    padding-right: 12px;
+    margin-bottom: 12px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c1 {
-    padding-top: 6px;
+    border-bottom: solid 1px background-front-border;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c1 {
     padding-bottom: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c6 {
-    padding: 0px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c8 {
-    padding: 12px;
+  .c5 {
+    margin-bottom: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c9 {
+    padding: 0px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c10 {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c10 {
+    padding-bottom: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c11 {
     padding-right: 3px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c14 {
-    padding-left: 12px;
-    padding-right: 12px;
+  .c15 {
+    padding-right: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c4 {
+  .c3 {
     width: 6px;
   }
 }
 
-@media only screen and (max-width:768px) {
-  .c16 {
-    width: 12px;
+@media only screen and (min-width:768px) and (max-width:1024px) {
+  .c6 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-align-items: flex-end;
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+
+  .c6 > * {
+    width: 100%;
   }
 }
 
@@ -453,33 +444,29 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
   <header
     class="c1"
   >
-    <div
+    <svg
+      aria-label="New"
       class="c2"
+      viewBox="0 0 24 24"
     >
-      <svg
-        aria-label="New"
-        class="c3"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 1v22M2 6l20 12m0-12L2 18"
-          fill="none"
-          stroke="#000"
-          stroke-width="2"
-        />
-      </svg>
-      <div
-        class="c4"
+      <path
+        d="M12 1v22M2 6l20 12m0-12L2 18"
+        fill="none"
+        stroke="#000"
+        stroke-width="2"
       />
-      <span
-        class="c5"
-      >
-        account.otherTransaction.header
-      </span>
-    </div>
+    </svg>
+    <div
+      class="c3"
+    />
+    <span
+      class="c4"
+    >
+      account.otherTransaction.header
+    </span>
   </header>
   <div
-    class="c6"
+    class="c5 c6"
   >
     <div
       class="c7"
@@ -490,196 +477,222 @@ exports[`<Transaction  /> should handle unknown transaction types gracefully 1`]
         <div
           class="c9"
         >
-          <svg
-            aria-label="Money"
+          <a
+            data-testid="external-wallet-address"
+            href="/account/source"
+          >
+            <div
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <svg
+                  aria-label="ContactInfo"
+                  class="c12"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M5 12a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm4 6v-2c0-2.25-1.787-4-4.036-4h.054C2.768 12 1 13.75 1 16v2M12 7h12M12 17h10m-10-5h7"
+                    fill="none"
+                    stroke="#000"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <div
+                class="c3"
+              />
+              <div
+                class="c13"
+              >
+                <span
+                  class="c4"
+                >
+                  account.otherTransaction.designation
+                </span>
+                <span
+                  class="c14"
+                >
+                  source...source
+                </span>
+              </div>
+            </div>
+          </a>
+          <div
             class="c10"
-            viewBox="0 0 24 24"
           >
-            <path
-              d="M16 16c0-1.105-3.134-2-7-2s-7 .895-7 2 3.134 2 7 2 7-.895 7-2zM2 16v4.937C2 22.077 5.134 23 9 23s7-.924 7-2.063V16M9 5c-4.418 0-8 .895-8 2s3.582 2 8 2M1 7v5c0 1.013 3.582 2 8 2M23 4c0-1.105-3.1-2-6.923-2-3.824 0-6.923.895-6.923 2s3.1 2 6.923 2S23 5.105 23 4zm-7 12c3.824 0 7-.987 7-2V4M9.154 4v10.166M9 9c0 1.013 3.253 2 7.077 2C19.9 11 23 10.013 23 9"
-              fill="none"
-              stroke="#000"
-              stroke-width="2"
+            <div
+              class="c11"
+            >
+              <svg
+                aria-label="Package"
+                class="c12"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M12.371.571 12 .423l-.371.148-10 4L1 4.823v14.354l.629.251 10 4 .371.149.371-.149 10-4 .629-.251V4.823l-.629-.252-10-4zM3 6.977v10.846l8 3.2V10.177l-8-3.2zm10 3.2v10.846l8-3.2V6.977l-8 3.2zM19.307 5.5 12 2.577 9.943 3.4l7.307 2.923 2.057-.823zm-14.614 0L7.25 4.477 14.557 7.4 12 8.423 4.693 5.5z"
+                  fill="#000"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              class="c3"
             />
-          </svg>
-        </div>
-        <div
-          class="c4"
-        />
-        <div
-          class="c11"
-        >
-          <span
-            class="c12"
-          >
-            common.amount
-          </span>
-          <span
-            class="c5"
-          >
-            0.001
-            <span
+            <div
               class="c13"
             >
-              TEST
-            </span>
-          </span>
-        </div>
-      </div>
-      <a
-        data-testid="external-wallet-address"
-        href="/account/source"
-      >
-        <div
-          class="c8"
-        >
-          <div
-            class="c9"
-          >
-            <svg
-              aria-label="ContactInfo"
-              class="c10"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M5 12a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm4 6v-2c0-2.25-1.787-4-4.036-4h.054C2.768 12 1 13.75 1 16v2M12 7h12M12 17h10m-10-5h7"
-                fill="none"
-                stroke="#000"
-                stroke-width="2"
-              />
-            </svg>
-          </div>
-          <div
-            class="c4"
-          />
-          <div
-            class="c11"
-          >
-            <span
-              class="c12"
-            >
-              account.otherTransaction.designation
-            </span>
-            <span
-              class="c5"
-            >
-              source...source
-            </span>
+              <span
+                class="c4"
+              >
+                common.hash
+              </span>
+              <span
+                class="c14"
+              >
+                ff1234...ff1234
+              </span>
+            </div>
           </div>
         </div>
-      </a>
-      <div
-        class="c8"
-      >
         <div
           class="c9"
         >
-          <svg
-            aria-label="Cube"
+          <div
             class="c10"
-            viewBox="0 0 24 24"
           >
-            <path
-              d="m12 2 10 5v10l-10 5-10-5V7l10-5zM2 7l10 5 10-5m-10 5v10-10z"
-              fill="none"
-              stroke="#000"
-              stroke-width="2"
+            <div
+              class="c11"
+            >
+              <svg
+                aria-label="Clock"
+                class="c12"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M13 7a1 1 0 1 0-2 0v5a1 1 0 0 0 .4.8l4 3a1 1 0 0 0 1.2-1.6L13 11.5V7z"
+                  fill="#000"
+                />
+                <path
+                  clip-rule="evenodd"
+                  d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z"
+                  fill="#000"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              class="c3"
             />
-          </svg>
-        </div>
-        <div
-          class="c4"
-        />
-        <div
-          class="c11"
-        >
-          <span
-            class="c12"
+            <div
+              class="c13"
+            >
+              <span
+                class="c4"
+              >
+                common.time
+              </span>
+              <span
+                class="c14"
+              >
+                4/10/2021, 1:30:55 AM
+              </span>
+            </div>
+          </div>
+          <div
+            class="c10"
           >
-            common.block
-          </span>
-          <span
-            class="c5"
-          />
+            <div
+              class="c11"
+            >
+              <svg
+                aria-label="Cube"
+                class="c12"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="m12 2 10 5v10l-10 5-10-5V7l10-5zM2 7l10 5 10-5m-10 5v10-10z"
+                  fill="none"
+                  stroke="#000"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="c3"
+            />
+            <div
+              class="c13"
+            >
+              <span
+                class="c4"
+              >
+                common.block
+              </span>
+              <span
+                class="c14"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <footer
-    class="c14"
-  >
-    <span
+    <div
       class="c15"
     >
-      4/10/2021, 1:30:55 AM
-    </span>
-    <div
-      class="c16"
-    />
-    <div
-      class="c2"
-    >
-      <a
-        class="c17"
-        data-testid="explorer-link"
-        href="https://oasisscan.com/transactions/ff1234"
-        rel="noopener"
-        target="_blank"
+      <span
+        class="c16"
       >
-        <svg
-          aria-label="CircleInformation"
-          class="c18"
-          viewBox="0 0 24 24"
+        0.001
+        <span
+          class="c17"
         >
-          <path
-            d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-12v8m0-12v2"
-            fill="none"
-            stroke="#000"
-            stroke-width="2"
-          />
-        </svg>
-      </a>
+          TEST
+        </span>
+      </span>
+      <span
+        class="c18"
+      >
+        account.transaction.successful
+      </span>
     </div>
+  </div>
+  <footer
+    class="c19"
+  >
+    <a
+      class="c20"
+      data-testid="explorer-link"
+      href="https://oasisscan.com/transactions/ff1234"
+      rel="noopener"
+      target="_blank"
+    >
+      <span
+        class="c21"
+      >
+        account.transaction.explorerLink
+      </span>
+      <svg
+        aria-label="FormNext"
+        class="c12"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="m9 6 6 6-6 6"
+          fill="none"
+          stroke="#000"
+          stroke-width="2"
+        />
+      </svg>
+    </a>
   </footer>
 </div>
 `;
 
 exports[`<Transaction  /> should match snapshot 1`] = `
-.c3 {
-  display: inline-block;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: #f8f8f8;
-  stroke: #f8f8f8;
-}
-
-.c3 g {
-  fill: inherit;
-  stroke: inherit;
-}
-
-.c3 *:not([stroke])[fill="none"] {
-  stroke-width: 0;
-}
-
-.c3 *[stroke*="#"],
-.c3 *[STROKE*="#"] {
-  stroke: inherit;
-  fill: none;
-}
-
-.c3 *[fill-rule],
-.c3 *[FILL-RULE],
-.c3 *[fill*="#"],
-.c3 *[FILL*="#"] {
-  fill: inherit;
-  stroke: none;
-}
-
-.c10 {
+.c2 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
@@ -690,59 +703,59 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   stroke: #7D4CDB;
 }
 
-.c10 g {
+.c2 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c10 *:not([stroke])[fill="none"] {
+.c2 *:not([stroke])[fill="none"] {
   stroke-width: 0;
 }
 
-.c10 *[stroke*="#"],
-.c10 *[STROKE*="#"] {
+.c2 *[stroke*="#"],
+.c2 *[STROKE*="#"] {
   stroke: inherit;
   fill: none;
 }
 
-.c10 *[fill-rule],
-.c10 *[FILL-RULE],
-.c10 *[fill*="#"],
-.c10 *[FILL*="#"] {
+.c2 *[fill-rule],
+.c2 *[FILL-RULE],
+.c2 *[fill*="#"],
+.c2 *[FILL*="#"] {
   fill: inherit;
   stroke: none;
 }
 
-.c18 {
+.c12 {
   display: inline-block;
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: #777777;
-  stroke: #777777;
+  width: 20px;
+  height: 20px;
+  fill: #7D4CDB;
+  stroke: #7D4CDB;
 }
 
-.c18 g {
+.c12 g {
   fill: inherit;
   stroke: inherit;
 }
 
-.c18 *:not([stroke])[fill="none"] {
+.c12 *:not([stroke])[fill="none"] {
   stroke-width: 0;
 }
 
-.c18 *[stroke*="#"],
-.c18 *[STROKE*="#"] {
+.c12 *[stroke*="#"],
+.c12 *[STROKE*="#"] {
   stroke: inherit;
   fill: none;
 }
 
-.c18 *[fill-rule],
-.c18 *[FILL-RULE],
-.c18 *[fill*="#"],
-.c18 *[FILL*="#"] {
+.c12 *[fill-rule],
+.c12 *[FILL-RULE],
+.c12 *[fill*="#"],
+.c12 *[FILL*="#"] {
   fill: inherit;
   stroke: none;
 }
@@ -761,9 +774,10 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  border-radius: 12px;
+  padding: 12px;
+  border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0px 1px 2px rgba(0,0,0,0.20);
+  box-shadow: none;
 }
 
 .c1 {
@@ -773,12 +787,12 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  margin-bottom: 24px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background-color: #7D4CDB;
-  color: #f8f8f8;
+  border-bottom: solid 1px background-front-border;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: row;
@@ -787,34 +801,32 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-top: 12px;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
   padding-bottom: 12px;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
 }
 
-.c2 {
+.c5 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  margin-bottom: 12px;
   min-width: 0;
   min-height: 0;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -826,13 +838,25 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-flex: 1 1;
-  -ms-flex: 1 1;
-  flex: 1 1;
+  width: 75%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding: 0px;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -844,10 +868,12 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  padding: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-bottom: 12px;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -874,7 +900,7 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   padding-right: 6px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -892,7 +918,27 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   justify-content: center;
 }
 
-.c14 {
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 25%;
+  padding-right: 12px;
+}
+
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -903,7 +949,6 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  background: #33333310;
   min-width: 0;
   min-height: 0;
   -webkit-flex-direction: row;
@@ -912,15 +957,14 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  padding-left: 24px;
-  padding-right: 24px;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 
-.c4 {
+.c3 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -930,164 +974,158 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   width: 12px;
 }
 
-.c16 {
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
-  align-self: stretch;
-  width: 24px;
-}
-
-.c5 {
-  font-size: 18px;
-  line-height: 24px;
-}
-
-.c12 {
+.c4 {
   font-size: 18px;
   line-height: 24px;
   font-weight: bold;
 }
 
-.c13 {
-  margin-left: 3px;
+.c14 {
   font-size: 18px;
   line-height: 24px;
 }
 
-.c15 {
+.c16 {
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: bold;
+}
+
+.c17 {
+  margin-left: 3px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #a3a3a3;
+  font-weight: 600;
+}
+
+.c18 {
+  font-size: 14px;
+  line-height: 20px;
+  color: successful-label;
+  font-weight: bold;
+}
+
+.c21 {
   font-size: 14px;
   line-height: 20px;
 }
 
-.c17 {
-  display: inline-block;
+.c20 {
   box-sizing: border-box;
-  cursor: pointer;
-  font: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: #7D4CDB;
+  font-weight: 600;
   -webkit-text-decoration: none;
   text-decoration: none;
-  margin: 0;
-  background: transparent;
-  overflow: visible;
-  text-transform: none;
-  color: inherit;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
-  line-height: 0;
-  padding: 12px;
+  cursor: pointer;
 }
 
-.c17:hover {
-  background-color: rgba(221,221,221,0.4);
-  color: #000000;
+.c20:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
 }
 
-.c17:focus {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c17:focus > circle,
-.c17:focus > ellipse,
-.c17:focus > line,
-.c17:focus > path,
-.c17:focus > polygon,
-.c17:focus > polyline,
-.c17:focus > rect {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c17:focus::-moz-focus-inner {
-  border: 0;
-}
-
-.c17:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.c17:focus:not(:focus-visible) > circle,
-.c17:focus:not(:focus-visible) > ellipse,
-.c17:focus:not(:focus-visible) > line,
-.c17:focus:not(:focus-visible) > path,
-.c17:focus:not(:focus-visible) > polygon,
-.c17:focus:not(:focus-visible) > polyline,
-.c17:focus:not(:focus-visible) > rect {
-  outline: none;
-  box-shadow: none;
-}
-
-.c17:focus:not(:focus-visible)::-moz-focus-inner {
-  border: 0;
-}
-
-.c7 {
+.c8 {
   display: grid;
   box-sizing: border-box;
   grid-template-columns: repeat( auto-fit,minmax(min(96px,100%),1fr) );
   grid-gap: 0px 0px;
 }
 
+.c6 {
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
 @media only screen and (max-width:768px) {
   .c0 {
-    border-radius: 6px;
+    padding: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c0 {
+    border-radius: 3px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c1 {
-    padding-left: 12px;
-    padding-right: 12px;
+    margin-bottom: 12px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c1 {
-    padding-top: 6px;
+    border-bottom: solid 1px background-front-border;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c1 {
     padding-bottom: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c6 {
-    padding: 0px;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c8 {
-    padding: 12px;
+  .c5 {
+    margin-bottom: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
   .c9 {
+    padding: 0px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c10 {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c10 {
+    padding-bottom: 6px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c11 {
     padding-right: 3px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c14 {
-    padding-left: 12px;
-    padding-right: 12px;
+  .c15 {
+    padding-right: 6px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c4 {
+  .c3 {
     width: 6px;
   }
 }
 
-@media only screen and (max-width:768px) {
-  .c16 {
-    width: 12px;
+@media only screen and (min-width:768px) and (max-width:1024px) {
+  .c6 {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    -webkit-align-items: flex-end;
+    -webkit-box-align: flex-end;
+    -ms-flex-align: flex-end;
+    align-items: flex-end;
+  }
+
+  .c6 > * {
+    width: 100%;
   }
 }
 
@@ -1097,33 +1135,29 @@ exports[`<Transaction  /> should match snapshot 1`] = `
   <header
     class="c1"
   >
-    <div
+    <svg
+      aria-label="LinkPrevious"
       class="c2"
+      viewBox="0 0 24 24"
     >
-      <svg
-        aria-label="LinkPrevious"
-        class="c3"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M22 12H2m9-9-9 9 9 9"
-          fill="none"
-          stroke="#000"
-          stroke-width="2"
-        />
-      </svg>
-      <div
-        class="c4"
+      <path
+        d="M22 12H2m9-9-9 9 9 9"
+        fill="none"
+        stroke="#000"
+        stroke-width="2"
       />
-      <span
-        class="c5"
-      >
-        account.transaction.transfer.received
-      </span>
-    </div>
+    </svg>
+    <div
+      class="c3"
+    />
+    <span
+      class="c4"
+    >
+      account.transaction.transfer.received
+    </span>
   </header>
   <div
-    class="c6"
+    class="c5 c6"
   >
     <div
       class="c7"
@@ -1134,156 +1168,216 @@ exports[`<Transaction  /> should match snapshot 1`] = `
         <div
           class="c9"
         >
-          <svg
-            aria-label="Money"
+          <a
+            data-testid="external-wallet-address"
+            href="/account/source"
+          >
+            <div
+              class="c10"
+            >
+              <div
+                class="c11"
+              >
+                <svg
+                  aria-label="ContactInfo"
+                  class="c12"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M5 12a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm4 6v-2c0-2.25-1.787-4-4.036-4h.054C2.768 12 1 13.75 1 16v2M12 7h12M12 17h10m-10-5h7"
+                    fill="none"
+                    stroke="#000"
+                    stroke-width="2"
+                  />
+                </svg>
+              </div>
+              <div
+                class="c3"
+              />
+              <div
+                class="c13"
+              >
+                <span
+                  class="c4"
+                >
+                  common.from
+                </span>
+                <span
+                  class="c14"
+                >
+                  source...source
+                </span>
+              </div>
+            </div>
+          </a>
+          <div
             class="c10"
-            viewBox="0 0 24 24"
           >
-            <path
-              d="M16 16c0-1.105-3.134-2-7-2s-7 .895-7 2 3.134 2 7 2 7-.895 7-2zM2 16v4.937C2 22.077 5.134 23 9 23s7-.924 7-2.063V16M9 5c-4.418 0-8 .895-8 2s3.582 2 8 2M1 7v5c0 1.013 3.582 2 8 2M23 4c0-1.105-3.1-2-6.923-2-3.824 0-6.923.895-6.923 2s3.1 2 6.923 2S23 5.105 23 4zm-7 12c3.824 0 7-.987 7-2V4M9.154 4v10.166M9 9c0 1.013 3.253 2 7.077 2C19.9 11 23 10.013 23 9"
-              fill="none"
-              stroke="#000"
-              stroke-width="2"
+            <div
+              class="c11"
+            >
+              <svg
+                aria-label="Package"
+                class="c12"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M12.371.571 12 .423l-.371.148-10 4L1 4.823v14.354l.629.251 10 4 .371.149.371-.149 10-4 .629-.251V4.823l-.629-.252-10-4zM3 6.977v10.846l8 3.2V10.177l-8-3.2zm10 3.2v10.846l8-3.2V6.977l-8 3.2zM19.307 5.5 12 2.577 9.943 3.4l7.307 2.923 2.057-.823zm-14.614 0L7.25 4.477 14.557 7.4 12 8.423 4.693 5.5z"
+                  fill="#000"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              class="c3"
             />
-          </svg>
-        </div>
-        <div
-          class="c4"
-        />
-        <div
-          class="c11"
-        >
-          <span
-            class="c12"
-          >
-            common.amount
-          </span>
-          <span
-            class="c5"
-          >
-            0.001
-            <span
+            <div
               class="c13"
             >
-              TEST
-            </span>
-          </span>
-        </div>
-      </div>
-      <a
-        data-testid="external-wallet-address"
-        href="/account/source"
-      >
-        <div
-          class="c8"
-        >
-          <div
-            class="c9"
-          >
-            <svg
-              aria-label="ContactInfo"
-              class="c10"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M5 12a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm4 6v-2c0-2.25-1.787-4-4.036-4h.054C2.768 12 1 13.75 1 16v2M12 7h12M12 17h10m-10-5h7"
-                fill="none"
-                stroke="#000"
-                stroke-width="2"
-              />
-            </svg>
-          </div>
-          <div
-            class="c4"
-          />
-          <div
-            class="c11"
-          >
-            <span
-              class="c12"
-            >
-              common.from
-            </span>
-            <span
-              class="c5"
-            >
-              source...source
-            </span>
+              <span
+                class="c4"
+              >
+                common.hash
+              </span>
+              <span
+                class="c14"
+              >
+                ff1234...ff1234
+              </span>
+            </div>
           </div>
         </div>
-      </a>
-      <div
-        class="c8"
-      >
         <div
           class="c9"
         >
-          <svg
-            aria-label="Cube"
+          <div
             class="c10"
-            viewBox="0 0 24 24"
           >
-            <path
-              d="m12 2 10 5v10l-10 5-10-5V7l10-5zM2 7l10 5 10-5m-10 5v10-10z"
-              fill="none"
-              stroke="#000"
-              stroke-width="2"
+            <div
+              class="c11"
+            >
+              <svg
+                aria-label="Clock"
+                class="c12"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M13 7a1 1 0 1 0-2 0v5a1 1 0 0 0 .4.8l4 3a1 1 0 0 0 1.2-1.6L13 11.5V7z"
+                  fill="#000"
+                />
+                <path
+                  clip-rule="evenodd"
+                  d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zM3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z"
+                  fill="#000"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div
+              class="c3"
             />
-          </svg>
-        </div>
-        <div
-          class="c4"
-        />
-        <div
-          class="c11"
-        >
-          <span
-            class="c12"
+            <div
+              class="c13"
+            >
+              <span
+                class="c4"
+              >
+                common.time
+              </span>
+              <span
+                class="c14"
+              >
+                4/10/2021, 1:30:55 AM
+              </span>
+            </div>
+          </div>
+          <div
+            class="c10"
           >
-            common.block
-          </span>
-          <span
-            class="c5"
-          />
+            <div
+              class="c11"
+            >
+              <svg
+                aria-label="Cube"
+                class="c12"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="m12 2 10 5v10l-10 5-10-5V7l10-5zM2 7l10 5 10-5m-10 5v10-10z"
+                  fill="none"
+                  stroke="#000"
+                  stroke-width="2"
+                />
+              </svg>
+            </div>
+            <div
+              class="c3"
+            />
+            <div
+              class="c13"
+            >
+              <span
+                class="c4"
+              >
+                common.block
+              </span>
+              <span
+                class="c14"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <footer
-    class="c14"
-  >
-    <span
+    <div
       class="c15"
     >
-      4/10/2021, 1:30:55 AM
-    </span>
-    <div
-      class="c16"
-    />
-    <div
-      class="c2"
-    >
-      <a
-        class="c17"
-        data-testid="explorer-link"
-        href="https://oasisscan.com/transactions/ff1234"
-        rel="noopener"
-        target="_blank"
+      <span
+        class="c16"
       >
-        <svg
-          aria-label="CircleInformation"
-          class="c18"
-          viewBox="0 0 24 24"
+        0.001
+        <span
+          class="c17"
         >
-          <path
-            d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm0-12v8m0-12v2"
-            fill="none"
-            stroke="#000"
-            stroke-width="2"
-          />
-        </svg>
-      </a>
+          TEST
+        </span>
+      </span>
+      <span
+        class="c18"
+      >
+        account.transaction.successful
+      </span>
     </div>
+  </div>
+  <footer
+    class="c19"
+  >
+    <a
+      class="c20"
+      data-testid="explorer-link"
+      href="https://oasisscan.com/transactions/ff1234"
+      rel="noopener"
+      target="_blank"
+    >
+      <span
+        class="c21"
+      >
+        account.transaction.explorerLink
+      </span>
+      <svg
+        aria-label="FormNext"
+        class="c12"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="m9 6 6 6-6 6"
+          fill="none"
+          stroke="#000"
+          stroke-width="2"
+        />
+      </svg>
+    </a>
   </footer>
 </div>
 `;
