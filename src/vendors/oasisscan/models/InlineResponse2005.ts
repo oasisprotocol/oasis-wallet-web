@@ -14,48 +14,48 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    RuntimeTransactionInfoRow,
-    RuntimeTransactionInfoRowFromJSON,
-    RuntimeTransactionInfoRowFromJSONTyped,
-    RuntimeTransactionInfoRowToJSON,
+    InlineResponse2005Data,
+    InlineResponse2005DataFromJSON,
+    InlineResponse2005DataFromJSONTyped,
+    InlineResponse2005DataToJSON,
 } from './';
 
 /**
  * 
  * @export
- * @interface InlineResponse2003
+ * @interface InlineResponse2005
  */
-export interface InlineResponse2003 {
+export interface InlineResponse2005 {
     /**
      * 
      * @type {number}
-     * @memberof InlineResponse2003
+     * @memberof InlineResponse2005
      */
     code: number;
     /**
      * 
-     * @type {RuntimeTransactionInfoRow}
-     * @memberof InlineResponse2003
+     * @type {InlineResponse2005Data}
+     * @memberof InlineResponse2005
      */
-    data: RuntimeTransactionInfoRow;
+    data: InlineResponse2005Data;
 }
 
-export function InlineResponse2003FromJSON(json: any): InlineResponse2003 {
-    return InlineResponse2003FromJSONTyped(json, false);
+export function InlineResponse2005FromJSON(json: any): InlineResponse2005 {
+    return InlineResponse2005FromJSONTyped(json, false);
 }
 
-export function InlineResponse2003FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineResponse2003 {
+export function InlineResponse2005FromJSONTyped(json: any, ignoreDiscriminator: boolean): InlineResponse2005 {
     if ((json === undefined) || (json === null)) {
         return json;
     }
     return {
         
         'code': json['code'],
-        'data': json['data'],
+        'data': InlineResponse2005DataFromJSON(json['data']),
     };
 }
 
-export function InlineResponse2003ToJSON(value?: InlineResponse2003 | null): any {
+export function InlineResponse2005ToJSON(value?: InlineResponse2005 | null): any {
     if (value === undefined) {
         return undefined;
     }
@@ -65,7 +65,7 @@ export function InlineResponse2003ToJSON(value?: InlineResponse2003 | null): any
     return {
         
         'code': value.code,
-        'data': value.data,
+        'data': InlineResponse2005DataToJSON(value.data),
     };
 }
 

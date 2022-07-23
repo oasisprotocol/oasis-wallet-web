@@ -1,4 +1,4 @@
-import { OperationsRowMethodEnum } from 'vendors/oasisscan/index'
+import { OperationsRowMethodEnum, ParaTimeCtxRowMethodEnum } from 'vendors/oasisscan/index'
 import {
   parseValidatorsList,
   parseAccount,
@@ -137,6 +137,40 @@ describe('oasisscan', () => {
   test('parse transaction list', () => {
     expect(
       parseTransactionsList([
+        // Emerald ParaTime Object
+        // https://api.oasisscan.com/mainnet/runtime/transaction/info?id=000000000000000000000000000000000000000000000000e2eaa99fc008f87f&hash=25b84ca4582f6e3140c384ad60b98415d2c3079d1fc5f2221e45da7b13c70817
+        {
+          ctx: {
+            amount: '200',
+            method: 'consensus.Deposit' as ParaTimeCtxRowMethodEnum,
+            from: 'oasis1qqnk4au603zs94k0d0n7c0hkx8t4p6r87s60axru',
+            to: 'oasis1qzgc7dvlls36q47z5y6dvu6ylaa78rkrduqtxgdr',
+            nonce: 4,
+          },
+          runtimeName: 'Emerald',
+          runtimeId: '000000000000000000000000000000000000000000000000e2eaa99fc008f87f',
+          round: 997775,
+          timestamp: 1649604086,
+          txHash: '25b84ca4582f6e3140c384ad60b98415d2c3079d1fc5f2221e45da7b13c70817',
+          result: true,
+          message: 'null',
+          type: 'regular',
+          etx: null,
+          events: {
+            type: 'deposit',
+            tx_hash: '0000000000000000000000000000000000000000000000000000000000000000',
+            round: 997776,
+            position: 0,
+            i: 0,
+            from: 'oasis1qqnk4au603zs94k0d0n7c0hkx8t4p6r87s60axru',
+            to: 'oasis1qzgc7dvlls36q47z5y6dvu6ylaa78rkrduqtxgdr',
+            owner: null,
+            nonce: 4,
+            amount: [],
+            error: null,
+          },
+        },
+
         // https://api.oasisscan.com/mainnet/chain/transactions?size=200&runtime=false&method=staking.Transfer&address=oasis1qz086axf5hreqpehv5hlgmtw7sfem79gz55v68wp
         {
           txHash: 'b831c4b2aa3188058717250cba279795d907e581bb4d7d40d9dc358d37a56254',

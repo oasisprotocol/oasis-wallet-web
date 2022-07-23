@@ -10,9 +10,12 @@ import {
   DelegationRow,
   DebondingDelegationRow,
   OperationsListApi,
+  RuntimeApi,
   ValidatorRow,
   OperationsRow,
   OperationsRowMethodEnum,
+  ParaTimeCtxRowMethodEnum,
+  RuntimeTransactionInfoRow,
 } from 'vendors/oasisscan/index'
 
 import { throwAPIErrors, sortByStatus } from './helpers'
@@ -25,6 +28,7 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
 
   const accounts = new AccountsApi(explorerConfig)
   const operations = new OperationsListApi(explorerConfig)
+  const runtime = new RuntimeApi(explorerConfig)
 
   async function getAccount(address: string): Promise<Account> {
     const account = await accounts.getAccount({ accountId: address })
@@ -38,14 +42,29 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     return parseValidatorsList(validators.data.list)
   }
 
+  async function getRuntimeTransactionInfo(tx: OperationsRow) {
+    const { data } = await runtime.getRuntimeTransactionInfo({
+      id: tx.runtimeId!,
+      hash: tx.txHash,
+    })
+    return data
+  }
+
   async function getTransactionsList(params: { accountId: string; limit: number }): Promise<Transaction[]> {
     const transactionsList = await operations.getTransactionsList({
       address: params.accountId,
       size: params.limit,
-      runtime: false,
+      runtime: true,
     })
     if (!transactionsList || transactionsList.code !== 0) throw new Error('Wrong response code') // TODO
-    return parseTransactionsList(transactionsList.data.list)
+
+    const list = await Promise.all(
+      transactionsList.data.list.map(async tx => (tx.runtimeId ? getRuntimeTransactionInfo(tx) : tx)),
+    ).then(transaction => {
+      return transaction
+    })
+
+    return parseTransactionsList(list)
   }
 
   async function getDelegations(params: { accountId: string; nic: oasis.client.NodeInternal }): Promise<{
@@ -99,7 +118,9 @@ export function parseValidatorsList(validators: ValidatorRow[]): Validator[] {
     .sort(sortByStatus)
 }
 
-export const transactionMethodMap: { [k in OperationsRowMethodEnum]: TransactionType } = {
+export const transactionMethodMap: {
+  [k in OperationsRowMethodEnum | ParaTimeCtxRowMethodEnum]: TransactionType
+} = {
   [OperationsRowMethodEnum.StakingTransfer]: TransactionType.StakingTransfer,
   [OperationsRowMethodEnum.StakingTransfer]: TransactionType.StakingTransfer,
   [OperationsRowMethodEnum.StakingAddEscrow]: TransactionType.StakingAddEscrow,
@@ -117,22 +138,48 @@ export const transactionMethodMap: { [k in OperationsRowMethodEnum]: Transaction
   [OperationsRowMethodEnum.BeaconPvssCommit]: TransactionType.BeaconPvssCommit,
   [OperationsRowMethodEnum.BeaconPvssReveal]: TransactionType.BeaconPvssReveal,
   [OperationsRowMethodEnum.BeaconVrfProve]: TransactionType.BeaconVrfProve,
+  [ParaTimeCtxRowMethodEnum.ConsensusDeposit]: TransactionType.ConsensusDeposit,
+  [ParaTimeCtxRowMethodEnum.ConsensusWithdraw]: TransactionType.ConsensusWithdraw,
+  [ParaTimeCtxRowMethodEnum.ConsensusAccountsParameters]: TransactionType.ConsensusAccountsParameters,
+  [ParaTimeCtxRowMethodEnum.ConsensusBalance]: TransactionType.ConsensusBalance,
+  [ParaTimeCtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-export function parseTransactionsList(transactionsList: OperationsRow[]): Transaction[] {
-  return transactionsList.map(t => {
-    const parsed: Transaction = {
-      amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),
-      fee: parseStringValueToInt(t.fee),
-      from: t.from,
-      hash: t.txHash,
-      level: t.height,
-      status: t.status,
-      timestamp: t.timestamp,
-      to: t.to ?? undefined,
-      type: transactionMethodMap[t.method],
+export function parseTransactionsList(list: (OperationsRow | RuntimeTransactionInfoRow)[]): Transaction[] {
+  return list.map(t => {
+    if ('ctx' in t) {
+      const parsed: Transaction = {
+        amount: t.ctx.amount == null ? undefined : parseStringValueToInt(t.ctx.amount),
+        fee: undefined,
+        from: t.ctx.from,
+        hash: t.txHash,
+        level: undefined,
+        status: t.result,
+        timestamp: t.timestamp,
+        to: t.ctx.to ?? undefined,
+        type: transactionMethodMap[t.ctx.method],
+        runtimeName: t.runtimeName,
+        runtimeId: t.runtimeId,
+        round: t.round,
+      }
+      return parsed
+    } else {
+      const parsed: Transaction = {
+        amount: t.amount == null ? undefined : parseStringValueToInt(t.amount),
+        fee: t.fee ? parseStringValueToInt(t.fee) : undefined,
+        from: t.from,
+        hash: t.txHash,
+        level: t.height,
+        status: t.status,
+        timestamp: t.timestamp,
+        to: t.to ?? undefined,
+        type: transactionMethodMap[t.method],
+        runtimeName: undefined,
+        runtimeId: undefined,
+        round: undefined,
+      }
+      return parsed
     }
-    return parsed
   })
 }
 

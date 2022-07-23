@@ -17,6 +17,11 @@ export enum TransactionType {
   BeaconPvssCommit = 'beacon.PVSSCommit',
   BeaconPvssReveal = 'beacon.PVSSReveal',
   BeaconVrfProve = 'beacon.VRFProve',
+  ConsensusDeposit = 'consensus.Deposit',
+  ConsensusWithdraw = 'consensus.Withdraw',
+  ConsensusAccountsParameters = 'consensus.Parameters',
+  ConsensusBalance = 'consensus.Balance',
+  ConsensusAccount = 'consensus.Account',
 }
 
 export interface Transaction {
@@ -29,6 +34,11 @@ export interface Transaction {
   timestamp: number | undefined
   to: string | undefined
   type: TransactionType
+  // These are undefined on consensus transaction
+  // Only appear on ParaTime transaction
+  runtimeName: string | undefined
+  runtimeId: string | undefined
+  round: number | undefined
 }
 
 /* --- STATE --- */

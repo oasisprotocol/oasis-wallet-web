@@ -54,6 +54,9 @@
         "received": "Received <0></0> delegation in escrow",
         "sent": "Delegated <0></0> to validator"
       },
+      "consensusDeposit": {
+        "sent": "{{runtimeName}} ParaTime deposit"
+      },
       "loadingError": "Couldn't load transactions.",
       "reclaimEscrow": {
         "received": "<0></0> reclaimed by delegator",
@@ -83,6 +86,7 @@
     "confirm": "Confirm",
     "delegator": "Delegator",
     "from": "From",
+    "round": "Round",
     "to": "To",
     "unavailable": "Unavailable",
     "validator": "Validator",

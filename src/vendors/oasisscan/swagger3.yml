@@ -1,9 +1,8 @@
 openapi: '3.0.1'
 info:
   title: Oasisscan API
-  version: "1"
-  description:
-    https://github.com/bitcat365/oasisscan-backend#readme
+  version: '1'
+  description: https://github.com/bitcat365/oasisscan-backend#readme
 paths:
   '/chain/account/info/{account_id}':
     get:
@@ -23,7 +22,7 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
@@ -46,13 +45,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["active", "delegators", "inactive", "list"]
+                    required: ['active', 'delegators', 'inactive', 'list']
                     properties:
                       active:
                         type: integer
@@ -104,13 +103,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["list", "maxPage", "page", "size", "totalSize", "tags"]
+                    required: ['list', 'maxPage', 'page', 'size', 'totalSize', 'tags']
                     properties:
                       list:
                         type: array
@@ -124,6 +123,40 @@ paths:
                         type: integer
                       totalSize:
                         type: integer
+  '/runtime/transaction/info':
+    get:
+      tags:
+        - Runtime
+      operationId: getRuntimeTransactionInfo
+      parameters:
+        - name: id
+          schema:
+            type: string
+          required: true
+          in: query
+        - name: hash
+          schema:
+            type: string
+          required: true
+          in: query
+        - name: round
+          schema:
+            type: integer
+          in: query
+      responses:
+        '200':
+          description: Get details for ParaTime transaction
+          content:
+            application/json:
+              schema:
+                type: object
+                required: ['code', 'data']
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    type: object
+                    $ref: '#/components/schemas/RuntimeTransactionInfoRow'
   '/chain/account/delegations':
     get:
       tags:
@@ -158,13 +191,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["list", "maxPage", "page", "size", "totalSize", "tags"]
+                    required: ['list', 'maxPage', 'page', 'size', 'totalSize', 'tags']
                     properties:
                       list:
                         type: array
@@ -207,13 +240,13 @@ paths:
             application/json:
               schema:
                 type: object
-                required: ["code", "data"]
+                required: ['code', 'data']
                 properties:
                   code:
                     type: integer
                   data:
                     type: object
-                    required: ["list", "maxPage", "page", "size", "totalSize", "tags"]
+                    required: ['list', 'maxPage', 'page', 'size', 'totalSize', 'tags']
                     properties:
                       list:
                         type: array
@@ -264,8 +297,7 @@ components:
       properties:
         active:
           type: boolean
-          description:
-            If "true", entity is part of validator set
+          description: If "true", entity is part of validator set
             (top <scheduler.params.max_validators> by stake).
         balance:
           type: string
@@ -332,8 +364,7 @@ components:
           type: integer
         status:
           type: boolean
-          description:
-            If "true", an entity has a node that is registered for being a
+          description: If "true", an entity has a node that is registered for being a
             validator, node is up to date, and has successfully registered itself.
             However, it may or may not be part of validator set
             (top <scheduler.params.max_validators> by stake).
@@ -427,18 +458,7 @@ components:
         to:
           type: string
           nullable: true
-        round:
-          type: integer
         runtimeId:
-          type: string
-          description: ParaTime only
-        runtimeName:
-          type: string
-          description: ParaTime only
-        result:
-          type: boolean
-          description: ParaTime only
-        type:
           type: string
           description: ParaTime only
       required:
@@ -505,3 +525,49 @@ components:
         - epochLeft
         - validatorName
         - icon
+    RuntimeTransactionInfoRow:
+      type: object
+      properties:
+        ctx:
+          $ref: '#/components/schemas/ParaTimeCtxRow'
+        runtimeName:
+          type: string
+        runtimeId:
+          type: string
+        round:
+          type: integer
+        timestamp:
+          type: integer
+        txHash:
+          type: string
+        result:
+          type: boolean
+        message: {} # any type
+        type: {} # any type
+        etx: {} # any type
+        events: {} # any type
+      required: ['ctx', 'result', 'runtimeName', 'runtimeId', 'round', 'timestamp', 'txHash']
+    ParaTimeCtxRow:
+      type: object
+      properties:
+        amount:
+          type: string
+        method:
+          type: string
+          enum:
+            - consensus.Deposit
+            - consensus.Withdraw
+            - consensus_accounts.Parameters
+            - consensus.Balance
+            - consensus.Account
+        from:
+          type: string
+        to:
+          type: string
+        nonce:
+          type: integer
+      required:
+        - amount
+        - method
+        - to
+        - from

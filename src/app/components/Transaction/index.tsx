@@ -9,6 +9,7 @@ import {
   ContactInfo,
   Cube,
   Money,
+  Inherit,
   LineChart,
   New,
   LinkPrevious,
@@ -164,6 +165,21 @@ export function Transaction(props: TransactionProps) {
       [TransactionSide.Received]: unrecognizedTransaction,
       [TransactionSide.Sent]: unrecognizedTransaction,
     },
+    [transactionTypes.TransactionType.ConsensusDeposit]: {
+      [TransactionSide.Received]: unrecognizedTransaction,
+      [TransactionSide.Sent]: {
+        designation: t('common.to', 'To'),
+        icon: () => <Inherit />,
+        header: () => (
+          <Trans
+            i18nKey="account.transaction.consensusDeposit.sent"
+            t={t}
+            values={{ runtimeName: transaction.runtimeName }}
+            defaults="{{runtimeName}} ParaTime deposit"
+          />
+        ),
+      },
+    },
     [transactionTypes.TransactionType.StakingAllow]: {
       [TransactionSide.Received]: unrecognizedTransaction,
       [TransactionSide.Sent]: unrecognizedTransaction,
@@ -212,6 +228,22 @@ export function Transaction(props: TransactionProps) {
       [TransactionSide.Received]: unrecognizedTransaction,
       [TransactionSide.Sent]: unrecognizedTransaction,
     },
+    [transactionTypes.TransactionType.ConsensusWithdraw]: {
+      [TransactionSide.Received]: unrecognizedTransaction,
+      [TransactionSide.Sent]: unrecognizedTransaction,
+    },
+    [transactionTypes.TransactionType.ConsensusAccountsParameters]: {
+      [TransactionSide.Received]: unrecognizedTransaction,
+      [TransactionSide.Sent]: unrecognizedTransaction,
+    },
+    [transactionTypes.TransactionType.ConsensusBalance]: {
+      [TransactionSide.Received]: unrecognizedTransaction,
+      [TransactionSide.Sent]: unrecognizedTransaction,
+    },
+    [transactionTypes.TransactionType.ConsensusAccount]: {
+      [TransactionSide.Received]: unrecognizedTransaction,
+      [TransactionSide.Sent]: unrecognizedTransaction,
+    },
   }
 
   const isTypeRecognized = (type: string | undefined): type is transactionTypes.TransactionType =>
@@ -224,14 +256,24 @@ export function Transaction(props: TransactionProps) {
   const icon = matchingConfiguration.icon()
   const header = matchingConfiguration.header()
   const designation = matchingConfiguration.designation
-  const blockExplorerLink = config[props.network][backend()]?.blockExplorer
+  const backendLinks = config[props.network][backend()]
+  let externalExplorerLink = (
+    transaction.runtimeId ? backendLinks.blockExplorerParatimes : backendLinks.blockExplorer
+  )?.replace('{{txHash}}', encodeURIComponent(transaction.hash))
+
+  if (transaction.runtimeId) {
+    externalExplorerLink = externalExplorerLink?.replace(
+      '{{runtimeId}}',
+      encodeURIComponent(transaction.runtimeId),
+    )
+  }
 
   return (
     <Card round="small" background="background-front" gap="none" elevation="xsmall">
       <CardHeader
         pad={{ horizontal: 'medium', vertical: 'small' }}
         gap="none"
-        background={transaction.status ? 'brand' : 'status-error'}
+        background={transaction.status ? (transaction.runtimeName ? 'accent-4' : 'brand') : 'status-error'}
         wrap={true}
       >
         <Box direction="row" gap="small">
@@ -263,8 +305,8 @@ export function Transaction(props: TransactionProps) {
           )}
           <InfoBox
             icon={<Cube color="brand" />}
-            label={t('common.block', 'Block')}
-            value={transaction.level}
+            label={transaction.runtimeId ? t('common.round', 'Round') : t('common.block', 'Block')}
+            value={transaction[transaction.runtimeId ? 'round' : 'level']}
           />
         </Grid>
       </CardBody>
@@ -276,7 +318,7 @@ export function Transaction(props: TransactionProps) {
           <Button
             icon={<CircleInformation color="dark-3" />}
             hoverIndicator
-            href={blockExplorerLink.replace('{{txHash}}', encodeURIComponent(transaction.hash))}
+            href={externalExplorerLink}
             target="_blank"
             rel="noopener"
             data-testid="explorer-link"
