@@ -142,7 +142,7 @@
     "nodemon": "2.0.18",
     "parcel": "2.6.2",
     "parcel-transformer-env-variables-injection": "0.1.2",
-    "plop": "2.7.6",
+    "plop": "3.1.1",
     "portable-fetch": "3.0.0",
     "prettier": "2.7.1",
     "redux-saga-test-plan": "4.0.4",
