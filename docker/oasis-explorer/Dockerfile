@@ -10,7 +10,7 @@ RUN git clone https://github.com/everstake/oasis-explorer.git /app &&  \
 ENV CGO_ENABLED 0
 RUN go build
 
-FROM docker.io/library/alpine:3.16.0
+FROM docker.io/library/alpine:3.16.1
 RUN apk add --no-cache ca-certificates
 COPY --from=build-env /app/oasisTracker /oasisTracker
 COPY --from=build-env app/dao/postgres/migrations /dao/postgres/migrations
