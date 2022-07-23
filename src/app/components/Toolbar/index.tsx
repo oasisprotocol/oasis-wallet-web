@@ -11,7 +11,9 @@ import { useSelector } from 'react-redux'
 
 import { AccountSelectorButton } from './Features/AccountSelectorButton'
 import { NetworkSelector } from './Features/NetworkSelector'
+import { mobileHeaderZIndex } from '../Sidebar'
 
+const toolbarZIndex = mobileHeaderZIndex + 1
 const StyledToolbar = styled(Box)`
   @media only screen and (min-width: ${({ theme }) => `${theme.global?.breakpoints?.small?.value}px`}) {
     padding: ${({ theme }) => `${theme.global?.edgeSize?.small} ${theme.global?.edgeSize?.small} 0`};
@@ -21,7 +23,7 @@ const StyledToolbar = styled(Box)`
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 2;
+    z-index: ${toolbarZIndex};
     padding: ${({ theme }) => theme.global?.breakpoints?.small?.edgeSize?.small};
   }
 `

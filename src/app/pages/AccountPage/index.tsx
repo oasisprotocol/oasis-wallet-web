@@ -33,6 +33,7 @@ import {
 } from '../../state/wallet/selectors'
 import { ActiveDelegationList } from '../StakingPage/Features/DelegationList/ActiveDelegationList'
 import { DebondingDelegationList } from '../StakingPage/Features/DelegationList/DebondingDelegationList'
+import { mobileHeaderZIndex } from '../../components/Sidebar'
 import { ValidatorList } from '../StakingPage/Features/ValidatorList'
 import { AccountDetails } from './Features/AccountDetails'
 import { AccountSummary } from './Features/AccountSummary'
@@ -57,16 +58,19 @@ interface NavItemProps {
   route: string
 }
 
+const counterZIndex = mobileHeaderZIndex - 1
 const NavItem = ({ counter, label, route }: NavItemProps) => {
   return (
     <StyledNavItem exact to={route}>
       <Text>{label}</Text>
       {!!counter && (
         <Box
-          style={{ position: 'absolute', top: '-3px', right: '-5px' }}
+          align="center"
+          style={{ position: 'absolute', top: '-3px', right: '-5px', zIndex: counterZIndex }}
           responsive={false}
           background="brand"
           pad={{ horizontal: 'xsmall' }}
+          width="20px"
           round
         >
           <Text size="small" weight="bold">
