@@ -58,7 +58,7 @@
   "dependencies": {
     "@ledgerhq/hw-transport-webusb": "6.20.0",
     "@metamask/jazzicon": "2.0.0",
-    "@oasisprotocol/client": "0.1.0-alpha8",
+    "@oasisprotocol/client": "0.1.0-alpha9",
     "@oasisprotocol/ledger": "0.2.3",
     "@reduxjs/toolkit": "1.7.1",
     "base64-arraybuffer": "1.0.2",

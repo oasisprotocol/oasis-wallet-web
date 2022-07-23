@@ -2723,15 +2723,15 @@
     node-gyp "^7.1.0"
     read-package-json-fast "^2.0.1"
 
-"@oasisprotocol/client@0.1.0-alpha8":
-  version "0.1.0-alpha8"
-  resolved "https://registry.yarnpkg.com/@oasisprotocol/client/-/client-0.1.0-alpha8.tgz#717cf6bdfcf964c7e476ec3bb8007730a55fd3d1"
-  integrity sha512-PtJyysR9Tlt3VDcMJlR7h1XyDidYZwPWQGZBFLOViTzMMlc686uxiNBOD9UYeP6IVQPAwpSmYmL0hEMV9dDbiQ==
+"@oasisprotocol/client@0.1.0-alpha9":
+  version "0.1.0-alpha9"
+  resolved "https://registry.yarnpkg.com/@oasisprotocol/client/-/client-0.1.0-alpha9.tgz#a97f672675aa7982f869b5f6b6800f852d9a2f29"
+  integrity sha512-mrALHouToFiiNQi7fKk91U9FdjUbTj+OFqSeZn29nZw0OtiqfF9glTI2Cs0uRVORYB+iqYW5RL7H23rsgs9Y4w==
   dependencies:
     bech32 "^2.0.0"
     bip39 "^3.0.4"
-    cborg "^1.6.0"
-    grpc-web "^1.3.0"
+    cborg "^1.9.1"
+    grpc-web "^1.3.1"
     js-sha512 "^0.8.0"
     protobufjs "~6.11.2"
     tweetnacl "^1.0.3"
@@ -5765,10 +5765,10 @@ caseless@~0.12.0:
   resolved "https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cborg@^1.6.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/cborg/-/cborg-1.8.0.tgz#d75be6c5cdaa0f9aab3d24c62b8d2c47ed57ca76"
-  integrity sha512-zT4TJQJJFXLGpd0iMmj1gQCscbcrBxC6X5S0D9bdA8nH34ZbsSdtzJXD0A2ZJzBWP95WI1pKX9CLkwW6UpolwA==
+cborg@^1.9.1:
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/cborg/-/cborg-1.9.4.tgz#85354ee6e0fe017dd34e300c3dcd044407a27800"
+  integrity sha512-ltobKo17xKYJolhg8UxQhvzcqXhjtUnovwe9Xx59Izo32gLwozGoJs/efp+8dZ5+zu9pNJYnHtmp6iJnDUapww==
 
 chalk@4.1.2:
   version "4.1.2"
@@ -8482,7 +8482,7 @@ grommet@2.25.0:
     markdown-to-jsx "^7.1.5"
     prop-types "^15.8.1"
 
-grpc-web@^1.3.0:
+grpc-web@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/grpc-web/-/grpc-web-1.3.1.tgz#6d8affe75a103790b7ad570824e765a1d6a418e4"
   integrity sha512-VxyYEAGsatecAFY3xieRDzsuhm92yQBsJD7fd5Z3MY150hZWPwkrUWetzJ0QK5W0uym4+VedPQrei38wk0eIjQ==
