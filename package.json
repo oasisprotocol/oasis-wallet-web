@@ -139,7 +139,7 @@
     "jest-watch-typeahead": "1.0.0",
     "jest-when": "3.5.1",
     "node-plop": "0.26.3",
-    "nodemon": "2.0.18",
+    "nodemon": "2.0.19",
     "parcel": "2.6.2",
     "parcel-transformer-env-variables-injection": "0.1.2",
     "plop": "2.7.6",
