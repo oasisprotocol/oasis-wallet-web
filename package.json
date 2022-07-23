@@ -138,7 +138,7 @@
     "jest-styled-components": "7.0.5",
     "jest-watch-typeahead": "1.0.0",
     "jest-when": "3.5.1",
-    "node-plop": "0.26.3",
+    "node-plop": "0.31.0",
     "nodemon": "2.0.18",
     "parcel": "2.6.2",
     "parcel-transformer-env-variables-injection": "0.1.2",
