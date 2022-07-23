@@ -188,7 +188,7 @@ exports[`<Toolbar  /> should match snapshot 1`] = `
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 2;
+    z-index: 4;
     padding: 6px;
   }
 }

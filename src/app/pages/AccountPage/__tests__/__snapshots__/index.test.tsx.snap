@@ -151,6 +151,10 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   background-color: #0092f6;
   color: #f8f8f8;
   min-width: 0;
@@ -158,6 +162,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  width: 20px;
   padding-left: 6px;
   padding-right: 6px;
   border-radius: 24px;
@@ -1015,7 +1020,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
         </span>
         <div
           class="c17"
-          style="position: absolute; top: -3px; right: -5px;"
+          style="position: absolute; top: -3px; right: -5px; z-index: 2;"
         >
           <span
             class="c18"

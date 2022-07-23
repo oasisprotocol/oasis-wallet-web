@@ -282,6 +282,8 @@ export function Sidebar() {
   )
 }
 
+export const mobileHeaderZIndex = 3
+
 export function Navigation() {
   const size = useContext(ResponsiveContext)
   const [sidebarVisible, setSidebarVisible] = React.useState(false)
@@ -308,7 +310,7 @@ export function Navigation() {
             position: 'fixed',
             top: 0,
             width: '100%',
-            zIndex: 2,
+            zIndex: mobileHeaderZIndex,
           }}
         >
           <Button onClick={() => toggleSidebar()} icon={<MenuIcon />} focusIndicator={false} />
