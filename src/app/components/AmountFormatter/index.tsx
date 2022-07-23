@@ -14,6 +14,7 @@ export interface AmountFormatterProps {
   minimumFractionDigits?: number
   maximumFractionDigits?: number
   hideTicker?: boolean
+  size?: string
   smallTicker?: boolean
 }
 
@@ -38,7 +39,7 @@ export const AmountFormatter = memo((props: AmountFormatterProps) => {
     <>
       {amountString}
       {!props.hideTicker && (
-        <Text margin={{ left: 'xxsmall' }} {...tickerProps}>
+        <Text margin={{ left: 'xxsmall' }} size={props.size} {...tickerProps}>
           {ticker}
         </Text>
       )}

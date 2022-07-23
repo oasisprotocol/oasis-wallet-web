@@ -91,14 +91,13 @@ describe('<Transaction  />', () => {
   it('should not redirect user when clicking on amount or block section', () => {
     renderComponent(store, ref, transaction, network)
 
-    userEvent.click(screen.getByLabelText('Money'))
     userEvent.click(screen.getByLabelText('Cube'))
     expect(pushSpy).not.toHaveBeenCalled()
   })
 
   it('should mark failed transactions', () => {
     renderComponent(store, ref, { ...transaction, status: false }, network)
-    expect(screen.getByText('account.transaction.transactionFailed')).toBeInTheDocument()
+    expect(screen.getByText('account.transaction.failed')).toBeInTheDocument()
   })
 
   it('should handle unknown transaction types gracefully', () => {

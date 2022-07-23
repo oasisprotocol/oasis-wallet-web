@@ -1,23 +1,28 @@
 import { Box, Text } from 'grommet'
 import * as React from 'react'
+import type { Icon } from 'grommet-icons/icons'
 
-interface DetailProps {
-  icon?: React.ReactNode
+interface InfoBoxProps {
+  icon: Icon
   label: string
   value: string | React.ReactNode
 }
 
-export function InfoBox(props: DetailProps) {
+export function InfoBox({ icon: IconComponent, label, value }: InfoBoxProps) {
   return (
-    <Box direction="row" gap="small" hoverIndicator={{ color: 'background-contrast' }} pad="medium">
-      {props.icon && (
-        <Box fill="vertical" align="center" justify="center" alignSelf="center" pad={{ right: 'xsmall' }}>
-          {props.icon}
-        </Box>
-      )}
+    <Box
+      direction="row"
+      gap="small"
+      hoverIndicator={{ color: 'background-contrast' }}
+      pad={{ horizontal: 'small', bottom: 'small' }}
+    >
+      <Box fill="vertical" align="center" justify="center" alignSelf="center" pad={{ right: 'xsmall' }}>
+        <IconComponent color="brand" size="20px" />
+      </Box>
+
       <Box justify="center">
-        <Text weight="bold">{props.label}</Text>
-        <Text>{props.value}</Text>
+        <Text weight="bold">{label}</Text>
+        <Text>{value}</Text>
       </Box>
     </Box>
   )

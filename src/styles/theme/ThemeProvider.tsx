@@ -117,6 +117,10 @@ const grommetCustomTheme: ThemeType = {
         dark: '#16213e',
         light: '#fafafa',
       },
+      'successful-label': {
+        dark: '#6FFFB0',
+        light: '#3fa900',
+      },
     },
     font: {
       family: 'Rubik',

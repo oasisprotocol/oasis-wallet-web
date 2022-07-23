@@ -33,7 +33,7 @@ export function TransactionHistory(props: Props) {
   ))
 
   return (
-    <Box gap="small" margin="none">
+    <Box gap="medium" margin="none">
       {transactionsError && (
         <p>
           {t('account.transaction.loadingError', "Couldn't load transactions.")}{' '}
