@@ -8,6 +8,7 @@ import { TransactionState } from 'app/state/transaction/types'
 import { ImportAccountsState } from 'app/state/importaccounts/types'
 import { StakingState } from 'app/state/staking/types'
 import { FatalErrorState } from 'app/state/fatalerror/types'
+import { SettingsState } from '../app/components/SettingsDialog/slice/types'
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 export interface RootState {
@@ -20,6 +21,7 @@ export interface RootState {
   importAccounts: ImportAccountsState
   staking: StakingState
   fatalError: FatalErrorState
+  settings: SettingsState
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
 }
 

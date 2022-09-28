@@ -18,6 +18,7 @@ export function* transactionSaga() {
   yield* takeEvery(transactionActions.sendTransaction, doTransaction)
   yield* takeEvery(transactionActions.addEscrow, doTransaction)
   yield* takeEvery(transactionActions.reclaimEscrow, doTransaction)
+  yield* takeEvery(transactionActions.sendBurn, doTransaction)
 }
 
 function* setStep(step: TransactionStep) {
@@ -95,6 +96,15 @@ function* prepareReclaimEscrow(signer: Signer, shares: bigint, validator: string
   return yield* call(OasisTransaction.buildReclaimEscrow, nic, signer as Signer, validator, shares)
 }
 
+function* prepareBurn(signer: Signer, amount: bigint) {
+  const nic = yield* call(getOasisNic)
+
+  yield* call(assertWalletIsOpen)
+  yield* call(assertSufficientBalance, amount)
+
+  return yield* call(OasisTransaction.buildBurn, nic, signer as Signer, amount)
+}
+
 /**
  * Generate transaction, sign, push to node
  *
@@ -135,6 +145,10 @@ export function* doTransaction(action: PayloadAction<TransactionPayload>) {
           BigInt(action.payload.shares),
           action.payload.validator,
         )
+        break
+
+      case 'burn':
+        tw = yield* call(prepareBurn, signer as Signer, BigInt(action.payload.amount))
         break
 
       default:

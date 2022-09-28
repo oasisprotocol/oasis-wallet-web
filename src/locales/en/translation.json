@@ -18,6 +18,13 @@
       "reclaim": "Reclaim",
       "reclaimAll": "Reclaim all"
     },
+    "sendBurn": {
+      "burn": "Burn",
+      "confirmBurning": {
+        "description": "You are about to burn these tokens. You are not sending them anywhere, but destroying them. They will completely cease to exist, and there is no way to get them back.",
+        "title": "Are you sure you want to continue?"
+      }
+    },
     "sendTransaction": {
       "confirmSendingToValidator": {
         "description": "This is a validator address. Transfers to this address do not stake your funds with the validator.",
@@ -30,6 +37,7 @@
     },
     "subnavigation": {
       "activeDelegations": "Active delegations",
+      "burning": "Burning tokens",
       "debondingDelegations": "Debonding delegations",
       "mobileActiveDelegations": "Delegations",
       "mobileDebondingDelegations": "Debonding",
@@ -51,6 +59,9 @@
       "addEscrow": {
         "received": "Received <Amount> delegation in escrow",
         "sent": "Delegated <Amount/> to validator"
+      },
+      "burnTransaction": {
+        "header": "Burned <Amount/>"
       },
       "consensusDeposit": {
         "received": "Received <Amount/> deposit into {{runtimeName}} ParaTime",
@@ -96,6 +107,9 @@
     "oasismonitor": "Oasis Monitor API",
     "oasisscan": "Oasis Scan API"
   },
+  "burn": {
+    "amount": "Amount to burn"
+  },
   "common": {
     "amount": "Amount",
     "block": "Block",
@@ -118,6 +132,13 @@
     "mnemonicMismatch": "Entered mnemonic does not match.",
     "newMnemonic": "Generate a new mnemonic",
     "thisIsYourPhrase": "This is your mnemonic"
+  },
+  "dangerMode": {
+    "description": "Dangerous mode: should the wallet let the user shoot himself in the foot?",
+    "off": "Off - Refuse to execute nonsensical actions",
+    "on": "On - Allow executing nonsensical actions. Don't blame Oasis!",
+    "youCanButDoYouWant": "You most probably shouldn't do this, but since you have specifically enabled 'dangerous mode' in wallet settings, we won't stop you.",
+    "youDontWantThis": "You most probably don't want to do this, so I won't allow it. If you really do, then please enable the 'dangerous mode' in wallet settings, and try again."
   },
   "delegations": {
     "activeDelegations": "Active delegations",
@@ -193,6 +214,7 @@
   "menu": {
     "closeWallet": "Close wallet",
     "home": "Home",
+    "settings": "Settings",
     "stake": "Stake",
     "wallet": "Wallet"
   },
@@ -227,6 +249,13 @@
       "hidePrivateKey": "Hide private key",
       "instruction": "Enter your private key in Base64 format.",
       "showPrivateKey": "Show private key"
+    }
+  },
+  "settings": {
+    "dialog": {
+      "close": "Close",
+      "description": "This is where you can configure the behavior of the Oasis Wallet.",
+      "title": "Wallet settings"
     }
   },
   "theme": {
@@ -272,6 +301,7 @@
     },
     "types": {
       "addEscrow": "Delegating your tokens to a validator and generate rewards",
+      "burn": "Burn tokens in your account",
       "reclaimEscrow": "Reclaiming your tokens delegated to a validator",
       "transfer": "Transferring tokens from your account to another"
     }

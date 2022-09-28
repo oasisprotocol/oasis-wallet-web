@@ -91,10 +91,22 @@ export function* refreshAccountOnTransaction() {
     const from = yield* select(selectAddress)
     let otherAddress: string
 
-    if (payload.type === 'transfer') {
-      otherAddress = payload.to
-    } else {
-      otherAddress = payload.validator
+    switch (payload.type) {
+      case 'transfer':
+        otherAddress = payload.to
+        break
+      case 'addEscrow':
+        otherAddress = payload.validator
+        break
+      case 'reclaimEscrow':
+        otherAddress = payload.validator
+        break
+      case 'burn':
+        otherAddress = 'none'
+        break
+      default:
+        console.warn('Unknown payload type', (payload as any).type)
+        otherAddress = 'none'
     }
 
     const currentAccount = yield* select(selectAccountAddress)

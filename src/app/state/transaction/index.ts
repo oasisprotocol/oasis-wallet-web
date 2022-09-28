@@ -9,6 +9,7 @@ import {
   TransactionStep,
   TransactionPayload,
   ReclaimEscrowPayload,
+  BurnPayload,
 } from './types'
 
 export const initialState: TransactionState = {
@@ -42,6 +43,11 @@ const slice = createSlice({
       state.active = true
     },
     sendTransaction(state, action: PayloadAction<TransferPayload>) {
+      state.error = undefined
+      state.success = false
+      state.active = true
+    },
+    sendBurn(state, action: PayloadAction<BurnPayload>) {
       state.error = undefined
       state.success = false
       state.active = true

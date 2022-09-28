@@ -141,6 +141,7 @@ const transactionMethodMap: { [k in OperationsRowTypeEnum]: TransactionType } = 
   [OperationsRowTypeEnum.Pvsscommit]: TransactionType.BeaconPvssCommit,
   [OperationsRowTypeEnum.Pvssreveal]: TransactionType.BeaconPvssReveal,
   [OperationsRowTypeEnum.Vrfprove]: TransactionType.BeaconVrfProve,
+  [OperationsRowTypeEnum.Burn]: TransactionType.StakingBurn,
 }
 
 export function parseTransactionsList(transactionsList: OperationsRow[]): Transaction[] {

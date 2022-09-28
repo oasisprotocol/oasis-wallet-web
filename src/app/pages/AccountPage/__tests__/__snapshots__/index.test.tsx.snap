@@ -1015,6 +1015,16 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
           Debonding
         </span>
       </a>
+      <a
+        class="c16"
+        href="/account/oasis1qz0k5q8vjqvu4s4nwxyj406ylnflkc4vrcjghuwk/burn"
+      >
+        <span
+          class="c13"
+        >
+          Burning tokens
+        </span>
+      </a>
     </nav>
     <div
       class="c19"
@@ -1133,4 +1143,4 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 
 exports[`<AccountPage  /> with missing delegations 1`] = `"Total-Available100.0 Staked-Debonding-"`;
 
-exports[`<AccountPage  /> with missing delegations 2`] = `"TransactionsDelegationsDebonding"`;
+exports[`<AccountPage  /> with missing delegations 2`] = `"TransactionsDelegationsDebondingBurning tokens"`;

@@ -8,6 +8,7 @@ export enum TransactionType {
   StakingAmendCommissionSchedule = 'staking.AmendCommissionSchedule',
   StakingAllow = 'staking.Allow',
   StakingWithdraw = 'staking.Withdraw',
+  StakingBurn = 'staking.Burn',
   RoothashExecutorCommit = 'roothash.ExecutorCommit',
   RoothashExecutorProposerTimeout = 'roothash.ExecutorProposerTimeout',
   RegistryRegisterEntity = 'registry.RegisterEntity',
@@ -51,8 +52,8 @@ export interface TransactionState {
   preview?: TransactionPreview
 }
 
-export type NewTransactionType = 'transfer' | 'addEscrow' | 'reclaimEscrow'
-export type TransactionPayload = TransferPayload | AddEscrowPayload | ReclaimEscrowPayload
+export type NewTransactionType = 'transfer' | 'addEscrow' | 'reclaimEscrow' | 'burn'
+export type TransactionPayload = TransferPayload | AddEscrowPayload | ReclaimEscrowPayload | BurnPayload
 
 export interface TransactionPreview {
   transaction: TransactionPayload
@@ -101,5 +102,12 @@ export interface ReclaimEscrowPayload {
   shares: StringifiedBigInt
 
   /* Displayed token equivalent */
+  amount: StringifiedBigInt
+}
+
+export interface BurnPayload {
+  type: 'burn'
+
+  /* Token amount */
   amount: StringifiedBigInt
 }

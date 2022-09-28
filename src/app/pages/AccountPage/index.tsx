@@ -35,6 +35,7 @@ import { mobileHeaderZIndex } from '../../components/Sidebar'
 import { ValidatorList } from '../StakingPage/Features/ValidatorList'
 import { AccountDetails } from './Features/AccountDetails'
 import { AccountSummary } from './Features/AccountSummary'
+import { AccountTokenBurning } from './Features/AccountTokenBurning'
 
 const StyledNavItem = styled(NavLink)`
   display: flex;
@@ -201,12 +202,18 @@ export function AccountPage(props: Props) {
               }
               route="debonding-delegations"
             />
+
+            <NavItem
+              label={t('account.subnavigation.burning', 'Burning tokens')}
+              route={`/account/${address}/burn`}
+            />
           </Nav>
           <Routes>
             <Route path="/" element={<AccountDetails />} />
             <Route path="/stake" element={<ValidatorList />} />
             <Route path="/active-delegations" element={<ActiveDelegationList />} />
             <Route path="/debonding-delegations" element={<DebondingDelegationList />} />
+            <Route path="/burn" element={<AccountTokenBurning />} />
           </Routes>
         </>
       )}

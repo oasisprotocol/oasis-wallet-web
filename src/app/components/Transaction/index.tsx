@@ -18,6 +18,7 @@ import {
   LinkNext,
   Atm,
   Alert,
+  Trash,
 } from 'grommet-icons/icons'
 import type { Icon } from 'grommet-icons/icons'
 import * as React from 'react'
@@ -95,6 +96,19 @@ export function Transaction(props: TransactionProps) {
         t={t}
         values={{ method: transaction.type }}
         defaults="Method '{{method}}'"
+      />
+    ),
+  }
+
+  const burnTransaction: TransactionDictionary[transactionTypes.TransactionType][TransactionSide] = {
+    destination: '',
+    icon: Trash,
+    header: () => (
+      <Trans
+        i18nKey="account.transaction.burnTransaction.header"
+        t={t}
+        components={{ Amount }}
+        defaults="Burned  <Amount/>"
       />
     ),
   }
@@ -286,6 +300,10 @@ export function Transaction(props: TransactionProps) {
       [TransactionSide.Received]: genericTransaction,
       [TransactionSide.Sent]: genericTransaction,
     },
+    [transactionTypes.TransactionType.StakingBurn]: {
+      [TransactionSide.Received]: burnTransaction,
+      [TransactionSide.Sent]: burnTransaction,
+    },
     [transactionTypes.TransactionType.RoothashExecutorCommit]: {
       [TransactionSide.Received]: genericTransaction,
       [TransactionSide.Sent]: genericTransaction,
@@ -349,6 +367,7 @@ export function Transaction(props: TransactionProps) {
 
   const Icon = matchingConfiguration.icon
   const header = matchingConfiguration.header()
+  const hasDestination = transaction.type !== transactionTypes.TransactionType.StakingBurn
   const destination = matchingConfiguration.destination
   const backendLinks = config[props.network][backend()]
   const externalExplorerLink = transaction.runtimeId
@@ -392,13 +411,15 @@ export function Transaction(props: TransactionProps) {
           {!isMobile && (
             <Grid columns={{ count: 'fit', size: 'xsmall' }} gap="none">
               <Box pad="none">
-                <InfoBox
-                  copyToClipboard={!!otherAddress}
-                  icon={ContactInfo}
-                  label={destination}
-                  trimValue={!!otherAddress}
-                  value={otherAddress || t('common.unavailable', 'Unavailable')}
-                />
+                {hasDestination && (
+                  <InfoBox
+                    copyToClipboard={!!otherAddress}
+                    icon={ContactInfo}
+                    label={destination}
+                    trimValue={!!otherAddress}
+                    value={otherAddress || t('common.unavailable', 'Unavailable')}
+                  />
+                )}
                 <InfoBox
                   copyToClipboard={true}
                   icon={Package}
