@@ -24,7 +24,13 @@ export function configureAppStore(state?: Partial<RootState>) {
 
   const store = configureStore({
     reducer: createReducer(),
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(middlewares),
+    middleware: getDefaultMiddleware =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActionPaths: ['payload.handleConfirm'],
+          ignoredPaths: ['modal.current.handleConfirm', 'modal.stash'],
+        },
+      }).concat(middlewares),
     devTools:
       /* istanbul ignore next line */
       process.env.NODE_ENV !== 'production',

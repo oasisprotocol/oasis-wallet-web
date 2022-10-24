@@ -1,5 +1,5 @@
 import { TransactionStatus } from 'app/components/TransactionStatus'
-import { useModal } from 'app/components/Modal'
+import { modalActions } from '../../../../components/Modal/slice'
 import { transactionActions } from 'app/state/transaction'
 import { selectTransaction } from 'app/state/transaction/selectors'
 import { selectValidators } from 'app/state/staking/selectors'
@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { parseRoseStringToBaseUnitString } from 'app/lib/helpers'
+import { Modal } from '../../../../components/Modal/slice/types'
 
 export interface SendTransactionProps {
   isAddressInWallet: boolean
@@ -21,7 +22,7 @@ export function SendTransaction(props: SendTransactionProps) {
 
   const { t } = useTranslation()
   const dispatch = useDispatch()
-  const { launchModal } = useModal()
+  const launchModal = (modal: Modal) => dispatch(modalActions.launch(modal))
   const { error, success } = useSelector(selectTransaction)
   const validators = useSelector(selectValidators)
   const [recipient, setRecipient] = useState('')

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { ModalProvider } from 'app/components/Modal'
+import { ModalContainer } from 'app/components/Modal'
 import { Validator } from 'app/state/staking/types'
 import * as React from 'react'
 import { Provider } from 'react-redux'
@@ -12,9 +12,8 @@ import { AddEscrowForm } from '..'
 const renderComponent = (store: any, address: string, validatorStatus: Validator['status']) =>
   render(
     <Provider store={store}>
-      <ModalProvider>
-        <AddEscrowForm validatorAddress={address} validatorStatus={validatorStatus} validatorRank={21} />
-      </ModalProvider>
+      <AddEscrowForm validatorAddress={address} validatorStatus={validatorStatus} validatorRank={21} />
+      <ModalContainer />
     </Provider>,
   )
 

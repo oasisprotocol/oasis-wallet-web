@@ -121,6 +121,13 @@
     "newMnemonic": "Generate a new mnemonic",
     "thisIsYourPhrase": "This is your mnemonic"
   },
+  "dangerMode": {
+    "description": "Dangerous mode: should the wallet let the user shoot himself in the foot?",
+    "off": "Off - Refuse to execute nonsensical actions",
+    "on": "On - Allow executing nonsensical actions. Don't blame Oasis!",
+    "youCanButDoYouWant": "You most probably shouldn't do this, but since you have specifically enabled 'dangerous mode' in wallet settings, we won't stop you.",
+    "youDontWantThis": "You most probably don't want to do this, so I won't allow it. If you really do, then please enable the 'dangerous mode' in wallet settings, and try again."
+  },
   "delegations": {
     "activeDelegations": "Active delegations",
     "debondingDelegations": "Debonding delegations",
@@ -198,6 +205,7 @@
   "menu": {
     "closeWallet": "Close wallet",
     "home": "Home",
+    "settings": "Settings",
     "stake": "Stake",
     "wallet": "Wallet"
   },
@@ -232,6 +240,13 @@
       "hidePrivateKey": "Hide private key",
       "instruction": "Enter your private key in Base64 format.",
       "showPrivateKey": "Show private key"
+    }
+  },
+  "settings": {
+    "dialog": {
+      "close": "Close",
+      "description": "This is where you can configure the behavior of the Oasis Wallet.",
+      "title": "Wallet settings"
     }
   },
   "theme": {

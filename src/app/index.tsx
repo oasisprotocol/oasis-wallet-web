@@ -20,7 +20,7 @@ import { AccountPage } from './pages/AccountPage'
 import { CreateWalletPage } from './pages/CreateWalletPage'
 import { HomePage } from './pages/HomePage'
 import { OpenWalletPage } from './pages/OpenWalletPage'
-import { ModalProvider } from './components/Modal'
+import { ModalContainer } from './components/Modal'
 import { useRouteRedirects } from './useRouteRedirects'
 
 const AppMain = styled(Main)`
@@ -33,7 +33,7 @@ export function App() {
   const size = useContext(ResponsiveContext)
 
   return (
-    <ModalProvider>
+    <>
       <Helmet
         titleTemplate="%s - Oasis Wallet"
         defaultTitle="Oasis Wallet"
@@ -57,6 +57,7 @@ export function App() {
           </AppMain>
         </Box>
       </Box>
-    </ModalProvider>
+      <ModalContainer />
+    </>
   )
 }

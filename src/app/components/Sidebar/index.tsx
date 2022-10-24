@@ -22,6 +22,7 @@ import { Language } from '../../../styles/theme/icons/language/Language'
 import { ThemeSwitcher } from '../ThemeSwitcher'
 import logotype from '../../../../public/logo192.png'
 import { languageLabels } from '../../../locales/i18n'
+import { SettingsButton } from '../SettingsButton'
 
 const SidebarTooltip = (props: { children: React.ReactNode; isActive: boolean; label: string }) => {
   const size = useContext(ResponsiveContext)
@@ -211,6 +212,7 @@ const SidebarFooter = (props: SidebarFooterProps) => {
           </Menu>
         </Box>
       </SidebarTooltip>
+      <SettingsButton />
       <SidebarButton
         icon={<Github />}
         label="GitHub"

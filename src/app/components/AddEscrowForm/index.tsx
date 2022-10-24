@@ -3,7 +3,8 @@
  * AddEscrowForm
  *
  */
-import { useModal } from 'app/components/Modal'
+import { Modal } from '../Modal/slice/types'
+import { modalActions } from '../Modal/slice'
 import { parseRoseStringToBaseUnitString } from 'app/lib/helpers'
 import { selectMinStaking } from 'app/state/network/selectors'
 import { Validator } from 'app/state/staking/types'
@@ -24,7 +25,7 @@ interface Props {
 
 export const AddEscrowForm = memo((props: Props) => {
   const { t } = useTranslation()
-  const { launchModal } = useModal()
+  const launchModal = (modal: Modal) => dispatch(modalActions.launch(modal))
   const { error, success } = useSelector(selectTransaction)
   const isTop20 = props.validatorRank <= 20
   const [showNotice, setShowNotice] = useState(isTop20)
