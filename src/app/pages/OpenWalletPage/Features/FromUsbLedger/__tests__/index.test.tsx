@@ -7,7 +7,7 @@ jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
 }))
 
-describe('<FromLedger />', () => {
+describe('<FromUsbLedger />', () => {
   it('should render component', () => {
     const { container } = render(<FromLedger />)
 

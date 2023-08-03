@@ -83,7 +83,10 @@ export function ConnectDevicePage() {
         <Box gap="medium">
           <ol>
             <li>
-              {t('ledger.instructionSteps.connectLedger', 'Connect your Ledger device to the computer')}
+              {t(
+                'ledger.instructionSteps.connectUsbLedger',
+                'Connect your USB Ledger device to the computer',
+              )}
             </li>
             <li>{t('ledger.instructionSteps.closeLedgerLive', 'Close Ledger Live app on the computer')}</li>
             <li>{t('ledger.instructionSteps.openOasisApp', 'Open the Oasis App on your Ledger device')}</li>

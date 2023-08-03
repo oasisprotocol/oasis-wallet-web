@@ -1,56 +1,89 @@
-import { importAccountsActions } from 'app/state/importaccounts'
 import { Box } from 'grommet/es6/components/Box'
-import { Button } from 'grommet/es6/components/Button'
-import { Heading } from 'grommet/es6/components/Heading'
-import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
-import { ImportAccountsSelectionModal } from 'app/pages/OpenWalletPage/Features/ImportAccountsSelectionModal'
-import { selectShowAccountsSelectionModal } from 'app/state/importaccounts/selectors'
+import React, { useEffect } from 'react'
 import { Header } from 'app/components/Header'
-import { WalletType } from 'app/state/wallet/types'
+import { ButtonLink } from '../../../../components/ButtonLink'
+import { Button } from 'grommet/es6/components/Button'
+import { Text } from 'grommet/es6/components/Text'
+import { canAccessBle, canAccessNavigatorUsb } from '../../../../lib/ledger'
+import { useTranslation } from 'react-i18next'
 
-export function FromLedger() {
+type SelectOpenMethodProps = {
+  webExtensionLedgerAccess?: () => void
+}
+
+export function FromLedger({ webExtensionLedgerAccess }: SelectOpenMethodProps) {
   const { t } = useTranslation()
-  const dispatch = useDispatch()
-  const showAccountsSelectionModal = useSelector(selectShowAccountsSelectionModal)
+  const [supportsUsbLedger, setSupportsUsbLedger] = React.useState<boolean | undefined>(true)
+  const [supportsBleLedger, setSupportsBleLedger] = React.useState<boolean | undefined>(true)
+
+  useEffect(() => {
+    async function getLedgerSupport() {
+      setSupportsUsbLedger(await canAccessNavigatorUsb())
+      setSupportsBleLedger(await canAccessBle())
+    }
+
+    getLedgerSupport()
+  }, [])
 
   return (
     <Box
+      round="5px"
+      border={{ color: 'background-front-border', size: '1px' }}
       background="background-front"
       margin="small"
       pad="medium"
-      round="5px"
-      border={{ color: 'background-front-border', size: '1px' }}
     >
-      <Header>{t('openWallet.ledger.header', 'Open from Ledger device')}</Header>
+      <Header>
+        {t('openWallet.importAccounts.connectDeviceHeader', 'How do you want to connect your Ledger device?')}
+      </Header>
 
-      <Heading level="3" margin="0">
-        {t('ledger.instructionSteps.header', 'Steps:')}
-      </Heading>
-      <ol>
-        <li>{t('ledger.instructionSteps.connectLedger', 'Connect your Ledger device to the computer')}</li>
-        <li>{t('ledger.instructionSteps.closeLedgerLive', 'Close Ledger Live app on the computer')}</li>
-        <li>{t('ledger.instructionSteps.openOasisApp', 'Open the Oasis App on your Ledger device')}</li>
-      </ol>
-      <Box direction="row" margin={{ top: 'medium' }}>
-        <Button
-          type="submit"
-          label={t('openWallet.importAccounts.selectWallets', 'Select accounts to open')}
-          onClick={() => {
-            dispatch(importAccountsActions.enumerateAccountsFromLedger(WalletType.UsbLedger))
-          }}
-          primary
-        />
+      <Box direction="row-responsive" justify="start" margin={{ top: 'medium' }} gap="medium">
+        <div>
+          <div>
+            {webExtensionLedgerAccess ? (
+              <Button
+                disabled={!supportsUsbLedger}
+                style={{ width: 'fit-content' }}
+                onClick={webExtensionLedgerAccess}
+                label={t('ledger.extension.grantAccess', 'Grant access to your USB Ledger')}
+                primary
+              />
+            ) : (
+              <span>
+                <ButtonLink
+                  disabled={!supportsUsbLedger}
+                  to="usb"
+                  label={t('openWallet.importAccounts.usbLedger', 'USB Ledger')}
+                  primary
+                />
+              </span>
+            )}
+          </div>
+          {!supportsUsbLedger && (
+            <Text size="small" textAlign="center">
+              {t(
+                'errors.usbTransportNotSupported',
+                'Your browser does not support WebUSB (e.g. Firefox). Try using Chrome.',
+              )}
+            </Text>
+          )}
+        </div>
+        <div>
+          <div>
+            <ButtonLink
+              disabled={!supportsBleLedger}
+              to="ble"
+              label={t('openWallet.importAccounts.bluetoothLedger', 'Bluetooth Ledger')}
+              primary
+            />
+          </div>
+          {!supportsBleLedger && (
+            <Text size="small" textAlign="center">
+              {t('errors.bluetoothTransportNotSupported', 'Your device does not support Bluetooth.')}
+            </Text>
+          )}
+        </div>
       </Box>
-      {showAccountsSelectionModal && (
-        <ImportAccountsSelectionModal
-          abort={() => {
-            dispatch(importAccountsActions.clear())
-          }}
-          type={WalletType.UsbLedger}
-        />
-      )}
     </Box>
   )
 }
