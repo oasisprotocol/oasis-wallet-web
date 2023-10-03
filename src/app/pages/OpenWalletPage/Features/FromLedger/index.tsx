@@ -9,21 +9,25 @@ import { useTranslation } from 'react-i18next'
 
 type SelectOpenMethodProps = {
   webExtensionLedgerAccess?: () => void
+  disableBluetoothLedger?: boolean
 }
 
-export function FromLedger({ webExtensionLedgerAccess }: SelectOpenMethodProps) {
+export function FromLedger({ webExtensionLedgerAccess, disableBluetoothLedger }: SelectOpenMethodProps) {
   const { t } = useTranslation()
   const [supportsUsbLedger, setSupportsUsbLedger] = React.useState<boolean | undefined>(true)
   const [supportsBleLedger, setSupportsBleLedger] = React.useState<boolean | undefined>(true)
 
   useEffect(() => {
     async function getLedgerSupport() {
-      setSupportsUsbLedger(await canAccessNavigatorUsb())
-      setSupportsBleLedger(await canAccessBle())
+      const usbLedgerSupported = await canAccessNavigatorUsb()
+      const bleLedgerSupported = !disableBluetoothLedger && (await canAccessBle())
+
+      setSupportsUsbLedger(usbLedgerSupported)
+      setSupportsBleLedger(bleLedgerSupported)
     }
 
     getLedgerSupport()
-  }, [])
+  }, [disableBluetoothLedger])
 
   return (
     <Box

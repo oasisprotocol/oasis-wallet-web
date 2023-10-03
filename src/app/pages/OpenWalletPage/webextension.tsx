@@ -13,5 +13,5 @@ export function OpenWalletPageWebExtension() {
 export function FromLedgerWebExtension() {
   const href = useHref('/open-wallet/connect-device')
 
-  return <FromLedger webExtensionLedgerAccess={() => openLedgerAccessPopup(href)} />
+  return <FromLedger webExtensionLedgerAccess={() => openLedgerAccessPopup(href)} disableBluetoothLedger />
 }
