@@ -33,6 +33,7 @@ test.describe('The extension popup should load', () => {
   test('ask for USB permissions in ledger popup', async ({ page, context, extensionPopupURL }) => {
     await page.goto(`${extensionPopupURL}/open-wallet`)
     const popupPromise = context.waitForEvent('page')
+    await page.getByRole('button', { name: /Ledger/i }).click()
     await page.getByRole('button', { name: /Grant access to your Ledger/i }).click()
     const popup = await popupPromise
     await popup.waitForLoadState()

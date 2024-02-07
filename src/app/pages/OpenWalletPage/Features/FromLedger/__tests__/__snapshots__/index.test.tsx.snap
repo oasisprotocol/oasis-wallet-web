@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SelectOpenMethod /> should render component 1`] = `
+exports[`<FromLedger /> should render component 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -40,7 +40,7 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
   justify-content: flex-start;
 }
 
-.c4 {
+.c5 {
   -webkit-flex: 0 0 auto;
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
@@ -48,6 +48,21 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
   -ms-flex-item-align: stretch;
   align-self: stretch;
   width: 24px;
+}
+
+.c1 {
+  margin-top: 0px;
+  font-size: 34px;
+  line-height: 40px;
+  max-width: 816px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.c4 {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
 }
 
 .c3 {
@@ -70,16 +85,14 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
   background-color: #7D4CDB;
   color: #f8f8f8;
   border-radius: 18px;
+  opacity: 0.3;
+  cursor: default;
   -webkit-transition-property: color,background-color,border-color,box-shadow;
   transition-property: color,background-color,border-color,box-shadow;
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.1s;
   -webkit-transition-timing-function: ease-in-out;
   transition-timing-function: ease-in-out;
-}
-
-.c3:hover {
-  box-shadow: 0px 0px 0px 2px #7D4CDB;
 }
 
 .c3:focus {
@@ -117,15 +130,6 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
 
 .c3:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
-}
-
-.c1 {
-  margin-top: 0px;
-  font-size: 34px;
-  line-height: 40px;
-  max-width: 816px;
-  font-weight: 600;
-  overflow-wrap: break-word;
 }
 
 @media only screen and (max-width:768px) {
@@ -172,7 +176,7 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .c4 {
+  .c5 {
     width: auto;
     height: 12px;
   }
@@ -199,64 +203,61 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
     <h1
       class="c1"
     >
-      openWallet.header
+      openWallet.importAccounts.connectDeviceHeader
     </h1>
     <div
       class="c2"
     >
-      <span>
-        <a
-          aria-label="openWallet.method.mnemonic"
-          href="/mnemonic"
+      <div>
+        <div>
+          <span>
+            <a
+              aria-label="openWallet.importAccounts.usbLedger"
+              href="/usb"
+            >
+              <button
+                class="c3"
+                disabled=""
+                tabindex="-1"
+                type="button"
+              >
+                openWallet.importAccounts.usbLedger
+              </button>
+            </a>
+          </span>
+        </div>
+        <span
+          class="c4"
         >
-          <button
-            class="c3"
-            tabindex="-1"
-            type="button"
-          >
-            openWallet.method.mnemonic
-          </button>
-        </a>
-      </span>
+          errors.usbTransportNotSupported
+        </span>
+      </div>
       <div
-        class="c4"
+        class="c5"
       />
-      <span>
-        <a
-          aria-label="openWallet.method.privateKey"
-          href="/private-key"
-        >
-          <button
-            class="c3"
-            tabindex="-1"
-            type="button"
+      <div>
+        <div>
+          <a
+            aria-label="openWallet.importAccounts.bluetoothLedger"
+            href="/ble"
           >
-            openWallet.method.privateKey
-          </button>
-        </a>
-      </span>
-      <div
-        class="c4"
-      />
-      <span>
-        <a
-          aria-label="openWallet.method.ledger"
-          href="/ledger"
+            <button
+              class="c3"
+              disabled=""
+              tabindex="-1"
+              type="button"
+            >
+              openWallet.importAccounts.bluetoothLedger
+            </button>
+          </a>
+        </div>
+        <span
+          class="c4"
         >
-          <button
-            class="c3"
-            tabindex="-1"
-            type="button"
-          >
-            openWallet.method.ledger
-          </button>
-        </a>
-      </span>
+          errors.bluetoothTransportNotSupported
+        </span>
+      </div>
     </div>
-    <div
-      class="c2"
-      style="white-space: pre-wrap; display: inline;"
-    />
   </div>
 </div>
 `;

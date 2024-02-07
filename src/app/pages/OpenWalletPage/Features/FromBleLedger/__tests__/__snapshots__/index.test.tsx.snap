@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FromUsbLedger /> should render component 1`] = `
+exports[`<FromBleLedger /> should render component 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -191,7 +191,10 @@ exports[`<FromUsbLedger /> should render component 1`] = `
     </h3>
     <ol>
       <li>
-        ledger.instructionSteps.connectUsbLedger
+        ledger.instructionSteps.connectBluetoothLedger
+      </li>
+      <li>
+        ledger.instructionSteps.deviceIsPaired
       </li>
       <li>
         ledger.instructionSteps.closeLedgerLive
@@ -207,7 +210,7 @@ exports[`<FromUsbLedger /> should render component 1`] = `
         class="c4"
         type="submit"
       >
-        openWallet.importAccounts.selectWallets
+        openWallet.importAccounts.selectDevice
       </button>
     </div>
   </div>
