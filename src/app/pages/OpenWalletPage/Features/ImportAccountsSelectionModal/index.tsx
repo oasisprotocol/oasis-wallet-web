@@ -23,7 +23,7 @@ import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
 import { Spinner } from 'grommet/es6/components/Spinner'
 import { Text } from 'grommet/es6/components/Text'
 import { numberOfAccountPages } from 'app/state/importaccounts/saga'
-import { WalletType } from 'app/state/wallet/types'
+import { WalletType, LedgerWalletType } from 'app/state/wallet/types'
 import { ChoosePasswordFields } from 'app/components/Persist/ChoosePasswordFields'
 import { FormValue as ChoosePasswordFieldsFormValue } from 'app/components/Persist/ChoosePasswordInputFields'
 import { preventSavingInputsToUserData } from 'app/lib/preventSavingInputsToUserData'
@@ -47,7 +47,7 @@ function ImportAccountsSelector({ accounts }: ImportAccountsSelectorSelectorProp
 
 interface ImportAccountsSelectionModalProps {
   abort: () => void
-  type: WalletType.Mnemonic | WalletType.UsbLedger
+  type: WalletType.Mnemonic | LedgerWalletType
 }
 
 interface FormValue extends ChoosePasswordFieldsFormValue {}
@@ -83,8 +83,8 @@ export function ImportAccountsSelectionModal(props: ImportAccountsSelectionModal
 
   const onNext = () => {
     dispatch(importAccountsActions.setPage(pageNum + 1))
-    if (props.type === 'ledger') {
-      dispatch(importAccountsActions.enumerateMoreAccountsFromLedger(WalletType.UsbLedger))
+    if (props.type === WalletType.UsbLedger || props.type === WalletType.BleLedger) {
+      dispatch(importAccountsActions.enumerateMoreAccountsFromLedger(props.type))
     }
   }
 

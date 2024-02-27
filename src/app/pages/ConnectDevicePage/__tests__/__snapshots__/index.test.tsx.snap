@@ -252,7 +252,7 @@ exports[`<ConnectDevicePage /> should render component 1`] = `
       >
         <ol>
           <li>
-            ledger.instructionSteps.connectLedger
+            ledger.instructionSteps.connectUsbLedger
           </li>
           <li>
             ledger.instructionSteps.closeLedgerLive

@@ -50,12 +50,6 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
   width: 24px;
 }
 
-.c6 {
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-}
-
 .c3 {
   display: inline-block;
   box-sizing: border-box;
@@ -122,73 +116,6 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
 }
 
 .c3:focus:not(:focus-visible)::-moz-focus-inner {
-  border: 0;
-}
-
-.c5 {
-  display: inline-block;
-  box-sizing: border-box;
-  cursor: pointer;
-  font: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  margin: 0;
-  background: transparent;
-  overflow: visible;
-  text-transform: none;
-  border: 2px solid #7D4CDB;
-  border-radius: 18px;
-  color: #444444;
-  padding: 4px 22px;
-  font-size: 18px;
-  line-height: 24px;
-  background-color: #7D4CDB;
-  color: #f8f8f8;
-  border-radius: 18px;
-  opacity: 0.3;
-  cursor: default;
-  -webkit-transition-property: color,background-color,border-color,box-shadow;
-  transition-property: color,background-color,border-color,box-shadow;
-  -webkit-transition-duration: 0.1s;
-  transition-duration: 0.1s;
-  -webkit-transition-timing-function: ease-in-out;
-  transition-timing-function: ease-in-out;
-}
-
-.c5:focus {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c5:focus > circle,
-.c5:focus > ellipse,
-.c5:focus > line,
-.c5:focus > path,
-.c5:focus > polygon,
-.c5:focus > polyline,
-.c5:focus > rect {
-  outline: none;
-  box-shadow: 0 0 2px 2px #6FFFB0;
-}
-
-.c5:focus::-moz-focus-inner {
-  border: 0;
-}
-
-.c5:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.c5:focus:not(:focus-visible) > circle,.c5:focus:not(:focus-visible) > ellipse,
-.c5:focus:not(:focus-visible) > line,.c5:focus:not(:focus-visible) > path,
-.c5:focus:not(:focus-visible) > polygon,.c5:focus:not(:focus-visible) > polyline,
-.c5:focus:not(:focus-visible) > rect {
-  outline: none;
-  box-shadow: none;
-}
-
-.c5:focus:not(:focus-visible)::-moz-focus-inner {
   border: 0;
 }
 
@@ -311,30 +238,20 @@ exports[`<SelectOpenMethod /> should render component 1`] = `
       <div
         class="c4"
       />
-      <div>
-        <div>
-          <span>
-            <a
-              aria-label="openWallet.method.ledger"
-              href="/ledger"
-            >
-              <button
-                class="c5"
-                disabled=""
-                tabindex="-1"
-                type="button"
-              >
-                openWallet.method.ledger
-              </button>
-            </a>
-          </span>
-        </div>
-        <span
-          class="c6"
+      <span>
+        <a
+          aria-label="openWallet.method.ledger"
+          href="/ledger"
         >
-          errors.usbTransportNotSupported
-        </span>
-      </div>
+          <button
+            class="c3"
+            tabindex="-1"
+            type="button"
+          >
+            openWallet.method.ledger
+          </button>
+        </a>
+      </span>
     </div>
     <div
       class="c2"
