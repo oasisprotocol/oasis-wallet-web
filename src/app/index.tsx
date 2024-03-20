@@ -32,8 +32,8 @@ export function App() {
     <FatalErrorHandler>
       <ModalProvider>
         <Helmet
-          titleTemplate="%s - Oasis Wallet"
-          defaultTitle="Oasis Wallet"
+          titleTemplate="%s - Oasis ROSE Wallet"
+          defaultTitle="Oasis ROSE Wallet"
           htmlAttributes={{ lang: i18n.language }}
         >
           <meta name="description" content="A wallet for Oasis" />

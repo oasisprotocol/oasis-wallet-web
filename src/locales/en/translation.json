@@ -99,8 +99,8 @@
     "oasisscan": "Oasis Scan API"
   },
   "banner": {
-    "buildPreview": "Please note this is an experimental build of Oasis Wallet and your secrets are not safe. ONLY USE IT FOR TESTING.",
-    "buildStaging": "Please note this is the staging deployment of Oasis Wallet. ONLY USE IT FOR TESTING."
+    "buildPreview": "Please note this is an experimental build of ROSE Wallet and your secrets are not safe. ONLY USE IT FOR TESTING.",
+    "buildStaging": "Please note this is the staging deployment of ROSE Wallet. ONLY USE IT FOR TESTING."
   },
   "common": {
     "amount": "Amount",
@@ -166,10 +166,10 @@
     "copied": "Error copied to clipboard",
     "copy": "Copy error to clipboard",
     "heading": "A fatal error occurred",
-    "instruction": "A fatal error has occurred and Oasis Wallet must stop. Try refreshing the page and reopening your wallet to see if the issue persists. If the issue persists, please contact our support team via <Email/> email and attach the report below."
+    "instruction": "A fatal error has occurred and ROSE Wallet must stop. Try refreshing the page and reopening your wallet to see if the issue persists. If the issue persists, please contact our support team via <Email/> email and attach the report below."
   },
   "fiatOnramp": {
-    "astarFootnote": "It is hereby noted that AStar Technologies, a Cayman Islands exempted company is acting on behalf and for the purposes of Oasis, and is also the provider of the Oasis Wallet.",
+    "astarFootnote": "It is hereby noted that AStar Technologies, a Cayman Islands exempted company is acting on behalf and for the purposes of Oasis, and is also the provider of the ROSE Wallet.",
     "description": "This feature allows you to convert your fiat currency into cryptocurrency.",
     "header": "Buy ROSE",
     "headerInWidget": "Purchase ROSE to your wallet",
@@ -181,7 +181,7 @@
     "thirdPartyDisclaimer": "This service is provided by an external party. Oasis* does not carry any responsibility. All fees charged by Transak."
   },
   "footer": {
-    "github": "Oasis Wallet is fully <GithubLink>open source</GithubLink> - Feedback and issues are appreciated!",
+    "github": "ROSE Wallet is fully <GithubLink>open source</GithubLink> - Feedback and issues are appreciated!",
     "poweredBy": {
       "oasismonitor": "Powered by Oasis Monitor API & Oasis gRPC",
       "oasisscan": "Powered by Oasis Scan API & Oasis gRPC"

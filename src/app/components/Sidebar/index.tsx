@@ -167,7 +167,7 @@ const SidebarHeader = (props: SidebarHeaderProps) => {
       <Link to="/">
         <Box align="center" direction="row" gap="small">
           <Avatar src={logotype} size={sizeLogo[size]} />
-          {size !== 'medium' && <Text>Oasis Wallet</Text>}
+          {size !== 'medium' && <Text>ROSE Wallet</Text>}
         </Box>
       </Link>
     </Box>
