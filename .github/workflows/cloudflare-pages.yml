@@ -43,7 +43,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: oasisprotocol/oasis-wallet-ext
-          ref: lw/rose-current
+          ref: lw/rose-token
       - name: Set up Node.js 18
         uses: actions/setup-node@v3
         with:
