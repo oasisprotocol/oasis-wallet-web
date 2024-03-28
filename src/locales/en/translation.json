@@ -169,7 +169,8 @@
     "copy": "Copy error to clipboard",
     "description": "The error that has occurred triggers the wallet to stop. <strong>Your funds are safe.</strong><br/><br/>Please try refreshing the page and reopening your wallet to see if the issue persists. You can check the current status of the network below.",
     "heading": "An error occurred.",
-    "instruction": "If the issue is not resolved after refreshing, please email our support team at  <Email/> and attached the error report."
+    "instruction": "If the issue is not resolved after refreshing, please email our support team at  <Email/> and attached the error report.",
+    "reload": "Reload extension"
   },
   "fiatOnramp": {
     "astarFootnote": "It is hereby noted that AStar Technologies, a Cayman Islands exempted company is acting on behalf and for the purposes of Oasis, and is also the provider of the Oasis Wallet.",
