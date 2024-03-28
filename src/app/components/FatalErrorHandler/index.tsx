@@ -16,6 +16,7 @@ import { TextArea } from 'grommet/es6/components/TextArea'
 import { Text } from 'grommet/es6/components/Text'
 import { Copy } from 'grommet-icons/es6/icons/Copy'
 import { Dashboard } from 'grommet-icons/es6/icons/Dashboard'
+import { Refresh } from 'grommet-icons/es6/icons/Refresh'
 import * as React from 'react'
 import { useContext, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -23,6 +24,7 @@ import { useSelector } from 'react-redux'
 import { normalizeColor } from 'grommet/es6/utils'
 import { ResponsiveLayer } from '../ResponsiveLayer'
 import logotype from '../../../../public/logo192.png'
+import { runtimeIs } from 'config'
 
 const StyledTextArea = styled(TextArea)`
   // Opacity is a workaround for browsers anti-aliasing issue triggered by border-radius.
@@ -116,6 +118,21 @@ export function FatalErrorHandler({ children }: Props) {
             size="large"
           />
         </Box>
+        {runtimeIs === 'extension' && (
+          <Box align={isMobile ? 'stretch' : 'end'} margin={{ bottom: isMobile ? 'xlarge' : 'large' }}>
+            <StyledButton
+              onClick={() => (window as any).chrome?.runtime?.reload()}
+              icon={<Refresh size="22px" color={normalizeColor('brand-white', theme)} />}
+              label={t('fatalError.reloadExtension', 'Reload extension')}
+              style={{
+                backgroundColor: normalizeColor('brand-blue', theme),
+                color: normalizeColor('brand-white', theme),
+                borderColor: normalizeColor('brand-blue', theme),
+              }}
+              size="large"
+            />
+          </Box>
+        )}
         <Text size="small">
           <Trans
             i18nKey="fatalError.instruction"
