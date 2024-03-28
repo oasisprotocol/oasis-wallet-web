@@ -35,5 +35,6 @@
     "persistent": true
   },
   "web_accessible_resources": ["./oasis-xu-frame.html"],
-  "externally_connectable": { "ids": [] }
+  "externally_connectable": { "ids": [] },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAybK17ag+0PwHWbYEE36o+SmN35mcXj3RoM8ZBIlOjetdV3uqG8vdzv0YZ2Td21Y0il+1IKt/d9kslRT67C/S2fZ3XKAf96o+j+9/mgdOBwkL7m8XeALzBCYI3sSPnHf36iZu0w9FM9enUFHmq4HPNsT7BqTTEkdtDRRU4JHb+GGLjWvpyB1WIuv7UIJu64zUcZXsGf//ojRG2eISBJZxaItTuFS1210PebsS85++eeHLPWwMMp7d3UXOZpDYoyS07orZJd4c54hZaMNCKKZ5zbupwEuDvSANvEiuxpXe+hHLRnxOlpmhnj+XqkMBTgTFC57b75vhnvOCNbZ/ylW9xwIDAQAB"
 }

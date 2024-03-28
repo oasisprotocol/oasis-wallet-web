@@ -3,17 +3,8 @@ name: ci-build
 
 # Trigger the workflow when:
 on:
-  # A push occurs to one of the matched branches.
   push:
-    branches:
-      - master
-      - stable/*
-  # Or when a pull request event occurs for a pull request against one of the
-  # matched branches.
   pull_request:
-    branches:
-      - master
-      - stable/*
 
 # Explicitly disable secrets.GITHUB_TOKEN permissions.
 permissions: {}
@@ -39,11 +30,10 @@ jobs:
         run: |
           echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
       - name: Build app
-        run: yarn build
+        run: yarn build:ext
       - name: Upload build artifacts
         # Upload build artifacts on push event.
-        if: github.event_name == 'push'
         uses: actions/upload-artifact@v3
         with:
           name: oasis-wallet-web-${{ steps.vars.outputs.SHORT_SHA }}
-          path: build
+          path: build-ext
