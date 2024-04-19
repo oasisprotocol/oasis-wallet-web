@@ -1,10 +1,10 @@
 {
   "appName": {
-    "message": "ROSE Wallet",
+    "message": "ROSE Wallet - beta",
     "description": "The name of the application"
   },
   "appDescription": {
-    "message": "The official non-custodial browser extension wallet for the Oasis Network.",
+    "message": "Beta testing",
     "description": "The description of the application"
   }
 }

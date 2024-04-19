@@ -31,8 +31,8 @@ jobs:
           cache: yarn
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Build app
-        run: yarn build
+      - name: Build extension
+        run: yarn build:ext
       - name: Set workflow variables
         # Id is needed to access output in a next step.
         id: vars
@@ -42,21 +42,37 @@ jobs:
           echo "VERSION=$(echo ${{ github.ref_name }} | sed 's/^v//')" >> "$GITHUB_OUTPUT"
       - name: Create zip file
         run: |
-          cd build/
-          zip -r ../rose-wallet-web-${{ steps.vars.outputs.VERSION }}.zip .
-      - name: Parse CHANGELOG.md file and extract changes for the given version
-        uses: buberdds/extract-changelog-action@v1
-        id: changelog
-        with:
-          version: ${{ steps.vars.outputs.VERSION }}
+          cd build-ext/
+          zip -r ../rose-wallet-extension-beta.zip .
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          prerelease: true
           files: |
-            rose-wallet-web-${{ steps.vars.outputs.VERSION }}.zip
-            build/Content-Security-Policy.txt
-            build/Permissions-Policy.txt
-          name: ROSE Wallet ${{ steps.vars.outputs.VERSION }}
-          body: ${{ steps.changelog.outputs.content }}
+            rose-wallet-extension-beta.zip
+          name: ROSE Wallet Extension - beta
+          body: |
+            To install beta version as a separate extension:
+            - open **chrome://extensions/**
+            - click top right to enable Developer mode
+            - download **rose-wallet-extension-beta.zip** (assets below)
+            - drag it into chrome://extensions/
+
+            To copy saved wallets from old extension:
+            - _extensions and instructions like these could be malicious and steal your tokens - don't blindly trust them_
+            - open **chrome-extension://ppdadbejkmjnefldpcdjhnkpbjkikoip/manifest.json** and open console and run:
+              ```js
+              if (location.href !== 'chrome-extension://ppdadbejkmjnefldpcdjhnkpbjkikoip/manifest.json') throw 'Is this the new extension instead of old one?';
+              copy(`
+              if ((await new Promise(resolve => chrome.storage.local.get('keyringData', resolve))).keyringData) throw 'Already has keyringData. Is this old extension instead of new one?';
+              const chromeStorageLocal = ${JSON.stringify(await new Promise(resolve => chrome.storage.local.get(null, resolve)))};
+              await new Promise(resolve => chrome.storage.local.set(chromeStorageLocal, resolve));
+              Object.entries(${JSON.stringify(window.localStorage)}).forEach(([k, v]) => window.localStorage.setItem(k, v));
+              chrome.extension.getBackgroundPage().location.reload();
+              location.reload();
+              `)
+              ```
+            - **chrome-extension://jeooipjboldjebnajiegnfpklodgimmf/manifest.json** open console and paste.
+            - click the new extension
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
