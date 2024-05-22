@@ -57,12 +57,18 @@ jobs:
       - name: Build Android ROSE Wallet
         run: ./gradlew bundleRelease
         working-directory: android
+      - name: Decode and Save Keystore File
+        run: |
+          echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/release.jks
+      - name: Sign Android bundle
+        run: |
+          jarsigner -verbose -keystore android/release.jks -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -signedjar android/app/build/outputs/bundle/release/app-release-signed.aab android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEY_ALIAS }}
       - name: Upload Android ROSE Wallet build artifacts
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: rose-wallet-android-${{ steps.vars.outputs.SHORT_SHA }}.aab
-          path: android/app/build/outputs/bundle/release/app-release.aab
+          path: android/app/build/outputs/bundle/release/app-release-signed.aab
       - name: Upload web ROSE Wallet build artifacts
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
