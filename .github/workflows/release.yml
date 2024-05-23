@@ -24,6 +24,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Set up OpenJDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
       - name: Set up Node.js 18
         uses: actions/setup-node@v4
         with:
@@ -35,6 +40,22 @@ jobs:
         run: yarn build
       - name: Build extension ROSE Wallet
         run: yarn build:ext
+      - name: Sync Capacitor for Android
+        run: yarn cap sync android
+      - name: Accept SDK licenses
+        run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
+      - name: Install SDK components
+        run: |
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0"
+      - name: Build Android ROSE Wallet
+        run: ./gradlew bundleRelease
+        working-directory: android
+      - name: Decode and Save Keystore File
+        run: |
+          echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/release.jks
+      - name: Sign Android bundle
+        run: |
+          jarsigner -verbose -keystore android/release.jks -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -signedjar android/app/build/outputs/bundle/release/app-release-signed.aab android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEY_ALIAS }}
       - name: Set workflow variables
         # Id is needed to access output in a next step.
         id: vars
@@ -42,6 +63,9 @@ jobs:
         # and use short SHA of the commit for file name.
         run: |
           echo "VERSION=$(echo ${{ github.ref_name }} | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+      - name: Copy and rename Android bundle
+        run: |
+          cp android/app/build/outputs/bundle/release/app-release-signed.aab rose-wallet-android-${{ steps.vars.outputs.VERSION }}.aab
       - name: Create web ROSE Wallet zip file
         run: |
           cd build/
@@ -59,6 +83,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
+            rose-wallet-android-${{ steps.vars.outputs.VERSION }}.aab
             rose-wallet-web-${{ steps.vars.outputs.VERSION }}.zip
             rose-wallet-ext-${{ steps.vars.outputs.VERSION }}.zip
             build/Content-Security-Policy.txt
