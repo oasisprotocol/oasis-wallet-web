@@ -54,21 +54,37 @@ jobs:
       - name: Install SDK components
         run: |
           $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0"
-      - name: Build Android ROSE Wallet
+      - name: Build Android App Bundle (AAB)
         run: ./gradlew bundleRelease
+        working-directory: android
+      - name: Build Android Package (APK)
+        run: ./gradlew assembleRelease
         working-directory: android
       - name: Decode and Save Keystore File
         run: |
           echo "${{ secrets.KEYSTORE_FILE }}" | base64 --decode > android/release.jks
-      - name: Sign Android bundle
+      - name: Sign AAB using jarsigner
         run: |
           jarsigner -verbose -keystore android/release.jks -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -signedjar android/app/build/outputs/bundle/release/app-release-signed.aab android/app/build/outputs/bundle/release/app-release.aab ${{ secrets.KEY_ALIAS }}
-      - name: Upload Android ROSE Wallet build artifacts
+      # Targeting version 30 and above we need to align the APK so that all uncompressed data starts on a 4-byte boundary
+      - name: Zipalign APK
+        run: |
+          $ANDROID_SDK_ROOT/build-tools/31.0.0/zipalign -v 4 android/app/build/outputs/apk/release/app-release-unsigned.apk android/app/build/outputs/apk/release/app-release-aligned.apk
+      - name: Sign APK using apksigner
+        run: |
+          $ANDROID_SDK_ROOT/build-tools/31.0.0/apksigner sign --ks android/release.jks --ks-pass pass:${{ secrets.KEYSTORE_PASSWORD }} --key-pass pass:${{ secrets.KEY_PASSWORD }} --ks-key-alias ${{ secrets.KEY_ALIAS }} android/app/build/outputs/apk/release/app-release-aligned.apk
+      - name: Upload Android AAB build artifacts
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: rose-wallet-android-${{ steps.vars.outputs.SHORT_SHA }}.aab
           path: android/app/build/outputs/bundle/release/app-release-signed.aab
+      - name: Upload Android APK build artifacts
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: rose-wallet-android-${{ steps.vars.outputs.SHORT_SHA }}.apk
+          path: android/app/build/outputs/apk/release/app-release-aligned.apk
       - name: Upload web ROSE Wallet build artifacts
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
