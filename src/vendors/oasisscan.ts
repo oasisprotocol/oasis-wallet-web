@@ -206,7 +206,7 @@ export function parseTransactionsList(
         runtimeName: undefined,
         runtimeId: undefined,
         round: undefined,
-        nonce: BigInt((t as OperationsEntity).nonce ?? 0).toString()
+        nonce: BigInt((t as OperationsEntity).nonce ?? 0).toString(),
       }
       return parsed
     }

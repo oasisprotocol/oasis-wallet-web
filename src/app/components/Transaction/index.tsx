@@ -461,9 +461,11 @@ export function Transaction(props: TransactionProps) {
               </Box>
 
               <Box pad="none">
-                <InfoBox icon={Clock} label={t('common.time', 'Time')}>
-                  {intlDateTimeFormat(transaction.timestamp!)}
-                </InfoBox>
+                {transaction.timestamp && (
+                  <InfoBox icon={Clock} label={t('common.time', 'Time')}>
+                    {intlDateTimeFormat(transaction.timestamp)}
+                  </InfoBox>
+                )}
 
                 {!transaction.runtimeId && transaction.level && (
                   <InfoBox icon={Cube} label={t('common.block', 'Block')}>
@@ -485,15 +487,31 @@ export function Transaction(props: TransactionProps) {
             <AmountFormatter amount={transaction.amount!} smallTicker />
           </Text>
           <Text
-            color={transaction.status === TransactionStatus.Successful ? 'successful-label' : 'status-error'}
+            color={(() => {
+              switch (transaction.status) {
+                case TransactionStatus.Successful:
+                  return 'successful-label'
+                case TransactionStatus.Pending:
+                  return 'status-warning'
+                case TransactionStatus.Failed:
+                default:
+                  return 'status-error'
+              }
+            })()}
             size="small"
             weight="bold"
           >
-            {transaction.status === TransactionStatus.Successful ? (
-              <span>{t('account.transaction.successful', 'Successful')}</span>
-            ) : (
-              <span>{t('account.transaction.failed', 'Failed')}</span>
-            )}
+            {(() => {
+              switch (transaction.status) {
+                case TransactionStatus.Successful:
+                  return <span>{t('account.transaction.successful', 'Successful')}</span>
+                case TransactionStatus.Pending:
+                  return <span>{t('account.transaction.pending', 'Pending')}</span>
+                case TransactionStatus.Failed:
+                default:
+                  return <span>{t('account.transaction.failed', 'Failed')}</span>
+              }
+            })()}
           </Text>
         </Box>
       </StyledCardBody>

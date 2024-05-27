@@ -13,6 +13,8 @@ import { selectAddress } from '../wallet/selectors'
 import { selectAccountAddress, selectAccount } from './selectors'
 import { getAccountBalanceWithFallback } from '../../lib/getAccountBalanceWithFallback'
 import { walletActions } from '../wallet'
+import { selectSelectedNetwork } from '../network/selectors'
+import { Transaction } from '../transaction/types'
 
 const ACCOUNT_REFETCHING_INTERVAL = process.env.REACT_APP_E2E_TEST ? 5 * 1000 : 30 * 1000
 const TRANSACTIONS_UPDATE_DELAY = 35 * 1000 // Measured between 8 and 31 second additional delay after balance updates
@@ -22,7 +24,7 @@ export function* fetchAccount(action: PayloadAction<string>) {
   const address = action.payload
 
   yield* put(accountActions.setLoading(true))
-  const { getTransactionsList } = yield* call(getExplorerAPIs)
+  const { getTransactionsList, getTransaction } = yield* call(getExplorerAPIs)
 
   yield* all([
     join(
@@ -47,12 +49,33 @@ export function* fetchAccount(action: PayloadAction<string>) {
     ),
     join(
       yield* fork(function* () {
+        const networkType = yield* select(selectSelectedNetwork)
+
         try {
-          const transactions = yield* call(getTransactionsList, {
+          const transactions: Transaction[] = yield* call(getTransactionsList, {
             accountId: address,
             limit: TRANSACTIONS_LIMIT,
           })
-          yield* put(accountActions.transactionsLoaded(transactions))
+
+          const detailedTransactions = yield* call(() =>
+            Promise.allSettled(transactions.map(({ hash }) => getTransaction({ hash }))),
+          )
+          const transactionsWithDetails = transactions.map((t, i) => {
+            const { status, value } = detailedTransactions[i] as PromiseFulfilledResult<Transaction>
+            // Skip failed txs
+            if (status === 'fulfilled') {
+              return {
+                ...t,
+                ...value,
+              }
+            }
+
+            return t
+          })
+
+          yield* put(
+            accountActions.transactionsLoaded({ networkType, transactions: transactionsWithDetails }),
+          )
         } catch (e: any) {
           console.error('get transactions list failed, continuing without updated list.', e)
           if (e instanceof WalletError) {

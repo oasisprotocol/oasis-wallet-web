@@ -1,8 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit'
-import { Transaction } from 'app/state/transaction/types'
 import { ErrorPayload } from 'types/errors'
 import { createSlice } from 'utils/@reduxjs/toolkit'
-import { AccountState, Account } from './types'
+import { AccountState, Account, PendingTransactionPayload, TransactionsLoadedPayload } from './types'
 
 export const initialState: AccountState = {
   address: '',
@@ -15,6 +14,12 @@ export const initialState: AccountState = {
   transactions: [],
   transactionsError: undefined,
   loading: true,
+  pendingTransactions: {
+    local: [],
+    testnet: [],
+    mainnet: [],
+  },
+  nonce: '0',
 }
 
 export const accountSlice = createSlice({
@@ -23,7 +28,7 @@ export const accountSlice = createSlice({
   reducers: {
     openAccountPage(state, action: PayloadAction<string>) {},
     closeAccountPage(state) {},
-    clearAccount(state, action: PayloadAction<void>) {
+    clearAccount(state, action: PayloadAction) {
       Object.assign(state, initialState)
     },
     fetchAccount(state, action: PayloadAction<string>) {},
@@ -34,9 +39,20 @@ export const accountSlice = createSlice({
     accountError(state, action: PayloadAction<ErrorPayload>) {
       state.accountError = action.payload
     },
-    transactionsLoaded(state, action: PayloadAction<Transaction[]>) {
+    transactionsLoaded(state, action: PayloadAction<TransactionsLoadedPayload>) {
+      const {
+        payload: { networkType, transactions },
+      } = action
+
       state.transactionsError = undefined
-      state.transactions = action.payload
+      state.transactions = transactions
+
+      state.pendingTransactions = {
+        ...state.pendingTransactions,
+        [networkType]: state.pendingTransactions[networkType].filter(
+          ({ hash: pendingTxHash }) => !transactions.some(({ hash }) => pendingTxHash === hash),
+        ),
+      }
     },
     transactionsError(state, action: PayloadAction<ErrorPayload>) {
       state.transactionsError = action.payload
@@ -45,6 +61,20 @@ export const accountSlice = createSlice({
     },
     setLoading(state, action: PayloadAction<boolean>) {
       state.loading = action.payload
+    },
+    addPendingTransaction(state, action: PayloadAction<PendingTransactionPayload>) {
+      const {
+        payload: { from, networkType, transaction },
+      } = action
+
+      if (from !== state.address) {
+        return
+      }
+
+      state.pendingTransactions = {
+        ...state.pendingTransactions,
+        [networkType]: [transaction, ...state.pendingTransactions[networkType]],
+      }
     },
   },
 })

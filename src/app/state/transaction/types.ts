@@ -36,6 +36,7 @@ export enum TransactionType {
 export enum TransactionStatus {
   Failed,
   Successful,
+  Pending,
 }
 
 export interface Transaction {
@@ -53,6 +54,7 @@ export interface Transaction {
   runtimeName: string | undefined
   runtimeId: string | undefined
   round: number | undefined
+  nonce: StringifiedBigInt | undefined
 }
 
 /* --- STATE --- */

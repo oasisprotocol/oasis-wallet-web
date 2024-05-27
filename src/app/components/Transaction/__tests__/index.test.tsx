@@ -108,6 +108,7 @@ describe('<Transaction  />', () => {
         runtimeName: undefined,
         runtimeId: undefined,
         round: undefined,
+        nonce: 0n.toString(),
       },
       network,
     )
@@ -131,6 +132,7 @@ describe('<Transaction  />', () => {
         runtimeName: undefined,
         runtimeId: undefined,
         round: undefined,
+        nonce: 0n.toString(),
       },
       network,
     )

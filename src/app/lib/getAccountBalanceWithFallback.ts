@@ -14,6 +14,7 @@ function* getBalanceGRPC(address: string) {
     delegations: null,
     debonding: null,
     total: null,
+    nonce: account.general?.nonce?.toString() ?? '0',
   }
 }
 
