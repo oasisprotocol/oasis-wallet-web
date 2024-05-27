@@ -39,6 +39,7 @@
       "transactions": "Transactions"
     },
     "summary": {
+      "activity": "Activity",
       "balance": {
         "available": "Available",
         "debonding": "Debonding",
@@ -47,7 +48,10 @@
       },
       "noTransactionFound": "No transactions found.",
       "noWalletIsOpen": "To send, receive, stake and swap {{ticker}} tokens, <HomeLink>open your wallet</HomeLink>.",
-      "notYourAccount": "This is not your account."
+      "notYourAccount": "This is not your account.",
+      "pendingTransactions": "Pending transactions",
+      "someTxsInPendingState": "Some transactions are currently in a pending state.",
+      "viewAccountTxs": "View account transactions"
     },
     "transaction": {
       "addEscrow": {
@@ -69,6 +73,7 @@
         "header": "Method '{{method}}'"
       },
       "loadingError": "Couldn't load transactions.",
+      "pending": "Pending",
       "reclaimEscrow": {
         "received": "<Amount/> reclaimed by delegator",
         "sent": "Reclaimed <Amount/> from validator"

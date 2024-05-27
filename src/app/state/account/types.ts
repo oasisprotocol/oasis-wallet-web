@@ -1,6 +1,7 @@
 import { Transaction } from 'app/state/transaction/types'
 import { ErrorPayload } from 'types/errors'
 import { StringifiedBigInt } from 'types/StringifiedBigInt'
+import { NetworkType } from '../network/types'
 
 export interface BalanceDetails {
   available: StringifiedBigInt | null
@@ -20,6 +21,7 @@ export interface Allowance {
 export interface Account extends BalanceDetails {
   address: string
   allowances?: Allowance[]
+  nonce: StringifiedBigInt
 }
 
 /* --- STATE --- */
@@ -28,4 +30,16 @@ export interface AccountState extends Account {
   accountError?: ErrorPayload
   transactions: Transaction[]
   transactionsError?: ErrorPayload
+  pendingTransactions: Record<NetworkType, Transaction[]>
+}
+
+export interface PendingTransactionPayload {
+  from: string
+  networkType: NetworkType
+  transaction: Transaction
+}
+
+export interface TransactionsLoadedPayload {
+  transactions: Transaction[]
+  networkType: NetworkType
 }
