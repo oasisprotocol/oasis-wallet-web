@@ -64,6 +64,7 @@
     "@capacitor/core": "5.0.4",
     "@capacitor/ios": "5.0.4",
     "@ethereumjs/util": "9.0.3",
+    "@ledgerhq/hw-transport": "^6.30.1",
     "@ledgerhq/hw-transport-webusb": "6.28.5",
     "@metamask/browser-passworder": "=3.0.0",
     "@metamask/jazzicon": "2.0.0",
