@@ -44,9 +44,10 @@ jobs:
         run: yarn cap sync android
       - name: Accept SDK licenses
         run: yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --licenses
+      # Capacitor v6 sets a deployment target of Android 14 (SDK 34)
       - name: Install SDK components
         run: |
-          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-31" "build-tools;31.0.0"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
       - name: Build Android ROSE Wallet
         run: ./gradlew bundleRelease
         working-directory: android
