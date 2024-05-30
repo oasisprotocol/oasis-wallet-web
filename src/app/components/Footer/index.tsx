@@ -2,14 +2,13 @@ import { Anchor } from 'grommet/es6/components/Anchor'
 import { Box } from 'grommet/es6/components/Box'
 import { Text } from 'grommet/es6/components/Text'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
-import React, { memo, useContext, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Trans, useTranslation } from 'react-i18next'
 import { selectHasAccounts } from 'app/state/wallet/selectors'
 import { intlDateTimeFormat } from '../DateFormatter/intlDateTimeFormat'
 import { backend } from 'vendors/backend'
 import { BackendAPIs } from 'config'
-import { MobileFooterNavigation } from '../MobileFooterNavigation'
 import { mobileFooterNavigationHeight } from '../../../styles/theme/elementSizes'
 import { Button } from 'grommet/es6/components/Button'
 
@@ -150,21 +149,3 @@ export const Footer = memo(() => {
     </Box>
   )
 })
-
-export const PageFooter = () => {
-  const isMobile = useContext(ResponsiveContext) === 'small'
-  const walletHasAccounts = useSelector(selectHasAccounts)
-
-  return (
-    <>
-      {walletHasAccounts && isMobile ? (
-        // Footer for opened wallet is rendered in Settings tab in Profile dropdown
-        <Box pad="xlarge">
-          <MobileFooterNavigation />
-        </Box>
-      ) : (
-        <Footer />
-      )}
-    </>
-  )
-}
