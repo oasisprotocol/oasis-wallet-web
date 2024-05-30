@@ -55,6 +55,7 @@ export const Footer = memo(() => {
         bottom: isMobile && walletHasAccounts ? mobileFooterNavigationHeight : 'none',
       }}
       margin={{ bottom: 'large' }}
+      data-testid="footer"
     >
       <Text size={responsiveSize} textAlign="center" margin={{ bottom: isMobile ? 'small' : 'none' }}>
         <Trans

@@ -46,7 +46,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
               <Main>
                 <Toolbar />
                 <Outlet />
-                <Memo />
+                <PageFooter />
               </Main>
             </Box>
           </UnlockGate>

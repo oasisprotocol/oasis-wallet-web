@@ -1,35 +1,23 @@
-import * as React from 'react'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { configureAppStore } from 'store/configureStore'
 import { Wallet } from 'app/state/wallet/types'
-import {
-  useParaTimesNavigation,
-  ParaTimesNavigationHook,
-} from '../../../pages/ParaTimesPage/useParaTimesNavigation'
-import { MobileFooterNavigation, MobileFooterNavigationProps } from '..'
+import { MobileFooterNavigation } from '..'
 
-jest.mock('../../../pages/ParaTimesPage/useParaTimesNavigation')
-
-const renderComponent = (store: any, { walletHasAccounts, isMobile }: MobileFooterNavigationProps) =>
+const renderComponent = (store: any) =>
   render(
     <Provider store={store}>
       <MemoryRouter>
-        <MobileFooterNavigation walletHasAccounts={walletHasAccounts} isMobile={isMobile} />
+        <MobileFooterNavigation />
       </MemoryRouter>
     </Provider>,
   )
 
 describe('<MobileFooterNavigation />', () => {
   let store: ReturnType<typeof configureAppStore>
-  const mockUseParaTimesNavigationResult = {
-    getParaTimesRoutePath: (address: string) => address,
-    paraTimesRouteLabel: 'MockParaTimesLabel',
-  } as ParaTimesNavigationHook
 
   beforeEach(() => {
-    jest.mocked(useParaTimesNavigation).mockReturnValue(mockUseParaTimesNavigationResult)
     store = configureAppStore({
       wallet: {
         selectedWallet: 'dummy',
@@ -42,22 +30,19 @@ describe('<MobileFooterNavigation />', () => {
     })
   })
 
-  it('should render component for mobile and when account is open', () => {
-    renderComponent(store, { walletHasAccounts: true, isMobile: true })
+  it('should render mobile navigation', () => {
+    renderComponent(store)
 
-    expect(screen.getByTestId('mobile-footer-navigation')).toBeInTheDocument()
-    expect(screen.queryByText('MockParaTimesLabel')).toBeInTheDocument()
-  })
+    const walletLink = screen.getByRole('link', { name: /menu.wallet/ })
+    expect(walletLink).toHaveAttribute('href', '/account/dummy')
 
-  it('should not render component for non mobile', () => {
-    renderComponent(store, { walletHasAccounts: true, isMobile: false })
+    const stakeLink = screen.getByRole('link', { name: /menu.stake/ })
+    expect(stakeLink).toHaveAttribute('href', '/account/dummy/stake')
 
-    expect(screen.queryByTestId('mobile-footer-navigation')).not.toBeInTheDocument()
-  })
+    const paraTimesLink = screen.getByRole('link', { name: /menu.paraTimes/ })
+    expect(paraTimesLink).toHaveAttribute('href', '/account/dummy/paratimes')
 
-  it('should not render component when account is not open', () => {
-    renderComponent(store, { walletHasAccounts: false, isMobile: true })
-
-    expect(screen.queryByTestId('mobile-footer-navigation')).not.toBeInTheDocument()
+    const buyLink = screen.getByRole('link', { name: /menu.fiatOnramp-mobile/ })
+    expect(buyLink).toHaveAttribute('href', '/account/dummy/fiat')
   })
 })

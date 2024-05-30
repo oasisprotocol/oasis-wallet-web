@@ -1,40 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Footer /> should render mobile version of footer 1`] = `
-.c9 {
-  display: inline-block;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
-  stroke: currentColor;
-}
-
-.c9 g {
-  fill: inherit;
-  stroke: inherit;
-}
-
-.c9 *:not([stroke])[fill='none'] {
-  stroke-width: 0;
-}
-
-.c9 *[stroke*='#'],
-.c9 *[STROKE*='#'] {
-  stroke: inherit;
-  fill: none;
-}
-
-.c9 *[fill-rule],
-.c9 *[FILL-RULE],
-.c9 *[fill*='#'],
-.c9 *[FILL*='#'] {
-  fill: inherit;
-  stroke: none;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -79,39 +45,6 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   flex-direction: column;
 }
 
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  box-sizing: border-box;
-  max-width: 100%;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  min-width: 0;
-  min-height: 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  height: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-}
-
-.c10 {
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
-  align-self: stretch;
-  height: 12px;
-}
-
 .c2 {
   box-sizing: border-box;
   display: -webkit-inline-box;
@@ -144,52 +77,6 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   font-size: 14px;
   line-height: 20px;
   text-align: center;
-}
-
-.c11 {
-  font-size: 14px;
-  line-height: 20px;
-  text-align: center;
-}
-
-.c6 {
-  background-color: #FFFFFF;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: stretch;
-  -webkit-box-align: stretch;
-  -ms-flex-align: stretch;
-  align-items: stretch;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  box-shadow: 0px 0px 1px #EDEDED;
-  border-top: solid 1px #11111108;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.c7 {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  -webkit-flex-basis: 0;
-  -ms-flex-preferred-size: 0;
-  flex-basis: 0;
-}
-
-.c7:hover {
-  background-color: #11111108;
 }
 
 .c5 {
@@ -287,14 +174,9 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   }
 }
 
-@media only screen and (max-width:768px) {
-  .c10 {
-    height: 6px;
-  }
-}
-
 <footer
   class="c0"
+  data-testid="footer"
 >
   <span
     class="c1"
@@ -379,130 +261,5 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
       </span>
     </a>
   </span>
-  <nav
-    class="c6"
-    data-testid="mobile-footer-navigation"
-  >
-    <a
-      class="c7"
-      href="/account/dummy"
-    >
-      <span
-        class="c8"
-      >
-        <svg
-          aria-label="Money"
-          class="c9"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M16 16c0-1.105-3.134-2-7-2s-7 .895-7 2 3.134 2 7 2 7-.895 7-2zM2 16v4.937C2 22.077 5.134 23 9 23s7-.924 7-2.063V16M9 5c-4.418 0-8 .895-8 2s3.582 2 8 2M1 7v5c0 1.013 3.582 2 8 2M23 4c0-1.105-3.1-2-6.923-2-3.824 0-6.923.895-6.923 2s3.1 2 6.923 2S23 5.105 23 4zm-7 12c3.824 0 7-.987 7-2V4M9.154 4v10.166M9 9c0 1.013 3.253 2 7.077 2C19.9 11 23 10.013 23 9"
-            fill="none"
-            stroke="#000"
-            stroke-width="2"
-          />
-        </svg>
-        <span
-          class="c10"
-        />
-        <span
-          class="c11"
-          style="line-height: 1;"
-        >
-          ROSE Wallet
-        </span>
-      </span>
-    </a>
-    <a
-      class="c7"
-      href="/account/dummy/stake"
-    >
-      <span
-        class="c8"
-      >
-        <svg
-          aria-label="LineChart"
-          class="c9"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="m1 16 7-7 5 5L23 4M0 22h23.999M16 4h7v7"
-            fill="none"
-            stroke="#000"
-            stroke-width="2"
-          />
-        </svg>
-        <span
-          class="c10"
-        />
-        <span
-          class="c11"
-          style="line-height: 1;"
-        >
-          Stake
-        </span>
-      </span>
-    </a>
-    <a
-      class="c7"
-      href="/account/dummy/paratimes"
-    >
-      <span
-        class="c8"
-      >
-        <svg
-          aria-label="Inherit"
-          class="c9"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="m17 18-5-3 5 3zM7 18l5-3v-4m5 9a3 3 0 1 0 6 0 3 3 0 0 0-6 0zM4 17a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM17 6a5 5 0 1 1-10.001-.001A5 5 0 0 1 17 6z"
-            fill="none"
-            stroke="#231F20"
-            stroke-width="2"
-          />
-        </svg>
-        <span
-          class="c10"
-        />
-        <span
-          class="c11"
-          style="line-height: 1;"
-        >
-          ParaTimes
-        </span>
-      </span>
-    </a>
-    <a
-      class="c7"
-      href="/account/dummy/fiat"
-    >
-      <span
-        class="c8"
-      >
-        <svg
-          aria-label="CreditCard"
-          class="c9"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M1 5c0-.552.44-1 1.002-1h19.996A1 1 0 0 1 23 5v14c0 .552-.44 1-1.002 1H2.002A1 1 0 0 1 1 19V5zm0 3h22v2H1V8zm4 7h2v.5H5V15zm5 0h6v.5h-6V15z"
-            fill="none"
-            stroke="#000"
-            stroke-width="2"
-          />
-        </svg>
-        <span
-          class="c10"
-        />
-        <span
-          class="c11"
-          style="line-height: 1;"
-        >
-          Buy
-        </span>
-      </span>
-    </a>
-  </nav>
 </footer>
 `;
