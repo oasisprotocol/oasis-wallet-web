@@ -2,7 +2,7 @@ import { Anchor } from 'grommet/es6/components/Anchor'
 import { Box } from 'grommet/es6/components/Box'
 import { Text } from 'grommet/es6/components/Text'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
-import React, { memo, useState } from 'react'
+import React, { memo, useContext, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Trans, useTranslation } from 'react-i18next'
 import { selectHasAccounts } from 'app/state/wallet/selectors'
@@ -147,7 +147,24 @@ export const Footer = memo(() => {
           defaults="We’d love your feedback at <EmailLink>wallet@oasisprotocol.org</EmailLink>"
         />
       </Text>
-      <MobileFooterNavigation walletHasAccounts={walletHasAccounts} isMobile={isMobile} />
     </Box>
   )
 })
+
+export const PageFooter = () => {
+  const isMobile = useContext(ResponsiveContext) === 'small'
+  const walletHasAccounts = useSelector(selectHasAccounts)
+
+  return (
+    <>
+      {walletHasAccounts && isMobile ? (
+        // Footer for opened wallet is rendered in Settings tab in Profile dropdown
+        <Box pad="xlarge">
+          <MobileFooterNavigation />
+        </Box>
+      ) : (
+        <Footer />
+      )}
+    </>
+  )
+}
