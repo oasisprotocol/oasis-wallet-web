@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { Paragraph } from 'grommet/es6/components/Paragraph'
 import { DeleteInputForm } from '../../components/DeleteInputForm'
 import { Box } from 'grommet/es6/components/Box'
-import { Layer } from 'grommet/es6/components/Layer'
+import { ResponsiveLayer } from '../ResponsiveLayer'
 import { Header } from 'app/components/Header'
 
 interface DeleteProfileButtonProps {
@@ -87,7 +87,17 @@ function ModalLayout(props: {
   onEsc?: () => void
 }) {
   return (
-    <Layer modal background="background-front" onClickOutside={props.onClickOutside} onEsc={props.onEsc}>
+    <ResponsiveLayer
+      modal
+      responsive={false}
+      style={{
+        width: '100%',
+        maxWidth: '500px',
+      }}
+      background="background-front"
+      onClickOutside={props.onClickOutside}
+      onEsc={props.onEsc}
+    >
       <Box pad="medium">
         <Header level={2} fill textAlign="center" margin={{ top: 'medium' }}>
           {props.title}
@@ -95,6 +105,6 @@ function ModalLayout(props: {
 
         {props.children}
       </Box>
-    </Layer>
+    </ResponsiveLayer>
   )
 }
