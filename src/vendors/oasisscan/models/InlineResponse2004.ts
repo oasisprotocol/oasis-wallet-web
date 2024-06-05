@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    InlineResponse2004Data,
-    InlineResponse2004DataFromJSON,
-    InlineResponse2004DataFromJSONTyped,
-    InlineResponse2004DataToJSON,
+    RuntimeTransactionInfoRow,
+    RuntimeTransactionInfoRowFromJSON,
+    RuntimeTransactionInfoRowFromJSONTyped,
+    RuntimeTransactionInfoRowToJSON,
 } from './';
 
 /**
@@ -34,10 +34,10 @@ export interface InlineResponse2004 {
     code: number;
     /**
      * 
-     * @type {InlineResponse2004Data}
+     * @type {RuntimeTransactionInfoRow}
      * @memberof InlineResponse2004
      */
-    data: InlineResponse2004Data;
+    data: RuntimeTransactionInfoRow;
 }
 
 export function InlineResponse2004FromJSON(json: any): InlineResponse2004 {
@@ -51,7 +51,7 @@ export function InlineResponse2004FromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'code': json['code'],
-        'data': InlineResponse2004DataFromJSON(json['data']),
+        'data': json['data'],
     };
 }
 
@@ -65,7 +65,7 @@ export function InlineResponse2004ToJSON(value?: InlineResponse2004 | null): any
     return {
         
         'code': value.code,
-        'data': InlineResponse2004DataToJSON(value.data),
+        'data': value.data,
     };
 }
 

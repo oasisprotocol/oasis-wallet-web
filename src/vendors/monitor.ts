@@ -38,11 +38,16 @@ export function getMonitorAPIs(url: string | 'https://monitor.oasis.dev') {
     return parseValidatorsList(validators)
   }
 
-  async function getTransactionsList(params: { accountId: string; limit: number }): Promise<Transaction[]> {
+  async function getTransaction({ hash }: { hash: string }) {
+    throw new Error('Not implemented')
+  }
+
+  async function getTransactionsList(params: { accountId: string; limit: number }) {
     const transactions = await operations.getTransactionsList({
       accountId: params.accountId,
       limit: params.limit,
     })
+
     return parseTransactionsList(transactions)
   }
 
@@ -64,7 +69,15 @@ export function getMonitorAPIs(url: string | 'https://monitor.oasis.dev') {
     }
   }
 
-  return { accounts, blocks, getAccount, getAllValidators, getTransactionsList, getDelegations }
+  return {
+    accounts,
+    blocks,
+    getAccount,
+    getAllValidators,
+    getTransaction,
+    getTransactionsList,
+    getDelegations,
+  }
 }
 
 export function parseAccount(account: AccountsRow): Account {
@@ -79,6 +92,7 @@ export function parseAccount(account: AccountsRow): Account {
       BigInt(account.delegations_balance) +
       BigInt(account.debonding_delegations_balance)
     ).toString(),
+    nonce: BigInt(account.nonce ?? 0).toString(),
   }
 }
 
@@ -163,6 +177,7 @@ export function parseTransactionsList(transactionsList: OperationsRow[]): Transa
       runtimeName: undefined,
       runtimeId: undefined,
       round: undefined,
+      nonce: undefined,
     }
     return parsed
   })

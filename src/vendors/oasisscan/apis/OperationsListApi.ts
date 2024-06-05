@@ -15,9 +15,9 @@
 
 import * as runtime from '../runtime';
 import {
-    InlineResponse2002,
-    InlineResponse2002FromJSON,
-    InlineResponse2002ToJSON,
+    InlineResponse2003,
+    InlineResponse2003FromJSON,
+    InlineResponse2003ToJSON,
 } from '../models';
 
 export interface GetTransactionsListRequest {
@@ -36,7 +36,7 @@ export class OperationsListApi extends runtime.BaseAPI {
 
     /**
      */
-    async getTransactionsListRaw(requestParameters: GetTransactionsListRequest): Promise<runtime.ApiResponse<InlineResponse2002>> {
+    async getTransactionsListRaw(requestParameters: GetTransactionsListRequest): Promise<runtime.ApiResponse<InlineResponse2003>> {
         if (requestParameters.runtime === null || requestParameters.runtime === undefined) {
             throw new runtime.RequiredError('runtime','Required parameter requestParameters.runtime was null or undefined when calling getTransactionsList.');
         }
@@ -76,12 +76,12 @@ export class OperationsListApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2002FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2003FromJSON(jsonValue));
     }
 
     /**
      */
-    async getTransactionsList(requestParameters: GetTransactionsListRequest): Promise<InlineResponse2002> {
+    async getTransactionsList(requestParameters: GetTransactionsListRequest): Promise<InlineResponse2003> {
         const response = await this.getTransactionsListRaw(requestParameters);
         return await response.value();
     }

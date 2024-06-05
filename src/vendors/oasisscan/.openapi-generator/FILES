@@ -1,4 +1,5 @@
 apis/AccountsApi.ts
+apis/OperationsEntityApi.ts
 apis/OperationsListApi.ts
 apis/RuntimeApi.ts
 apis/index.ts
@@ -11,12 +12,14 @@ models/InlineResponse200.ts
 models/InlineResponse2001.ts
 models/InlineResponse2001Data.ts
 models/InlineResponse2002.ts
-models/InlineResponse2002Data.ts
 models/InlineResponse2003.ts
+models/InlineResponse2003Data.ts
 models/InlineResponse2004.ts
-models/InlineResponse2004Data.ts
 models/InlineResponse2005.ts
 models/InlineResponse2005Data.ts
+models/InlineResponse2006.ts
+models/InlineResponse2006Data.ts
+models/OperationsEntity.ts
 models/OperationsRow.ts
 models/ParaTimeCtxRow.ts
 models/RuntimeTransactionInfoRow.ts
