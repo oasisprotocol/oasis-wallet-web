@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Oasisscan API
- * https://github.com/bitcat365/oasisscan-backend#readme
+ * https://github.com/bitcat365/oasisscan-backend#readme https://api.oasisscan.com/mainnet/swagger-ui/#/ https://api.oasisscan.com/mainnet/v2/api-docs 
  *
  * The version of the OpenAPI document: 1
  * 
@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    ParaTimeCtxRow,
-    ParaTimeCtxRowFromJSON,
-    ParaTimeCtxRowFromJSONTyped,
-    ParaTimeCtxRowToJSON,
+    OperationsRow,
+    OperationsRowFromJSON,
+    OperationsRowFromJSONTyped,
+    OperationsRowToJSON,
 } from './';
 
 /**
@@ -28,46 +28,34 @@ import {
 export interface InlineResponse2003Data {
     /**
      * 
-     * @type {ParaTimeCtxRow}
+     * @type {Array<OperationsRow>}
      * @memberof InlineResponse2003Data
      */
-    ctx: ParaTimeCtxRow;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Data
-     */
-    runtimeName: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof InlineResponse2003Data
-     */
-    runtimeId: string;
+    list: Array<OperationsRow>;
     /**
      * 
      * @type {number}
      * @memberof InlineResponse2003Data
      */
-    round: number;
+    page: number;
     /**
      * 
      * @type {number}
      * @memberof InlineResponse2003Data
      */
-    timestamp?: number;
+    size: number;
     /**
      * 
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse2003Data
      */
-    txHash?: string;
+    maxPage: number;
     /**
      * 
-     * @type {boolean}
+     * @type {number}
      * @memberof InlineResponse2003Data
      */
-    result?: boolean;
+    totalSize: number;
 }
 
 export function InlineResponse2003DataFromJSON(json: any): InlineResponse2003Data {
@@ -80,13 +68,11 @@ export function InlineResponse2003DataFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'ctx': ParaTimeCtxRowFromJSON(json['ctx']),
-        'runtimeName': json['runtimeName'],
-        'runtimeId': json['runtimeId'],
-        'round': json['round'],
-        'timestamp': !exists(json, 'timestamp') ? undefined : json['timestamp'],
-        'txHash': !exists(json, 'txHash') ? undefined : json['txHash'],
-        'result': !exists(json, 'result') ? undefined : json['result'],
+        'list': ((json['list'] as Array<any>).map(OperationsRowFromJSON)),
+        'page': json['page'],
+        'size': json['size'],
+        'maxPage': json['maxPage'],
+        'totalSize': json['totalSize'],
     };
 }
 
@@ -99,13 +85,11 @@ export function InlineResponse2003DataToJSON(value?: InlineResponse2003Data | nu
     }
     return {
         
-        'ctx': ParaTimeCtxRowToJSON(value.ctx),
-        'runtimeName': value.runtimeName,
-        'runtimeId': value.runtimeId,
-        'round': value.round,
-        'timestamp': value.timestamp,
-        'txHash': value.txHash,
-        'result': value.result,
+        'list': ((value.list as Array<any>).map(OperationsRowToJSON)),
+        'page': value.page,
+        'size': value.size,
+        'maxPage': value.maxPage,
+        'totalSize': value.totalSize,
     };
 }
 

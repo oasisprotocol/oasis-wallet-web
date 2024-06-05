@@ -68,6 +68,32 @@ paths:
                         type: array
                         items:
                           $ref: '#/components/schemas/ValidatorRow'
+  '/chain/transaction/{hash}':
+    get:
+      tags:
+        - OperationsEntity
+      summary: TransactionDetail
+      operationId: getTransaction
+      parameters:
+        - name: hash
+          in: path
+          description: hash
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ 'code', 'data' ]
+                properties:
+                  code:
+                    type: integer
+                  data:
+                    "$ref": '#/components/schemas/OperationsEntity'
   '/chain/transactions':
     get:
       tags:
@@ -494,6 +520,73 @@ components:
         - status
         - from
         - to
+    OperationsEntity:
+      type: object
+      properties:
+        txHash:
+          type: string
+        height:
+          type: integer
+        method:
+          type: string
+          enum:
+            - staking.Transfer
+            - staking.AddEscrow
+            - staking.ReclaimEscrow
+            - staking.AmendCommissionSchedule
+            - staking.Allow
+            - staking.Withdraw
+            - staking.Burn
+            - roothash.ExecutorCommit
+            - roothash.ExecutorProposerTimeout
+            - roothash.SubmitMsg
+            - registry.DeregisterEntity
+            - registry.RegisterEntity
+            - registry.RegisterNode
+            - registry.RegisterRuntime
+            - registry.UnfreezeNode
+            - governance.CastVote
+            - governance.SubmitProposal
+            - beacon.PVSSCommit
+            - beacon.PVSSReveal
+            - beacon.VRFProve
+            - consensus.Meta
+        fee:
+          type: string
+        amount:
+          type: string
+          nullable: true
+        shares:
+          type: string
+          nullable: true
+        timestamp:
+          type: integer
+        time:
+          type: integer
+        status:
+          type: boolean
+        from:
+          type: string
+        to:
+          type: string
+          nullable: true
+        errorMessage:
+          type: string
+          nullable: true
+        nonce:
+          type: integer
+      required:
+        - timestamp
+        - txHash
+        - height
+        - method
+        - fee
+        - amount
+        - time
+        - status
+        - from
+        - to
+        - nonce
     DelegationRow:
       type: object
       properties:

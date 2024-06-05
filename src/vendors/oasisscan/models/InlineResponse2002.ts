@@ -14,10 +14,10 @@
 
 import { exists, mapValues } from '../runtime';
 import {
-    InlineResponse2002Data,
-    InlineResponse2002DataFromJSON,
-    InlineResponse2002DataFromJSONTyped,
-    InlineResponse2002DataToJSON,
+    OperationsEntity,
+    OperationsEntityFromJSON,
+    OperationsEntityFromJSONTyped,
+    OperationsEntityToJSON,
 } from './';
 
 /**
@@ -34,10 +34,10 @@ export interface InlineResponse2002 {
     code: number;
     /**
      * 
-     * @type {InlineResponse2002Data}
+     * @type {OperationsEntity}
      * @memberof InlineResponse2002
      */
-    data: InlineResponse2002Data;
+    data: OperationsEntity;
 }
 
 export function InlineResponse2002FromJSON(json: any): InlineResponse2002 {
@@ -51,7 +51,7 @@ export function InlineResponse2002FromJSONTyped(json: any, ignoreDiscriminator: 
     return {
         
         'code': json['code'],
-        'data': InlineResponse2002DataFromJSON(json['data']),
+        'data': OperationsEntityFromJSON(json['data']),
     };
 }
 
@@ -65,7 +65,7 @@ export function InlineResponse2002ToJSON(value?: InlineResponse2002 | null): any
     return {
         
         'code': value.code,
-        'data': InlineResponse2002DataToJSON(value.data),
+        'data': OperationsEntityToJSON(value.data),
     };
 }
 
