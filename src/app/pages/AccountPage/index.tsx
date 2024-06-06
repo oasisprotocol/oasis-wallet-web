@@ -64,9 +64,7 @@ const NavItem = ({ counter, label, route }: NavItemProps) => {
   )
 }
 
-interface AccountPageProps {}
-
-export function AccountPage(props: AccountPageProps) {
+export function AccountPage() {
   const { t } = useTranslation()
   const isMobile = React.useContext(ResponsiveContext) === 'small'
   const address = useParams<keyof AccountPageParams>().address!
@@ -103,10 +101,14 @@ export function AccountPage(props: AccountPageProps) {
     }
   }, [dispatch, address, selectedNetwork])
 
+  const isStakeInitialLoading = stake.loading && stake.delegations === null
+  const isAccountInitialLoading = account.loading && !account.address
+
   return (
     <Box pad="small">
       {active && <TransactionModal />}
-      {(stake.loading || account.loading) && (
+      {/* Prevent showing Loading account popup unless initial load */}
+      {(isStakeInitialLoading || isAccountInitialLoading) && (
         <Layer modal background="background-front" responsive={false}>
           <Box pad="medium" gap="medium" direction="row" align="center" width="max-content">
             <Spinner size="medium" />
