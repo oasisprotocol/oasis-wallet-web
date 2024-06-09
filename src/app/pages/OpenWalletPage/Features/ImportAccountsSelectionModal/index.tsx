@@ -106,7 +106,7 @@ export function ImportAccountsSelectionModal(props: ImportAccountsSelectionModal
             {t('openWallet.importAccounts.selectWallets', 'Select accounts to open')}
           </ModalSplitHeader>
 
-          <Box style={{ minHeight: '362px' }}>
+          <Box style={{ minHeight: '335px' }}>
             <ImportAccountsSelector accounts={accounts} />
             {![ImportAccountsStep.Idle, ImportAccountsStep.LoadingBalances].includes(importAccounts.step) && (
               <Box direction="row" gap="medium" alignContent="center" pad={{ top: 'small' }}>

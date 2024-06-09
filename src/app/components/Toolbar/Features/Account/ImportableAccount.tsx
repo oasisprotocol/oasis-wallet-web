@@ -17,10 +17,6 @@ export const ImportableAccount = ({
       displayBalance={true}
       displayCheckbox={true}
       displayAccountNumber={true}
-      displayDerivation={{
-        type: account.type,
-        pathDisplay: account.pathDisplay,
-      }}
       path={account.path}
     />
   )

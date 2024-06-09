@@ -523,7 +523,7 @@
     "wallets": {
       "select": "Select",
       "type": {
-        "bluetoothLedger": "BLE Ledger",
+        "bluetoothLedger": "Bluetooth Ledger",
         "mnemonic": "Mnemonic",
         "privateKey": "Private key",
         "usbLedger": "USB Ledger"

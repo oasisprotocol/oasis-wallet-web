@@ -12,7 +12,7 @@ export const DerivationFormatter = (props: DerivationFormatterProps) => {
   const { t } = useTranslation()
   const walletTypes: { [type in WalletType]: string } = {
     [WalletType.UsbLedger]: t('toolbar.wallets.type.usbLedger', 'USB Ledger'),
-    [WalletType.BleLedger]: t('toolbar.wallets.type.bluetoothLedger', 'BLE Ledger'),
+    [WalletType.BleLedger]: t('toolbar.wallets.type.bluetoothLedger', 'Bluetooth Ledger'),
     [WalletType.Mnemonic]: t('toolbar.wallets.type.mnemonic', 'Mnemonic'),
     [WalletType.PrivateKey]: t('toolbar.wallets.type.privateKey', 'Private key'),
   }

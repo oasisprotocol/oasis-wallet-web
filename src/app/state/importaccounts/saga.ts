@@ -83,16 +83,11 @@ function* getUSBTransport() {
  *  - We must consider the very limited vertical space available in extension mode. If we set this too big,
  *    the user will need to scroll to reach the open button.
  *
- * Because of the above considerations, we have set this to 4, for now.
+ * Because of the above considerations, we have set this to 5, for now.
  */
-export const accountsPerPage = 4
-
-/**
- * How many pages should there be, altogether?
- *
- * We want to offer ~50 accounts, so now se use 12, because 12 x 4 = 48 which is close to 50.
- */
-export const numberOfAccountPages = 12
+export const accountsPerPage = 5
+/* We want to offer ~50 accounts. */
+export const numberOfAccountPages = 10
 
 function* enumerateAccountsFromMnemonic(action: PayloadAction<string>) {
   const wallets: ImportAccountsListAccount[] = []
