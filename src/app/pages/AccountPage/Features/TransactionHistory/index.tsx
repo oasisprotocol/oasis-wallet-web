@@ -46,13 +46,14 @@ export function TransactionHistory() {
     .map(t => <Transaction key={t.hash} transaction={t} referenceAddress={address} network={network} />)
 
   return (
-    <Box gap="medium" margin="none">
+    <Box margin="none">
       {transactionsError && (
         <p>
           {t('account.transaction.loadingError', `Couldn't load transactions.`)}{' '}
           <ErrorFormatter code={transactionsError.code} message={transactionsError.message} />
         </p>
       )}
+      {/* eslint-disable no-restricted-syntax */}
       {(!!pendingTransactionComponents.length || hasUnknownPendingTransactions) && (
         <>
           <Heading level="3">{t('account.summary.pendingTransactions', 'Pending transactions')}</Heading>
@@ -81,27 +82,24 @@ export function TransactionHistory() {
               </span>
             }
           >
-            <span>
-              {t(
-                'account.summary.someTxsInPendingState',
-                'Some transactions are currently in a pending state.',
-              )}
-            </span>
-          </AlertBox>
-          <Box margin={{ top: 'small' }}>
-            {pendingTransactionComponents.length ? (
-              // eslint-disable-next-line no-restricted-syntax -- pendingTransactionComponents is not a plain text node
-              pendingTransactionComponents
-            ) : (
-              <></>
+            {t(
+              'account.summary.someTxsInPendingState',
+              'Some transactions are currently in a pending state.',
             )}
-          </Box>
+          </AlertBox>
+          {!!pendingTransactionComponents.length && (
+            <Box gap="medium" data-testid="pending-txs" margin={{ top: 'small' }}>
+              {pendingTransactionComponents}
+            </Box>
+          )}
           <Heading level="3">{t('account.summary.activity', 'Activity')}</Heading>
         </>
       )}
+      {/* eslint-enable no-restricted-syntax */}
       {allTransactions.length ? (
-        // eslint-disable-next-line no-restricted-syntax -- transactionComponents is not a plain text node
-        transactionComponents
+        <Box gap="medium" margin="none" data-testid="completed-txs">
+          {transactionComponents}
+        </Box>
       ) : (
         <Box
           round="5px"
