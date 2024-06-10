@@ -48,7 +48,7 @@ export function TransactionHistory() {
     .map(t => <Transaction key={t.hash} transaction={t} referenceAddress={address} network={network} />)
 
   return (
-    <Box gap="medium" margin="none">
+    <Box margin="none">
       {transactionsError && (
         <p>
           {t('account.transaction.loadingError', `Couldn't load transactions.`)}{' '}
@@ -89,14 +89,18 @@ export function TransactionHistory() {
               </Box>
             }
           />
-          <Box margin={{ top: 'small' }}>
-            {!!pendingTransactionComponents.length && <>{pendingTransactionComponents}</>}
-          </Box>
+          {!!pendingTransactionComponents.length && (
+            <Box gap="medium" data-testid="pending-txs" margin={{ top: 'small' }}>
+              {pendingTransactionComponents}
+            </Box>
+          )}
           <Heading level="3">{t('account.summary.activity', 'Activity')}</Heading>
         </>
       )}
       {allTransactions.length ? (
-        transactionComponents
+        <Box gap="medium" margin="none" data-testid="completed-txs">
+          {transactionComponents}
+        </Box>
       ) : (
         <Box
           round="5px"
