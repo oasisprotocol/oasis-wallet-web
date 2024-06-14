@@ -19,8 +19,6 @@ static_resources:
                       routes:
                         - match:
                             safe_regex:
-                              google_re2:
-                                max_program_size: 1000000
                               regex: '/oasis-core\.(NodeController/WaitReady|Registry/(GetNodes)|Staking/(TokenSymbol|ConsensusParameters|Account|DelegationsTo|DelegationsFor|DelegationInfosFor|DebondingDelegationInfosFor|GetEvents)|Beacon/(GetEpoch)|Consensus/(SubmitTx|EstimateGas|GetBlock|GetChainContext|GetTransactionsWithResults|GetGenesisDocument|WatchBlocks|GetSignerNonce))'
                           route:
                             cluster: oasis_node_grpc
@@ -38,15 +36,21 @@ static_resources:
                           route:
                             cluster: dev_static
                       cors:
-                        expose_headers: grpc-status,grpc-message
                         allow_origin_string_match:
-                          - prefix: '*'
+                          - exact: '*'
                         allow_headers: content-type,x-grpc-web,x-user-agent
+                        expose_headers: grpc-status,grpc-message,grpc-status-details-bin
                         max_age: '1728000'
                 http_filters:
                   - name: envoy.filters.http.grpc_web
+                    typed_config:
+                      '@type': type.googleapis.com/envoy.extensions.filters.http.grpc_web.v3.GrpcWeb
                   - name: envoy.filters.http.cors
+                    typed_config:
+                      '@type': type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
                   - name: envoy.filters.http.router
+                    typed_config:
+                      '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
   clusters:
     - name: oasis_node_grpc
       connect_timeout: 15s
@@ -58,7 +62,6 @@ static_resources:
                   address:
                     pipe:
                       path: /node/data/internal.sock
-      http2_protocol_options: {}
     - name: dev_static
       connect_timeout: 0.25s
       load_assignment:
