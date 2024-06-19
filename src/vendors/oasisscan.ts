@@ -22,6 +22,8 @@ import {
 
 import { throwAPIErrors } from './helpers'
 
+const getTransactionCacheMap: Record<string, Transaction> = {}
+
 export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainnet') {
   const explorerConfig = new Configuration({
     basePath: url,
@@ -54,11 +56,20 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
   }
 
   async function getTransaction({ hash }: { hash: string }) {
+    if (hash in getTransactionCacheMap) {
+      return getTransactionCacheMap[hash]
+    }
+
     const transaction = await operationsEntity.getTransaction({
       hash,
     })
 
-    const [parsedTx] = parseTransactionsList([transaction.data])
+    const [parsedTx] = parseTransactionsList([transaction.data ?? {}])
+
+    if (transaction.code === 0 && !!transaction.data) {
+      getTransactionCacheMap[hash] = parsedTx
+    }
+
     return parsedTx
   }
 
