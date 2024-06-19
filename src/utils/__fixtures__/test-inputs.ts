@@ -49,6 +49,13 @@ export const privateKeyUnlockedState = {
     transactions: [],
     transactionsError: undefined,
     loading: false,
+    pendingTransactions: {
+      local: [],
+      testnet: [],
+      mainnet: [],
+    },
+    // TODO: Would expect this nonce to be 0?
+    nonce: '1',
   },
   contacts: {},
   evmAccounts: {},
@@ -120,6 +127,8 @@ export const privateKeyUnlockedState = {
             escrow: '0',
             escrow_debonding: '0',
           },
+          // TODO: Would expect this nonce would not be here
+          nonce: '1',
         },
         privateKey:
           '5f48e5a6fb243f5abc13aac7c56449afbc93be90ae38f10a0465bc82db954f17e75624c8d2cd9f062ce0331373a3be50ef0eccc5d257b4e2dea83a05506c7132',
@@ -142,7 +151,7 @@ export const privateKeyUnlockedState = {
     }),
     enteredWrongPassword: false,
   },
-} satisfies RootState
+} as RootState
 
 export const walletExtensionV0PersistedState = {
   chromeStorageLocal: {
@@ -229,6 +238,12 @@ export const walletExtensionV0UnlockedState = {
     transactions: [],
     loading: false,
     allowances: [],
+    pendingTransactions: {
+      local: [],
+      testnet: [],
+      mainnet: [],
+    },
+    nonce: '0',
   },
   contacts: {
     oasis1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe: {
@@ -305,6 +320,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'ledger5',
         path: [44, 474, 0, 0, 5],
@@ -321,6 +337,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'ledger1',
         path: [44, 474, 0, 0, 0],
@@ -337,6 +354,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'Account 1',
         path: [44, 474, 0],
@@ -355,6 +373,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'Account 2',
         path: [44, 474, 1],
@@ -373,6 +392,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'short privatekey',
         privateKey:
@@ -389,6 +409,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'ledger5-1',
         path: [44, 474, 0, 0, 6],
@@ -405,6 +426,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'private key1',
         privateKey:
@@ -426,4 +448,4 @@ export const walletExtensionV0UnlockedState = {
     }),
     enteredWrongPassword: false,
   },
-} satisfies RootState
+} as RootState

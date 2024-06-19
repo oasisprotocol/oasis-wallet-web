@@ -21,12 +21,12 @@ import {
     InlineResponse2001,
     InlineResponse2001FromJSON,
     InlineResponse2001ToJSON,
-    InlineResponse2004,
-    InlineResponse2004FromJSON,
-    InlineResponse2004ToJSON,
     InlineResponse2005,
     InlineResponse2005FromJSON,
     InlineResponse2005ToJSON,
+    InlineResponse2006,
+    InlineResponse2006FromJSON,
+    InlineResponse2006ToJSON,
 } from '../models';
 
 export interface GetAccountRequest {
@@ -87,7 +87,7 @@ export class AccountsApi extends runtime.BaseAPI {
 
     /**
      */
-    async getDebondingDelegationsRaw(requestParameters: GetDebondingDelegationsRequest): Promise<runtime.ApiResponse<InlineResponse2005>> {
+    async getDebondingDelegationsRaw(requestParameters: GetDebondingDelegationsRequest): Promise<runtime.ApiResponse<InlineResponse2006>> {
         const queryParameters: any = {};
 
         if (requestParameters.size !== undefined) {
@@ -115,19 +115,19 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2005FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2006FromJSON(jsonValue));
     }
 
     /**
      */
-    async getDebondingDelegations(requestParameters: GetDebondingDelegationsRequest): Promise<InlineResponse2005> {
+    async getDebondingDelegations(requestParameters: GetDebondingDelegationsRequest): Promise<InlineResponse2006> {
         const response = await this.getDebondingDelegationsRaw(requestParameters);
         return await response.value();
     }
 
     /**
      */
-    async getDelegationsRaw(requestParameters: GetDelegationsRequest): Promise<runtime.ApiResponse<InlineResponse2004>> {
+    async getDelegationsRaw(requestParameters: GetDelegationsRequest): Promise<runtime.ApiResponse<InlineResponse2005>> {
         const queryParameters: any = {};
 
         if (requestParameters.size !== undefined) {
@@ -159,12 +159,12 @@ export class AccountsApi extends runtime.BaseAPI {
             query: queryParameters,
         });
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2004FromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => InlineResponse2005FromJSON(jsonValue));
     }
 
     /**
      */
-    async getDelegations(requestParameters: GetDelegationsRequest): Promise<InlineResponse2004> {
+    async getDelegations(requestParameters: GetDelegationsRequest): Promise<InlineResponse2005> {
         const response = await this.getDelegationsRaw(requestParameters);
         return await response.value();
     }

@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+
 import { Box } from 'grommet/es6/components/Box'
 import { Text } from 'grommet/es6/components/Text'
 import { normalizeColor } from 'grommet/es6/utils'
@@ -12,7 +14,8 @@ interface Props {
   center?: boolean
   /** Example `icon={<Info size="20px" />}` */
   icon?: React.ReactNode
-  children: React.ReactNode
+  children?: React.ReactNode
+  contents?: React.ReactNode
 }
 
 const mapStatus = {
@@ -61,12 +64,16 @@ export function AlertBox(props: Props) {
       background={{ color: mapStatus[props.status].background }}
       pad={{ horizontal: 'small' }}
     >
-      <Box direction="row" gap="small" align="center" justify={props.center ? 'center' : 'start'}>
-        {props.icon && <Text color={color}>{props.icon}</Text>}
-        <Text weight="bold" size="12px" style={{ marginTop: 10, marginBottom: 10 }}>
-          {props.children}
-        </Text>
-      </Box>
+      {props.contents ? (
+        props.contents
+      ) : (
+        <Box direction="row" gap="small" align="center" justify={props.center ? 'center' : 'start'}>
+          {props.icon && <Text color={color}>{props.icon}</Text>}
+          <Text weight="bold" size="12px" style={{ marginTop: 10, marginBottom: 10 }}>
+            {props.children}
+          </Text>
+        </Box>
+      )}
     </Box>
   )
 }
