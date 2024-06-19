@@ -75,6 +75,24 @@ export async function mockApi(context: BrowserContext | Page, balance: number) {
       body: 'AAAAAAGggAAAAB5ncnBjLXN0YXR1czowDQpncnBjLW1lc3NhZ2U6DQo=',
     })
   })
+  await context.route('**/oasis-core.Consensus/GetSignerNonce', route => {
+    route.fulfill({
+      contentType: 'application/grpc-web-text+proto',
+      body: 'AAAAAAIYKQ==gAAAAB5ncnBjLXN0YXR1czowDQpncnBjLW1lc3NhZ2U6DQo=',
+    })
+  })
+  await context.route('**/oasis-core.Consensus/EstimateGas', route => {
+    route.fulfill({
+      contentType: 'application/grpc-web-text+proto',
+      body: 'AAAAAAMZBPE=gAAAAB5ncnBjLXN0YXR1czowDQpncnBjLW1lc3NhZ2U6DQo=',
+    })
+  })
+  await context.route('**/oasis-core.Consensus/SubmitTx', route => {
+    route.fulfill({
+      contentType: 'application/grpc-web-text+proto',
+      body: 'AAAAAAA=gAAAAB5ncnBjLXN0YXR1czowDQpncnBjLW1lc3NhZ2U6DQo=',
+    })
+  })
 
   // Inside Transak iframe
   await context.route('https://sentry.io/**', route => route.fulfill({ body: '' }))
