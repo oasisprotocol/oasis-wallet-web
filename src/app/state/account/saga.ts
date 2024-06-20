@@ -15,6 +15,7 @@ import { getAccountBalanceWithFallback } from '../../lib/getAccountBalanceWithFa
 import { walletActions } from '../wallet'
 import { selectSelectedNetwork } from '../network/selectors'
 import { Transaction } from '../transaction/types'
+import { removeNullAndUndefinedValues } from '../../../utils/objectUtils'
 
 const ACCOUNT_REFETCHING_INTERVAL = process.env.REACT_APP_E2E_TEST ? 5 * 1000 : 10 * 1000
 const TRANSACTIONS_LIMIT = 20
@@ -65,7 +66,7 @@ export function* fetchAccount(action: PayloadAction<string>) {
             if (status === 'fulfilled') {
               return {
                 ...t,
-                ...value,
+                ...removeNullAndUndefinedValues(value),
               }
             }
 
