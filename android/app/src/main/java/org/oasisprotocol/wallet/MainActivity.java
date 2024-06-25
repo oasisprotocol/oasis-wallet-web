@@ -1,4 +1,4 @@
-package com.oasisprotocol.wallet;
+package org.oasisprotocol.wallet;
 
 import android.os.Bundle;
 import android.view.WindowManager; 
