@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux'
 import {
   hasAccountUnknownPendingTransactions,
   selectAccountAddress,
+  selectAccountIsLoading,
   selectPendingTransactionForAccount,
   selectTransactions,
   selectTransactionsError,
@@ -34,6 +35,7 @@ export function TransactionHistory() {
   const allTransactions = useSelector(selectTransactions)
   const transactionsError = useSelector(selectTransactionsError)
   const address = useSelector(selectAccountAddress)
+  const accountIsLoading = useSelector(selectAccountIsLoading)
   const pendingTransactions = useSelector(selectPendingTransactionForAccount)
   const hasUnknownPendingTransactions = useSelector(hasAccountUnknownPendingTransactions)
   const network = useSelector(selectSelectedNetwork)
@@ -45,6 +47,8 @@ export function TransactionHistory() {
     .filter(({ hash: pendingTxHash }) => !allTransactions.some(({ hash }) => hash === pendingTxHash))
     .map(t => <Transaction key={t.hash} transaction={t} referenceAddress={address} network={network} />)
 
+  const showPendingSection = !accountIsLoading && !!address
+
   return (
     <Box margin="none">
       {transactionsError && (
@@ -54,7 +58,7 @@ export function TransactionHistory() {
         </p>
       )}
       {/* eslint-disable no-restricted-syntax */}
-      {(!!pendingTransactionComponents.length || hasUnknownPendingTransactions) && (
+      {showPendingSection && (!!pendingTransactionComponents.length || hasUnknownPendingTransactions) && (
         <>
           <Heading level="3">{t('account.summary.pendingTransactions', 'Pending transactions')}</Heading>
           <AlertBox
