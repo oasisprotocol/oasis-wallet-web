@@ -35,9 +35,9 @@ const getPendingTx = (hash: string): Transaction => ({
   nonce: undefined,
 })
 
-const getTx = (hash: string, nonce: bigint): Transaction => ({
+const getTx = ({ hash = '', nonce = 0n, status = TransactionStatus.Successful } = {}): Transaction => ({
   ...getPendingTx(hash),
-  status: TransactionStatus.Successful,
+  status,
   nonce: nonce.toString(),
 })
 
@@ -128,7 +128,7 @@ describe('<TransactionHistory  />', () => {
     renderCmp(
       getState({
         accountNonce: 2n,
-        accountTxs: [getTx('txHash1', 0n)],
+        accountTxs: [getTx({ hash: 'txHash1', nonce: 0n })],
         pendingLocalTxs: [getPendingTx('txHash2')],
       }),
     )
@@ -138,5 +138,37 @@ describe('<TransactionHistory  />', () => {
 
     expect(await screen.findByText('txHash1')).toBeInTheDocument()
     expect(await screen.findByText('txHash2')).toBeInTheDocument()
+  })
+
+  it('should not display pending section in case of failed tx', async () => {
+    renderCmp(
+      getState({
+        accountNonce: 1n,
+        accountTxs: [getTx({ hash: 'txHash1', nonce: 0n, status: TransactionStatus.Failed })],
+      }),
+    )
+
+    await waitFor(() => expect(() => screen.getByTestId('pending-txs')).toThrow())
+    expect((await screen.getByTestId('completed-txs')).childElementCount).toBe(1)
+
+    expect(await screen.findByText('txHash1')).toBeInTheDocument()
+
+    await waitFor(() => expect(() => screen.getByText('account.summary.someTxsInPendingState')).toThrow())
+  })
+
+  it('should not display pending section on initial load', async () => {
+    renderCmp(
+      getState({
+        accountNonce: 1n,
+        accountTxs: [getTx({ hash: 'txHash1', nonce: 0n, status: TransactionStatus.Failed })],
+      }),
+    )
+
+    await waitFor(() => expect(() => screen.getByTestId('pending-txs')).toThrow())
+    expect((await screen.getByTestId('completed-txs')).childElementCount).toBe(1)
+
+    expect(await screen.findByText('txHash1')).toBeInTheDocument()
+
+    await waitFor(() => expect(() => screen.getByText('account.summary.someTxsInPendingState')).toThrow())
   })
 })

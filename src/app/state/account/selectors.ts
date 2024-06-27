@@ -47,7 +47,7 @@ export const hasAccountUnknownPendingTransactions = createSelector(
       undefined as bigint | undefined,
     )
 
-    if (!maxNonceFromTxs) {
+    if (maxNonceFromTxs === undefined) {
       return BigInt(accountNonce) > 0n
     }
 
