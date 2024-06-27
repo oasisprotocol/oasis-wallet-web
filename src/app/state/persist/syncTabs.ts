@@ -79,6 +79,7 @@ export const whitelistTabSyncActions: Record<AllActions, boolean> = {
   [rootSlices.account.actions.setLoading.type]: false,
   [rootSlices.account.actions.transactionsError.type]: false,
   [rootSlices.account.actions.transactionsLoaded.type]: false,
+  [rootSlices.account.actions.addPendingTransaction.type]: false,
   [rootSlices.createWallet.actions.clear.type]: false,
   [rootSlices.createWallet.actions.generateMnemonic.type]: false,
   [rootSlices.createWallet.actions.setChecked.type]: false,

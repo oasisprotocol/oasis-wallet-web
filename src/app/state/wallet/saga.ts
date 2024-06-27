@@ -48,11 +48,13 @@ export function* openWalletsFromLedger({ payload }: PayloadAction<OpenSelectedAc
   const accounts: ImportAccountsListAccount[] = yield* select(selectSelectedAccounts)
   yield* put(importAccountsActions.clear())
   for (const account of accounts) {
+    const { nonce: _, ...balance } = account.balance!
+
     yield* call(addWallet, {
       address: account.address,
       publicKey: account.publicKey,
       type: WalletType.UsbLedger,
-      balance: account.balance!,
+      balance,
       path: account.path,
       pathDisplay: account.pathDisplay,
       selectImmediately: account === accounts[0], // Select first
@@ -69,7 +71,7 @@ export function* openWalletFromPrivateKey({ payload }: PayloadAction<OpenFromPri
   const publicKeyBytes = nacl.sign.keyPair.fromSecretKey(hex2uint(payload.privateKey)).publicKey
   const walletAddress = yield* call(publicKeyToAddress, publicKeyBytes)
   const publicKey = uint2hex(publicKeyBytes)
-  const balance = yield* call(getAccountBalanceWithFallback, walletAddress)
+  const balance = yield* call(getAccountBalanceWithFallback, walletAddress, { includeNonce: false })
 
   yield* call(addWallet, {
     address: walletAddress,
@@ -89,9 +91,11 @@ export function* openWalletFromMnemonic({ payload }: PayloadAction<OpenSelectedA
   const accounts: ImportAccountsListAccount[] = yield* select(selectSelectedAccounts)
   yield* put(importAccountsActions.clear())
   for (const account of accounts) {
+    const { nonce: _, ...balance } = account.balance!
+
     yield* call(addWallet, {
       address: account.address,
-      balance: account.balance!,
+      balance,
       path: account.path,
       pathDisplay: account.pathDisplay,
       privateKey: account.privateKey,
@@ -127,7 +131,7 @@ export function* addWallet(payload: AddWalletPayload) {
 
 function* fetchWallet(action: PayloadAction<Wallet>) {
   const wallet = action.payload
-  const balance = yield* call(getAccountBalanceWithFallback, wallet.address)
+  const balance = yield* call(getAccountBalanceWithFallback, wallet.address, { includeNonce: false })
   yield* put(
     walletActions.updateBalance({
       address: wallet.address,

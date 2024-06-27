@@ -10,19 +10,21 @@ import { fetchAccount as stakingFetchAccount } from '../staking/saga'
 import { refreshAccount as walletRefreshAccount } from '../wallet/saga'
 import { transactionActions } from '../transaction'
 import { selectAddress } from '../wallet/selectors'
-import { selectAccountAddress, selectAccount } from './selectors'
+import { selectAccountAddress, selectAccount, hasAccountUnknownPendingTransactions } from './selectors'
 import { getAccountBalanceWithFallback } from '../../lib/getAccountBalanceWithFallback'
 import { walletActions } from '../wallet'
+import { selectSelectedNetwork } from '../network/selectors'
+import { Transaction } from '../transaction/types'
+import { removeNullAndUndefinedValues } from '../../../utils/objectUtils'
 
-const ACCOUNT_REFETCHING_INTERVAL = process.env.REACT_APP_E2E_TEST ? 5 * 1000 : 30 * 1000
-const TRANSACTIONS_UPDATE_DELAY = 35 * 1000 // Measured between 8 and 31 second additional delay after balance updates
+const ACCOUNT_REFETCHING_INTERVAL = process.env.REACT_APP_E2E_TEST ? 5 * 1000 : 10 * 1000
 const TRANSACTIONS_LIMIT = 20
 
 export function* fetchAccount(action: PayloadAction<string>) {
   const address = action.payload
 
   yield* put(accountActions.setLoading(true))
-  const { getTransactionsList } = yield* call(getExplorerAPIs)
+  const { getTransactionsList, getTransaction } = yield* call(getExplorerAPIs)
 
   yield* all([
     join(
@@ -47,12 +49,33 @@ export function* fetchAccount(action: PayloadAction<string>) {
     ),
     join(
       yield* fork(function* () {
+        const networkType = yield* select(selectSelectedNetwork)
+
         try {
-          const transactions = yield* call(getTransactionsList, {
+          const transactions: Transaction[] = yield* call(getTransactionsList, {
             accountId: address,
             limit: TRANSACTIONS_LIMIT,
           })
-          yield* put(accountActions.transactionsLoaded(transactions))
+
+          const detailedTransactions = yield* call(() =>
+            Promise.allSettled(transactions.map(({ hash }) => getTransaction({ hash }))),
+          )
+          const transactionsWithDetails = transactions.map((t, i) => {
+            const { status, value } = detailedTransactions[i] as PromiseFulfilledResult<Transaction>
+            // Skip failed txs
+            if (status === 'fulfilled') {
+              return {
+                ...t,
+                ...removeNullAndUndefinedValues(value),
+              }
+            }
+
+            return t
+          })
+
+          yield* put(
+            accountActions.transactionsLoaded({ networkType, transactions: transactionsWithDetails }),
+          )
         } catch (e: any) {
           console.error('get transactions list failed, continuing without updated list.', e)
           if (e instanceof WalletError) {
@@ -126,13 +149,14 @@ export function* fetchingOnAccountPage() {
           }
 
           const staleBalances = yield* select(selectAccount)
+          const hasPendingTxs = yield* select(hasAccountUnknownPendingTransactions)
           if (
             staleBalances.available !== refreshedAccount.available ||
             staleBalances.delegations !== refreshedAccount.delegations ||
-            staleBalances.debonding !== refreshedAccount.debonding
+            staleBalances.debonding !== refreshedAccount.debonding ||
+            hasPendingTxs
           ) {
             // Wait for oasisscan to update transactions (it updates balances faster)
-            yield* delay(TRANSACTIONS_UPDATE_DELAY)
             yield* call(fetchAccount, startAction)
             yield* call(stakingFetchAccount, startAction)
             yield* call(walletRefreshAccount, address)

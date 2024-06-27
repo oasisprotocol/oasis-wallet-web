@@ -53,6 +53,11 @@ describe('<AccountPage  />', () => {
         transactions: [],
         accountError: undefined,
         transactionsError: undefined,
+        pendingTransactions: {
+          local: [],
+          testnet: [],
+          mainnet: [],
+        },
       },
       staking: {
         delegations: [{ amount: 1111n.toString() }],

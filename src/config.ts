@@ -12,6 +12,7 @@ type BackendApiUrls = {
   explorer: string
   blockExplorer: string
   blockExplorerParatimes?: string
+  blockExplorerAccount?: string
 }
 
 type BackendProviders = {
@@ -39,6 +40,7 @@ export const config: BackendConfig = {
       explorer: 'https://api.oasisscan.com/mainnet',
       blockExplorer: 'https://oasisscan.com/transactions/{{txHash}}',
       blockExplorerParatimes: 'https://oasisscan.com/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'https://www.oasisscan.com/accounts/detail/{{address}}',
     },
   },
   testnet: {
@@ -54,6 +56,7 @@ export const config: BackendConfig = {
       blockExplorer: 'https://testnet.oasisscan.com/transactions/{{txHash}}',
       blockExplorerParatimes:
         'https://testnet.oasisscan.com/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'https://testnet.oasisscan.com/accounts/detail/{{address}}',
     },
   },
   local: {
@@ -69,6 +72,7 @@ export const config: BackendConfig = {
       blockExplorer: 'http://localhost:9001/data/transactions?operation_id={{txHash}}',
       blockExplorerParatimes:
         'http://localhost:9001/data/paratimes/transactions/{{txHash}}?runtime={{runtimeId}}',
+      blockExplorerAccount: 'http://localhost:9001/data/accounts/detail/{{address}}',
     },
   },
 }

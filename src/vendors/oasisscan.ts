@@ -16,6 +16,8 @@ import {
   OperationsRowMethodEnum,
   ParaTimeCtxRowMethodEnum,
   RuntimeTransactionInfoRow,
+  OperationsEntityApi,
+  OperationsEntity,
 } from 'vendors/oasisscan/index'
 
 import { throwAPIErrors } from './helpers'
@@ -28,12 +30,13 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
 
   const accounts = new AccountsApi(explorerConfig)
   const operations = new OperationsListApi(explorerConfig)
+  const operationsEntity = new OperationsEntityApi(explorerConfig)
   const runtime = new RuntimeApi(explorerConfig)
 
-  async function getAccount(address: string): Promise<Account> {
+  async function getAccount(address: string, { includeNonce = true } = {}): Promise<Account> {
     const account = await accounts.getAccount({ accountId: address })
     if (!account || account.code !== 0) throw new Error('Wrong response code') // TODO
-    return parseAccount(account.data)
+    return parseAccount(account.data, { includeNonce })
   }
 
   async function getAllValidators(): Promise<Validator[]> {
@@ -50,7 +53,16 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     return data
   }
 
-  async function getTransactionsList(params: { accountId: string; limit: number }): Promise<Transaction[]> {
+  async function getTransaction({ hash }: { hash: string }) {
+    const transaction = await operationsEntity.getTransaction({
+      hash,
+    })
+
+    const [parsedTx] = parseTransactionsList([transaction.data])
+    return parsedTx
+  }
+
+  async function getTransactionsList(params: { accountId: string; limit: number }) {
     const transactionsList = await operations.getTransactionsList({
       address: params.accountId,
       size: params.limit,
@@ -80,10 +92,18 @@ export function getOasisscanAPIs(url: string | 'https://api.oasisscan.com/mainne
     }
   }
 
-  return { accounts, operations, getAccount, getAllValidators, getTransactionsList, getDelegations }
+  return {
+    accounts,
+    operations,
+    getAccount,
+    getAllValidators,
+    getTransaction,
+    getTransactionsList,
+    getDelegations,
+  }
 }
 
-export function parseAccount(account: AccountsRow): Account {
+export function parseAccount(account: AccountsRow, { includeNonce = true } = {}): Account {
   return {
     address: account.address,
     allowances: account.allowances.map(allowance => ({
@@ -94,6 +114,7 @@ export function parseAccount(account: AccountsRow): Account {
     delegations: parseRoseStringToBaseUnitString(account.escrow),
     debonding: parseRoseStringToBaseUnitString(account.debonding),
     total: parseRoseStringToBaseUnitString(account.total),
+    ...(includeNonce ? { nonce: BigInt(account.nonce ?? 0).toString() } : {}),
   }
 }
 
@@ -150,7 +171,9 @@ export const transactionMethodMap: {
   [ParaTimeCtxRowMethodEnum.ConsensusAccount]: TransactionType.ConsensusAccount,
 }
 
-export function parseTransactionsList(list: (OperationsRow | RuntimeTransactionInfoRow)[]): Transaction[] {
+export function parseTransactionsList(
+  list: (OperationsRow | RuntimeTransactionInfoRow | OperationsEntity)[],
+): Transaction[] {
   return list.map(t => {
     if ('ctx' in t) {
       const parsed: Transaction = {
@@ -166,6 +189,7 @@ export function parseTransactionsList(list: (OperationsRow | RuntimeTransactionI
         runtimeName: t.runtimeName,
         runtimeId: t.runtimeId,
         round: t.round,
+        nonce: undefined,
       }
       return parsed
     } else {
@@ -182,6 +206,8 @@ export function parseTransactionsList(list: (OperationsRow | RuntimeTransactionI
         runtimeName: undefined,
         runtimeId: undefined,
         round: undefined,
+        nonce:
+          (t as OperationsEntity).nonce >= 0 ? BigInt((t as OperationsEntity).nonce).toString() : undefined,
       }
       return parsed
     }

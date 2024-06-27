@@ -49,6 +49,12 @@ export const privateKeyUnlockedState = {
     transactions: [],
     transactionsError: undefined,
     loading: false,
+    pendingTransactions: {
+      local: [],
+      testnet: [],
+      mainnet: [],
+    },
+    nonce: '1',
   },
   contacts: {},
   evmAccounts: {},
@@ -115,6 +121,7 @@ export const privateKeyUnlockedState = {
           available: '0',
           debonding: '0',
           delegations: '0',
+          nonce: '1',
           total: '0',
           validator: {
             escrow: '0',
@@ -229,6 +236,12 @@ export const walletExtensionV0UnlockedState = {
     transactions: [],
     loading: false,
     allowances: [],
+    pendingTransactions: {
+      local: [],
+      testnet: [],
+      mainnet: [],
+    },
+    nonce: '1',
   },
   contacts: {
     oasis1qq3xrq0urs8qcffhvmhfhz4p0mu7ewc8rscnlwxe: {
@@ -277,7 +290,6 @@ export const walletExtensionV0UnlockedState = {
       ethPrivateKeyRaw: '',
       feeAmount: '',
       feeGas: '',
-      paraTime: undefined,
       recipient: '',
       type: undefined,
     },
@@ -373,6 +385,7 @@ export const walletExtensionV0UnlockedState = {
           debonding: '0',
           delegations: '0',
           total: '0',
+          nonce: '0',
         },
         name: 'short privatekey',
         privateKey:
