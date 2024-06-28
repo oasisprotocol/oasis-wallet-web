@@ -79,64 +79,6 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   text-align: center;
 }
 
-.c5 {
-  display: inline-block;
-  box-sizing: border-box;
-  cursor: pointer;
-  font: inherit;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  margin: 0;
-  background: transparent;
-  overflow: visible;
-  text-transform: none;
-  color: #0500e2;
-  outline: none;
-  border: none;
-  padding: 0;
-  text-align: inherit;
-}
-
-.c5:focus {
-  outline: none;
-  box-shadow: 0 0 2px 2px #00A9FF;
-}
-
-.c5:focus > circle,
-.c5:focus > ellipse,
-.c5:focus > line,
-.c5:focus > path,
-.c5:focus > polygon,
-.c5:focus > polyline,
-.c5:focus > rect {
-  outline: none;
-  box-shadow: 0 0 2px 2px #00A9FF;
-}
-
-.c5:focus::-moz-focus-inner {
-  border: 0;
-}
-
-.c5:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-
-.c5:focus:not(:focus-visible) > circle,
-.c5:focus:not(:focus-visible) > ellipse,
-.c5:focus:not(:focus-visible) > line,
-.c5:focus:not(:focus-visible) > path,
-.c5:focus:not(:focus-visible) > polygon,
-.c5:focus:not(:focus-visible) > polyline,
-.c5:focus:not(:focus-visible) > rect {
-  outline: none;
-  box-shadow: none;
-}
-
-.c5:focus:not(:focus-visible)::-moz-focus-inner {
-  border: 0;
-}
-
 @media only screen and (max-width:768px) {
   .c0 {
     margin-bottom: 24px;
@@ -182,7 +124,7 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
     class="c1"
   >
     <span>
-      ROSE Wallet is fully 
+      ROSE Wallet is 
     </span>
     <a
       class="c2"
@@ -194,9 +136,11 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
         open source
       </span>
     </a>
+    <span>
+       and powered by
+    </span>
     <div
       class="c3"
-      style="display: inline-block;"
     >
       Powered by Oasis Scan API & Oasis gRPC
     </div>
@@ -233,17 +177,20 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
     >
       1.0.0-dev.1
     </a>
+    <br />
     <span>
-       
+      (commit: 
     </span>
+    <a
+      class="c2"
+      href="https://github.com/oasisprotocol/oasis-wallet-web/commit/sha0000000000000000000000000000000000000"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      sha0000
+    </a>
     <span>
-      <button
-        class="c5"
-        type="button"
-      >
-        [show details]
-      </button>
-      <span />
+      ) built at 1/1/1970, 12:00:00 AM
     </span>
   </span>
   <span
