@@ -2,7 +2,7 @@ import { Anchor } from 'grommet/es6/components/Anchor'
 import { Box } from 'grommet/es6/components/Box'
 import { Text } from 'grommet/es6/components/Text'
 import { ResponsiveContext } from 'grommet/es6/contexts/ResponsiveContext'
-import React, { memo } from 'react'
+import React, { memo, useContext } from 'react'
 import { useSelector } from 'react-redux'
 import { Trans, useTranslation } from 'react-i18next'
 import { selectHasAccounts } from 'app/state/wallet/selectors'
@@ -21,7 +21,8 @@ function NoReleaseLink() {
 
 export const Footer = memo(() => {
   const walletHasAccounts = useSelector(selectHasAccounts)
-  const isMobile = React.useContext(ResponsiveContext) === 'small'
+  const responsiveContext = useContext(ResponsiveContext)
+  const isMobileOrTablet = responsiveContext === 'small' || responsiveContext === 'medium'
   const { t } = useTranslation()
 
   const backendToLabel = {
@@ -33,25 +34,25 @@ export const Footer = memo(() => {
   return (
     <Box
       as="footer"
-      direction={isMobile ? 'column' : 'row'}
-      justify={isMobile ? 'center' : 'between'}
+      direction={isMobileOrTablet ? 'column' : 'row'}
+      justify={isMobileOrTablet ? 'center' : 'between'}
       align="center"
       round="5px"
       pad={{
         horizontal: 'medium',
-        top: isMobile ? '1rem' : 'medium',
-        bottom: isMobile && walletHasAccounts ? mobileFooterNavigationHeight : 'none',
+        top: isMobileOrTablet ? '1rem' : 'medium',
+        bottom: isMobileOrTablet && walletHasAccounts ? mobileFooterNavigationHeight : 'none',
       }}
       margin={{ bottom: 'large' }}
       data-testid="footer"
-      gap={isMobile ? '0' : '20px'}
+      gap={isMobileOrTablet ? '0' : '20px'}
     >
-      <Box style={{ flex: 1, alignSelf: isMobile ? 'center ' : 'flex-start' }}>
+      <Box style={{ flex: 1, alignSelf: isMobileOrTablet ? 'center ' : 'flex-start' }}>
         <Text
           size="small"
-          textAlign={isMobile ? 'center' : 'start'}
-          margin={{ bottom: isMobile ? 'small' : 'none' }}
-          style={{ display: 'inline-flex', flexDirection: isMobile ? 'column' : 'row' }}
+          textAlign={isMobileOrTablet ? 'center' : 'start'}
+          margin={{ bottom: isMobileOrTablet ? 'small' : 'none' }}
+          style={{ display: 'inline-flex', flexDirection: isMobileOrTablet ? 'column' : 'row' }}
         >
           <span>
             <Trans
@@ -65,19 +66,19 @@ export const Footer = memo(() => {
               }}
               defaults="ROSE Wallet is <GithubLink>open source</GithubLink> and powered by"
             />
-            {isMobile ? <br /> : <span> </span>}
+            {isMobileOrTablet ? <br /> : <span> </span>}
             <span>{poweredByLabel}</span>
           </span>
         </Text>
       </Box>
       {process.env.REACT_APP_BUILD_DATETIME && process.env.REACT_APP_BUILD_SHA && (
-        <Box style={{ flex: 1, alignSelf: isMobile ? 'center ' : 'flex-start' }}>
+        <Box style={{ flex: 1, alignSelf: isMobileOrTablet ? 'center ' : 'flex-start' }}>
           <Text
             size="small"
-            textAlign={isMobile ? 'center' : 'end'}
-            margin={{ top: isMobile ? 'small' : 'none' }}
+            textAlign={isMobileOrTablet ? 'center' : 'end'}
+            margin={{ top: isMobileOrTablet ? 'small' : 'none' }}
           >
-            {isMobile ? (
+            {isMobileOrTablet ? (
               <>
                 <TermsAndConditions />
                 <Version />
@@ -91,7 +92,7 @@ export const Footer = memo(() => {
           </Text>
         </Box>
       )}
-      {isMobile && (
+      {isMobileOrTablet && (
         <Text size="small" textAlign="center" margin={{ top: 'small' }}>
           <Trans
             i18nKey="footer.feedback"
@@ -108,10 +109,11 @@ export const Footer = memo(() => {
 })
 
 const TermsAndConditions = () => {
-  const isMobile = React.useContext(ResponsiveContext) === 'small'
+  const responsiveContext = useContext(ResponsiveContext)
+  const isMobileOrTablet = responsiveContext === 'small' || responsiveContext === 'medium'
 
   return (
-    <Box style={{ display: 'inline-flex', flexDirection: isMobile ? 'row' : 'row-reverse' }}>
+    <Box style={{ display: 'inline-flex', flexDirection: isMobileOrTablet ? 'row' : 'row-reverse' }}>
       <Trans
         i18nKey="footer.terms"
         t={t}
@@ -130,7 +132,8 @@ const TermsAndConditions = () => {
 }
 
 const Version = () => {
-  const isMobile = React.useContext(ResponsiveContext) === 'small'
+  const responsiveContext = useContext(ResponsiveContext)
+  const isMobileOrTablet = responsiveContext === 'small' || responsiveContext === 'medium'
 
   if (!process.env.REACT_APP_BUILD_SHA) {
     return null
@@ -158,7 +161,7 @@ const Version = () => {
         }}
         defaults="Version: <ReleaseLink/>"
       />
-      {isMobile ? <br /> : <span> </span>}
+      {isMobileOrTablet ? <br /> : <span> </span>}
       <Trans
         i18nKey="footer.buildDetails"
         t={t}

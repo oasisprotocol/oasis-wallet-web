@@ -8,18 +8,18 @@ import { Footer } from '.'
 
 export const PageFooter = () => {
   const isMobile = useContext(ResponsiveContext) === 'small'
+  const isDesktop = useContext(ResponsiveContext) === 'large'
   const walletHasAccounts = useSelector(selectHasAccounts)
 
   return (
     <>
-      {walletHasAccounts && isMobile ? (
-        // Footer for opened wallet is rendered in Settings tab in Profile dropdown
+      {walletHasAccounts && isMobile && (
         <Box pad="xlarge">
           <MobileFooterNavigation />
         </Box>
-      ) : (
-        <Footer />
       )}
+      {/* Footer for opened wallet is rendered in Settings tab in Profile dropdown */}
+      {((walletHasAccounts && isDesktop) || !walletHasAccounts) && <Footer />}
     </>
   )
 }

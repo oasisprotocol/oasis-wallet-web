@@ -6,7 +6,8 @@ import { LanguageSelect } from 'app/components/LanguageSelect'
 import { Footer } from 'app/components/Footer'
 
 export const Settings = () => {
-  const isMobile = useContext(ResponsiveContext) === 'small'
+  const responsiveContext = useContext(ResponsiveContext)
+  const isMobileOrTablet = responsiveContext === 'small' || responsiveContext === 'medium'
 
   return (
     <Box gap="small" style={{ flex: 1, justifyContent: 'space-between' }}>
@@ -14,7 +15,7 @@ export const Settings = () => {
         <LanguageSelect />
         <ThemeSelect />
       </Box>
-      {isMobile && <Footer />}
+      {isMobileOrTablet && <Footer />}
     </Box>
   )
 }
