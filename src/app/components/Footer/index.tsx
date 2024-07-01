@@ -10,6 +10,7 @@ import { intlDateTimeFormat } from '../DateFormatter/intlDateTimeFormat'
 import { backend } from 'vendors/backend'
 import { BackendAPIs } from 'config'
 import { mobileFooterNavigationHeight } from '../../../styles/theme/elementSizes'
+import { t } from 'i18next'
 
 const githubLink = 'https://github.com/oasisprotocol/oasis-wallet-web/'
 const githubReleaseLink = (tag: string) => `${githubLink}releases/tag/${tag}`
@@ -76,66 +77,17 @@ export const Footer = memo(() => {
             textAlign={isMobile ? 'center' : 'end'}
             margin={{ top: isMobile ? 'small' : 'none' }}
           >
-            <span>
-              <Trans
-                i18nKey="footer.terms"
-                t={t}
-                components={{
-                  TermsLink: (
-                    <Anchor
-                      href="https://wallet.oasis.io/t-c.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    />
-                  ),
-                }}
-                defaults="<TermsLink>Terms and Conditions</TermsLink>"
-              />
-              <Box margin={{ right: 'xsmall', left: 'xsmall' }} style={{ display: 'inline-block' }}>
-                |
-              </Box>
-            </span>
-            <span>
-              <Trans
-                i18nKey="footer.version"
-                t={t}
-                components={{
-                  ReleaseLink: process.env.REACT_APP_BUILD_VERSION ? (
-                    <Anchor
-                      href={githubReleaseLink(process.env.REACT_APP_BUILD_VERSION)}
-                      label={process.env.REACT_APP_BUILD_VERSION.replace('v', '')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    />
-                  ) : (
-                    <NoReleaseLink />
-                  ),
-                }}
-                values={{
-                  buildTime: intlDateTimeFormat(Number(process.env.REACT_APP_BUILD_DATETIME)),
-                }}
-                defaults="Version: <ReleaseLink/>"
-              />
-              {isMobile ? <br /> : <span> </span>}
-              <Trans
-                i18nKey="footer.buildDetails"
-                t={t}
-                components={{
-                  CommitLink: (
-                    <Anchor
-                      href={`${githubLink}commit/${process.env.REACT_APP_BUILD_SHA}`}
-                      label={process.env.REACT_APP_BUILD_SHA.substring(0, 7)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    />
-                  ),
-                }}
-                values={{
-                  buildTime: intlDateTimeFormat(Number(process.env.REACT_APP_BUILD_DATETIME)),
-                }}
-                defaults="(commit: <CommitLink/>) built at {{buildTime}}"
-              />
-            </span>
+            {isMobile ? (
+              <>
+                <TermsAndConditions />
+                <Version />
+              </>
+            ) : (
+              <>
+                <Version />
+                <TermsAndConditions />
+              </>
+            )}
           </Text>
         </Box>
       )}
@@ -154,3 +106,77 @@ export const Footer = memo(() => {
     </Box>
   )
 })
+
+const TermsAndConditions = () => {
+  const isMobile = React.useContext(ResponsiveContext) === 'small'
+
+  return (
+    <Box style={{ display: 'inline-flex', flexDirection: isMobile ? 'row' : 'row-reverse' }}>
+      <Trans
+        i18nKey="footer.terms"
+        t={t}
+        components={{
+          TermsLink: (
+            <Anchor href="https://wallet.oasis.io/t-c.pdf" target="_blank" rel="noopener noreferrer" />
+          ),
+        }}
+        defaults="<TermsLink>Terms and Conditions</TermsLink>"
+      />
+      <Box margin={{ right: 'xsmall', left: 'xsmall' }} style={{ display: 'inline-block' }}>
+        |
+      </Box>
+    </Box>
+  )
+}
+
+const Version = () => {
+  const isMobile = React.useContext(ResponsiveContext) === 'small'
+
+  if (!process.env.REACT_APP_BUILD_SHA) {
+    return null
+  }
+
+  return (
+    <span>
+      <Trans
+        i18nKey="footer.version"
+        t={t}
+        components={{
+          ReleaseLink: process.env.REACT_APP_BUILD_VERSION ? (
+            <Anchor
+              href={githubReleaseLink(process.env.REACT_APP_BUILD_VERSION)}
+              label={process.env.REACT_APP_BUILD_VERSION.replace('v', '')}
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          ) : (
+            <NoReleaseLink />
+          ),
+        }}
+        values={{
+          buildTime: intlDateTimeFormat(Number(process.env.REACT_APP_BUILD_DATETIME)),
+        }}
+        defaults="Version: <ReleaseLink/>"
+      />
+      {isMobile ? <br /> : <span> </span>}
+      <Trans
+        i18nKey="footer.buildDetails"
+        t={t}
+        components={{
+          CommitLink: (
+            <Anchor
+              href={`${githubLink}commit/${process.env.REACT_APP_BUILD_SHA}`}
+              label={process.env.REACT_APP_BUILD_SHA.substring(0, 7)}
+              target="_blank"
+              rel="noopener noreferrer"
+            />
+          ),
+        }}
+        values={{
+          buildTime: intlDateTimeFormat(Number(process.env.REACT_APP_BUILD_DATETIME)),
+        }}
+        defaults="(commit: <CommitLink/>) built at {{buildTime}}"
+      />
+    </span>
+  )
+}

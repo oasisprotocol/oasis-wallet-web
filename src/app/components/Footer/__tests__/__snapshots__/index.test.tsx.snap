@@ -186,7 +186,10 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
     <span
       class="c5"
     >
-      <span>
+      <div
+        class="c1"
+        style="display: inline-flex; flex-direction: row;"
+      >
         <a
           class="c3"
           href="https://wallet.oasis.io/t-c.pdf"
@@ -203,7 +206,7 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
         >
           |
         </div>
-      </span>
+      </div>
       <span>
         <span>
           Version: 
