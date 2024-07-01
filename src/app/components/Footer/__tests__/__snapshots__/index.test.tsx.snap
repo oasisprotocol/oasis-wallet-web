@@ -29,7 +29,21 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   border-radius: 5px;
 }
 
-.c3 {
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,7 +59,17 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   flex-direction: column;
 }
 
-.c2 {
+.c4 {
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  align-self: stretch;
+  height: 0;
+}
+
+.c3 {
   box-sizing: border-box;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
@@ -60,19 +84,19 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   cursor: pointer;
 }
 
-.c2:hover {
+.c3:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c1 {
+.c2 {
   margin-bottom: 12px;
   font-size: 14px;
   line-height: 20px;
   text-align: center;
 }
 
-.c4 {
+.c5 {
   margin-top: 12px;
   font-size: 14px;
   line-height: 20px;
@@ -105,13 +129,13 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
 }
 
 @media only screen and (max-width:768px) {
-  .c3 {
+  .c6 {
     margin-left: 3px;
   }
 }
 
 @media only screen and (max-width:768px) {
-  .c3 {
+  .c6 {
     margin-right: 3px;
   }
 }
@@ -120,87 +144,107 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   class="c0"
   data-testid="footer"
 >
-  <span
+  <div
     class="c1"
+    style="flex: 1; align-self: center;"
   >
-    <span>
-      ROSE Wallet is 
-    </span>
-    <a
+    <span
       class="c2"
-      href="https://github.com/oasisprotocol/oasis-wallet-web/"
-      rel="noopener noreferrer"
-      target="_blank"
+      style="display: inline-flex; flex-direction: column;"
     >
       <span>
-        open source
-      </span>
-    </a>
-    <span>
-       and powered by
-    </span>
-    <div
-      class="c3"
-    >
-      Powered by Oasis Scan API & Oasis gRPC
-    </div>
-  </span>
-  <span
-    class="c4"
-  >
-    <span>
-      <a
-        class="c2"
-        href="https://wallet.oasis.io/t-c.pdf"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
         <span>
-          Terms and Conditions
+          ROSE Wallet is 
         </span>
-      </a>
-      <div
-        class="c3"
-        style="display: inline-block;"
-      >
-        |
-      </div>
+        <a
+          class="c3"
+          href="https://github.com/oasisprotocol/oasis-wallet-web/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span>
+            open source
+          </span>
+        </a>
+        <span>
+           and powered by
+        </span>
+        <br />
+        <span>
+          Oasis Scan API & Oasis gRPC
+        </span>
+      </span>
     </span>
-    <span>
-      Version: 
-    </span>
-    <a
-      class="c2"
-      href="https://github.com/oasisprotocol/oasis-wallet-web/releases/tag/v1.0.0-dev.1"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      1.0.0-dev.1
-    </a>
-    <br />
-    <span>
-      (commit: 
-    </span>
-    <a
-      class="c2"
-      href="https://github.com/oasisprotocol/oasis-wallet-web/commit/sha0000000000000000000000000000000000000"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      sha0000
-    </a>
-    <span>
-      ) built at 1/1/1970, 12:00:00 AM
-    </span>
-  </span>
-  <span
+  </div>
+  <div
     class="c4"
+  />
+  <div
+    class="c1"
+    style="flex: 1; align-self: center;"
+  >
+    <span
+      class="c5"
+    >
+      <span>
+        <a
+          class="c3"
+          href="https://wallet.oasis.io/t-c.pdf"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <span>
+            Terms and Conditions
+          </span>
+        </a>
+        <div
+          class="c6"
+          style="display: inline-block;"
+        >
+          |
+        </div>
+      </span>
+      <span>
+        <span>
+          Version: 
+        </span>
+        <a
+          class="c3"
+          href="https://github.com/oasisprotocol/oasis-wallet-web/releases/tag/v1.0.0-dev.1"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          1.0.0-dev.1
+        </a>
+        <br />
+        <span>
+          (commit: 
+        </span>
+        <a
+          class="c3"
+          href="https://github.com/oasisprotocol/oasis-wallet-web/commit/sha0000000000000000000000000000000000000"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          sha0000
+        </a>
+        <span>
+          ) built at 1/1/1970, 12:00:00 AM
+        </span>
+      </span>
+    </span>
+  </div>
+  <div
+    class="c4"
+  />
+  <span
+    class="c5"
   >
     <span>
       We’d love your feedback at 
     </span>
     <a
-      class="c2"
+      class="c3"
       href="mailto:wallet@oasisprotocol.org"
     >
       <span>

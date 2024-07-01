@@ -63,7 +63,7 @@ describe('<Footer />', () => {
   it('should render backend label', () => {
     renderComponent(store, 'large')
 
-    expect(screen.getByText(/Powered by Oasis Scan API.*/)).toBeInTheDocument()
+    expect(screen.getByText(/Oasis Scan API/)).toBeInTheDocument()
   })
 
   it('should render mobile version of footer', () => {

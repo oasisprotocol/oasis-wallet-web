@@ -193,8 +193,8 @@
     "feedback": "We’d love your feedback at <EmailLink>wallet@oasisprotocol.org</EmailLink>",
     "github": "ROSE Wallet is <GithubLink>open source</GithubLink> and powered by",
     "poweredBy": {
-      "oasismonitor": "Powered by Oasis Monitor API & Oasis gRPC",
-      "oasisscan": "Powered by Oasis Scan API & Oasis gRPC"
+      "oasismonitor": "Oasis Monitor API & Oasis gRPC",
+      "oasisscan": "Oasis Scan API & Oasis gRPC"
     },
     "terms": "<TermsLink>Terms and Conditions</TermsLink>",
     "version": "Version: <ReleaseLink/>"
