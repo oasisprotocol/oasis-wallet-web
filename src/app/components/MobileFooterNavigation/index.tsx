@@ -43,12 +43,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
-export interface MobileFooterNavigationProps {
-  walletHasAccounts: boolean
-  isMobile: boolean
-}
-
-export const MobileFooterNavigation = ({ walletHasAccounts, isMobile }: MobileFooterNavigationProps) => {
+export const MobileFooterNavigation = () => {
   const { t } = useTranslation()
   const address = useSelector(selectAddress)
   const { getParaTimesRoutePath, paraTimesRouteLabel } = useParaTimesNavigation()
@@ -81,10 +76,6 @@ export const MobileFooterNavigation = ({ walletHasAccounts, isMobile }: MobileFo
     ]
     return menuItems
   }, [address, getParaTimesRoutePath, paraTimesRouteLabel, t])
-
-  if (!isMobile || !walletHasAccounts) {
-    return null
-  }
 
   return (
     <StyledMobileFooterNavigation data-testid="mobile-footer-navigation">

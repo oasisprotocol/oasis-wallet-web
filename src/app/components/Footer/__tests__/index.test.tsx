@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styles/theme/ThemeProvider'
 import { configureAppStore } from 'store/configureStore'
 import { Wallet } from 'app/state/wallet/types'
-import userEvent from '@testing-library/user-event'
 
 import { Footer } from '..'
 
@@ -45,9 +44,6 @@ describe('<Footer />', () => {
   it('should render a link with commit sha after toggling', async () => {
     renderComponent(store, 'large')
 
-    const toggleLink = await screen.findByText(/\[show details\]/i)
-    await userEvent.click(toggleLink)
-
     const commitLink = await screen.findByRole('link', { name: /sha0000/i })
     expect(commitLink).toHaveAttribute(
       'href',
@@ -67,7 +63,7 @@ describe('<Footer />', () => {
   it('should render backend label', () => {
     renderComponent(store, 'large')
 
-    expect(screen.getByText(/Powered by Oasis Scan API.*/)).toBeInTheDocument()
+    expect(screen.getByText(/Oasis Scan API/)).toBeInTheDocument()
   })
 
   it('should render mobile version of footer', () => {

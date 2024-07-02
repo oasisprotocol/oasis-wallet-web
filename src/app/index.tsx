@@ -14,7 +14,7 @@ import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import { Outlet } from 'react-router-dom'
 import { FatalErrorHandler } from './components/FatalErrorHandler'
-import { Footer } from './components/Footer'
+import { PageFooter } from './components/Footer/PageFooter'
 import { Navigation } from './components/Sidebar'
 import { Toolbar } from './components/Toolbar'
 import { ModalProvider } from './components/Modal'
@@ -50,7 +50,7 @@ export function App() {
                     {isMobile && <BuildBanner />}
                     <Toolbar />
                     <Outlet />
-                    <Footer />
+                    <PageFooter />
                   </Main>
                 </Box>
               </UnlockGate>
