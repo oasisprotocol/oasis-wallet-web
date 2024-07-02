@@ -8,6 +8,7 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
+  margin-top: auto;
   margin-bottom: 0px;
   -webkit-align-items: center;
   -webkit-box-align: center;
@@ -100,6 +101,12 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   font-size: 14px;
   line-height: 20px;
   text-align: center;
+}
+
+@media only screen and (max-width:768px) {
+  .c0 {
+    margin-top: auto;
+  }
 }
 
 @media only screen and (max-width:768px) {

@@ -43,6 +43,7 @@ export const Footer = memo(() => {
       }}
       margin={{
         bottom: (isMobileOrTablet && !walletHasAccounts) || !isMobileOrTablet ? 'medium' : 'none',
+        top: 'auto',
       }}
       data-testid="footer"
       gap={isMobileOrTablet ? '0' : '20px'}
