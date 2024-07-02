@@ -8,7 +8,7 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   display: flex;
   box-sizing: border-box;
   max-width: 100%;
-  margin-bottom: 48px;
+  margin-bottom: 0px;
   -webkit-align-items: center;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -25,7 +25,6 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 1rem;
-  padding-bottom: 4rem;
   border-radius: 5px;
 }
 
@@ -105,7 +104,7 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
 
 @media only screen and (max-width:768px) {
   .c0 {
-    margin-bottom: 24px;
+    margin-bottom: 0px;
   }
 }
 
@@ -119,12 +118,6 @@ exports[`<Footer /> should render mobile version of footer 1`] = `
 @media only screen and (max-width:768px) {
   .c0 {
     padding-top: 1rem;
-  }
-}
-
-@media only screen and (max-width:768px) {
-  .c0 {
-    padding-bottom: 4rem;
   }
 }
 

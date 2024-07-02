@@ -9,7 +9,6 @@ import { selectHasAccounts } from 'app/state/wallet/selectors'
 import { intlDateTimeFormat } from '../DateFormatter/intlDateTimeFormat'
 import { backend } from 'vendors/backend'
 import { BackendAPIs } from 'config'
-import { mobileFooterNavigationHeight } from '../../../styles/theme/elementSizes'
 import { t } from 'i18next'
 
 const githubLink = 'https://github.com/oasisprotocol/oasis-wallet-web/'
@@ -41,9 +40,10 @@ export const Footer = memo(() => {
       pad={{
         horizontal: 'medium',
         top: isMobileOrTablet ? '1rem' : 'medium',
-        bottom: isMobileOrTablet && walletHasAccounts ? mobileFooterNavigationHeight : 'none',
       }}
-      margin={{ bottom: 'large' }}
+      margin={{
+        bottom: (isMobileOrTablet && !walletHasAccounts) || !isMobileOrTablet ? 'medium' : 'none',
+      }}
       data-testid="footer"
       gap={isMobileOrTablet ? '0' : '20px'}
     >
