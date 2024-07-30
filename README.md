@@ -13,17 +13,6 @@
 
 [demo-video]
 
-- [ROSE Wallet](#rose-wallet)
-  - [Features](#features)
-  - [Getting started](#getting-started)
-    - [Installing and running from source code][install-link]
-    - [Test accounts](#test-accounts)
-  - [Architecture](#architecture)
-  - [Contributing & development](#contributing--development)
-    - [Running the tests](#running-the-tests)
-    - [Code style](#code-style)
-    - [Internationalization](#internationalization)
-
 ## Deploys
 
 - `stable` branch: <https://wallet.oasis.io>
