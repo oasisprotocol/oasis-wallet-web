@@ -15,8 +15,19 @@
 
 ## Deploys
 
-- `stable` branch: <https://wallet.oasis.io>
-- `master` branch: <https://wallet.stg.oasis.io>
+- Production / Stable deploy: <https://wallet.oasis.io>
+
+  The main deploy of the wallet available to the general public.
+
+- Staging deploy: <https://wallet.stg.oasis.io>
+
+  A deploy of the latest released version of the wallet available for users
+  wanting to try out and test the latest version.
+
+- Development deploy: <https://wallet.dev.oasis.io>
+
+  A deploy of the latest code in the `master` branch available for power users
+  and developers to try out the latest (unreleased) version.
 
 ## Features
 
