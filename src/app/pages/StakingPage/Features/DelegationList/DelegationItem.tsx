@@ -5,6 +5,7 @@ import React, { memo } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ValidatorInformations } from '../ValidatorList/ValidatorInformations'
+import { AddressBox } from '../../../../components/AddressBox'
 
 interface DelegationProps {
   data: Delegation | DebondingDelegation
@@ -23,7 +24,12 @@ export const DelegationItem = memo((props: DelegationProps) => {
     <Box pad={{ vertical: 'medium' }} data-testid="validator-item">
       <Box style={{ maxWidth: '85vw' }}>
         {validator && <ValidatorInformations validator={validator} details={details} />}
-        {!validator && <span>{t('validator.unknownValidator', 'Unknown validator')}</span>}
+        {!validator && (
+          <div>
+            <AddressBox address={delegation.validatorAddress} trimMobile />
+            {t('validator.unknownValidator', 'Unknown validator')}
+          </div>
+        )}
         {canReclaim && (
           <ReclaimEscrowForm
             address={delegation.validatorAddress}

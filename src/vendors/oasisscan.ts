@@ -260,7 +260,7 @@ export function parseDelegations(delegations: DelegationRow[]): Delegation[] {
     const parsed: Delegation = {
       amount: parseRoseStringToBaseUnitString(delegation.amount),
       shares: parseRoseStringToBaseUnitString(delegation.shares),
-      validatorAddress: delegation.validatorAddress,
+      validatorAddress: delegation.validatorAddress ?? delegation.entityAddress,
     }
     return parsed
   })

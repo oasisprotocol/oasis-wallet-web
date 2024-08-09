@@ -115,7 +115,10 @@ export const DelegationList = memo((props: Props) => {
       selector: 'amount',
       width: '28ex',
       right: true,
-      cell: datum => datum.amount && <AmountFormatter amount={datum.amount} />,
+      cell: datum =>
+        datum.amount && (
+          <AmountFormatter amount={datum.amount} maximumFractionDigits={2} minimumFractionDigits={2} />
+        ),
       sortable: true,
       sortFunction: (row1, row2) => Number(BigInt(row1.amount) - BigInt(row2.amount)),
     },

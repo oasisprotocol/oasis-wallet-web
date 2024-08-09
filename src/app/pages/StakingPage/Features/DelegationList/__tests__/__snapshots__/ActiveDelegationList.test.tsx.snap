@@ -592,7 +592,7 @@ exports[`<ActiveDelegationList  /> should match snapshot 1`] = `
                     class="c0"
                     style="display: inline-flex; white-space: nowrap; font-family: "Roboto mono", monospace; letter-spacing: 0;"
                   >
-                    0.0000001
+                    0.00
                   </div>
                   <span
                     class="c19"
