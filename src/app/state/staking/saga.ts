@@ -8,8 +8,8 @@ import { WalletError, WalletErrors } from 'types/errors'
 import { parseValidatorsList } from 'vendors/oasisscan'
 
 import { stakingActions } from '.'
-import { getExplorerAPIs, getOasisNic } from '../network/saga'
-import { selectEpoch, selectSelectedNetwork } from '../network/selectors'
+import { getEpoch, getExplorerAPIs, getOasisNic } from '../network/saga'
+import { selectSelectedNetwork } from '../network/selectors'
 import { selectValidators, selectValidatorsNetwork } from './selectors'
 import { CommissionBound, DebondingDelegation, Delegation, Validators } from './types'
 
@@ -156,7 +156,7 @@ export function* getValidatorDetails({ payload: address }: PayloadAction<string>
   const nic = yield* call(getOasisNic)
   const publicKey = yield* call(addressToPublicKey, address)
   const account = yield* call([nic, nic.stakingAccount], { owner: publicKey, height: 0 })
-  const currentEpoch = yield* select(selectEpoch)
+  const currentEpoch = yield* call(getEpoch)
 
   let rawBounds = account.escrow?.commission_schedule?.bounds
   if (!rawBounds) {

@@ -12,7 +12,7 @@ export interface NetworkState {
   chainContext?: string
 
   /** Current epoch */
-  epoch: number
+  epoch?: number
 
   /** Minimum staking amount */
   minimumStakingAmount: number

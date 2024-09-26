@@ -14,7 +14,9 @@ interface CommissionBoundProps {
 const CommissionBound = memo((props: CommissionBoundProps) => {
   const { t } = useTranslation()
   const epoch = useSelector(selectEpoch)
-
+  if (!epoch) {
+    return null
+  }
   const bound = props.bound
   const isCurrentBounds = epoch > bound.epochStart && (!bound.epochEnd || epoch < bound.epochEnd)
 

@@ -3,12 +3,12 @@ import { persistActions } from 'app/state/persist'
 import { selectSkipUnlockingOnInit } from 'app/state/persist/selectors'
 import { config } from 'config'
 import { RECEIVE_INIT_STATE } from 'redux-state-sync'
-import { all, call, put, select, takeLatest } from 'typed-redux-saga'
+import { call, put, select, takeLatest } from 'typed-redux-saga'
 import { backend, backendApi } from 'vendors/backend'
 
 import { networkActions } from '.'
 import { SyncedRootState } from '../persist/types'
-import { selectChainContext, selectSelectedNetwork } from './selectors'
+import { selectChainContext, selectEpoch, selectSelectedNetwork } from './selectors'
 import { NetworkType } from './types'
 import { WalletError, WalletErrors } from 'types/errors'
 
@@ -50,6 +50,24 @@ export function* getChainContext() {
   }
 }
 
+export function* getEpoch() {
+  const epoch = yield* select(selectEpoch)
+  if (epoch) {
+    return epoch
+  }
+
+  try {
+    const selectedNetwork = yield* select(selectSelectedNetwork)
+    const nic = yield* call(getOasisNic, selectedNetwork)
+    const fetchedEpoch = yield* call([nic, nic.beaconGetEpoch], oasis.consensus.HEIGHT_LATEST)
+    const fetchedEpochNumber = Number(fetchedEpoch)
+    yield* put(networkActions.setEpoch(fetchedEpochNumber))
+    return fetchedEpochNumber
+  } catch (error) {
+    throw new WalletError(WalletErrors.UnknownGrpcError, 'Could not fetch data')
+  }
+}
+
 export function* selectNetwork({
   network,
   isInitializing,
@@ -57,13 +75,8 @@ export function* selectNetwork({
   network: NetworkType
   isInitializing: boolean
 }) {
-  const nic = yield* call(getOasisNic, network)
-  const { epoch } = yield* all({
-    epoch: call([nic, nic.beaconGetEpoch], oasis.consensus.HEIGHT_LATEST),
-  })
   const networkState = {
     ticker: config[network].ticker,
-    epoch: Number(epoch), // Will lose precision in a few billion years at 1 epoch per hour
     selectedNetwork: network,
     minimumStakingAmount: config[network].min_delegation,
   }
@@ -112,6 +125,8 @@ export function* networkSaga() {
       yield* put(persistActions.skipUnlocking())
     }
   })
+
+  yield* takeLatest(networkActions.getEpoch, getEpoch)
 
   yield* put(networkActions.initializeNetwork())
 }
