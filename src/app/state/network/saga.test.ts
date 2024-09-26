@@ -1,6 +1,6 @@
 import { expectSaga, testSaga } from 'redux-saga-test-plan'
 import * as matchers from 'redux-saga-test-plan/matchers'
-import { getChainContext, getOasisNic, networkSaga, selectNetwork } from './saga'
+import { getChainContext, getEpoch, getOasisNic, networkSaga, selectNetwork } from './saga'
 import { networkActions } from '.'
 
 describe('Network Sagas', () => {
@@ -56,6 +56,42 @@ describe('Network Sagas', () => {
         ])
         .put(networkActions.setChainContext(mockChainContext))
         .returns(mockChainContext)
+        .run()
+    })
+  })
+
+  describe('getEpoch', () => {
+    const mockEpoch = 35337
+    const mockSelectedNetwork = 'testnet'
+    const mockNic = {
+      beaconGetEpoch: jest.fn().mockResolvedValue(mockEpoch),
+    }
+
+    it('should return existing epoch if available', () => {
+      return expectSaga(getEpoch)
+        .withState({
+          network: {
+            epoch: mockEpoch,
+            selectedNetwork: mockSelectedNetwork,
+          },
+        })
+        .returns(mockEpoch)
+        .run()
+    })
+
+    it('should fetch and return epoch when it is missing in state', () => {
+      return expectSaga(getEpoch)
+        .withState({
+          network: {
+            selectedNetwork: mockSelectedNetwork,
+          },
+        })
+        .provide([
+          [matchers.call.fn(getOasisNic), mockNic],
+          [matchers.call.fn(mockNic.beaconGetEpoch), mockEpoch],
+        ])
+        .put(networkActions.setEpoch(mockEpoch))
+        .returns(mockEpoch)
         .run()
     })
   })

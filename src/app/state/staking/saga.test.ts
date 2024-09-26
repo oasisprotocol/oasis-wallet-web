@@ -76,7 +76,11 @@ describe('Staking Sagas', () => {
       nic.stakingAccount.mockResolvedValue({})
 
       return expectSaga(stakingSaga)
-        .withState({})
+        .withState({
+          network: {
+            epoch: 35337,
+          },
+        })
         .provide(providers)
         .dispatch(stakingActions.validatorSelected('oasis1qqzz2le7nua2hvrkjrc9kc6n08ycs9a80chejmr7'))
         .put.actionType(stakingActions.updateValidatorDetails.type)

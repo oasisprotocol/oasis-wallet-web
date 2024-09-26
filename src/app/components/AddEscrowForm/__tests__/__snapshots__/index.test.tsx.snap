@@ -316,14 +316,16 @@ exports[`<AddEscrowForm /> should match snapshot 1`] = `
           >
             <span
               class="c5"
-            />
+            >
+              TEST
+            </span>
           </div>
           <input
             autocomplete="off"
             class="c6"
             data-testid="amount"
             id="amount-id"
-            min="0"
+            min="100"
             name="amount"
             placeholder="common.amount"
             required=""
@@ -356,7 +358,7 @@ exports[`<AddEscrowForm /> should match snapshot 1`] = `
                   class="notranslate"
                   translate="no"
                 >
-                   
+                   TEST
                 </span>
               </span>
             </span>

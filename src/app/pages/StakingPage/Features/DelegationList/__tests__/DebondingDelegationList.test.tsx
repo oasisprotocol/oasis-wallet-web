@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import { DebondingDelegationList } from '../DebondingDelegationList'
 import { configureAppStore } from 'store/configureStore'
 import { stakingActions } from 'app/state/staking'
+import { NetworkState } from '../../../../../../app/state/network/types'
 import { ThemeProvider } from '../../../../../../styles/theme/ThemeProvider'
 import { MemoryRouter } from 'react-router-dom'
 
@@ -25,7 +26,12 @@ describe('<DebondingDelegationList  />', () => {
   let store: ReturnType<typeof configureAppStore>
 
   beforeEach(() => {
-    store = configureAppStore()
+    store = configureAppStore({
+      network: {
+        ticker: 'TEST',
+        epoch: 4,
+      } as NetworkState,
+    })
   })
 
   it('should match snapshot', () => {
