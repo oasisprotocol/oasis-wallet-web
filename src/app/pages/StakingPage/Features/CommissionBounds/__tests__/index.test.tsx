@@ -21,7 +21,11 @@ describe('<CommissionBounds  />', () => {
   let store: ReturnType<typeof configureAppStore>
 
   beforeEach(() => {
-    store = configureAppStore()
+    store = configureAppStore({
+      network: {
+        epoch: 0,
+      } as NetworkState,
+    })
   })
 
   it('should match snapshot when empty', () => {
@@ -43,7 +47,7 @@ describe('<CommissionBounds  />', () => {
     store = configureAppStore()
     const component = renderComponent(store, [{ epochStart: 0, lower: 0.1, upper: 0.2, epochEnd: 100 }])
     act(() => {
-      store.dispatch(networkActions.networkSelected({ epoch: 50 } as NetworkState))
+      store.dispatch(networkActions.setEpoch(50))
     })
     expect(component.baseElement).toMatchSnapshot()
   })

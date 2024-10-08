@@ -608,7 +608,7 @@ exports[`<ActiveDelegationList  /> should match snapshot 1`] = `
                         class="notranslate"
                         translate="no"
                       >
-                         
+                         TEST
                       </span>
                     </span>
                   </span>

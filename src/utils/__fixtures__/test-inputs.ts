@@ -73,7 +73,7 @@ export const privateKeyUnlockedState = {
     ticker: 'ROSE',
     chainContext: '',
     selectedNetwork: 'mainnet',
-    epoch: 18372,
+    epoch: 0,
     minimumStakingAmount: 100,
   },
   paraTimes: {
@@ -274,7 +274,7 @@ export const walletExtensionV0UnlockedState = {
     chainContext: '',
     ticker: 'ROSE',
     selectedNetwork: 'mainnet',
-    epoch: 27884,
+    epoch: 0,
     minimumStakingAmount: 100,
   },
   paraTimes: {

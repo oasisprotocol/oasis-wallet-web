@@ -7,6 +7,12 @@ import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styles/theme/ThemeProvider'
 import { FromMnemonic } from '..'
 
+const mockDispatch = jest.fn()
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useDispatch: () => mockDispatch,
+}))
+
 const renderPage = (store: any) =>
   render(
     <Provider store={store}>
@@ -58,7 +64,7 @@ describe('<FromMnemonic/>', () => {
     expect(errorElem).toBeNull()
   })
 
-  it('should display account selection modal window', async () => {
+  it('should call the success handler and dispatch Redux action', async () => {
     renderPage(store)
     const textbox = screen.getByRole('textbox') as HTMLInputElement
     const button = screen.getByRole('button', { name: 'openWallet.mnemonic.import' })
@@ -66,6 +72,9 @@ describe('<FromMnemonic/>', () => {
     await userEvent.type(textbox, 'echo toward hold roast rather reduce cute civil equal whale wait conduct')
     await userEvent.click(button)
 
-    expect(await screen.findByText('openWallet.importAccounts.selectWallets')).toBeInTheDocument()
+    expect(mockDispatch).toHaveBeenCalledWith({
+      payload: 'echo toward hold roast rather reduce cute civil equal whale wait conduct',
+      type: 'importAccounts/enumerateAccountsFromMnemonic',
+    })
   })
 })

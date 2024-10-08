@@ -30,6 +30,7 @@ type Props =
     }
   | {
       type: 'debonding'
+      currentEpoch?: number
       delegations: DebondingDelegation[]
     }
 
@@ -141,7 +142,13 @@ export const DelegationList = memo((props: Props) => {
       id: 'debondingTimeEnd',
       selector: 'epoch',
       sortable: true,
-      cell: datum => <TimeToEpoch epoch={(datum as DebondingDelegation).epoch} />,
+      cell: datum => {
+        if ('currentEpoch' in props) {
+          return (
+            <TimeToEpoch currentEpoch={props.currentEpoch} epoch={(datum as DebondingDelegation).epoch} />
+          )
+        }
+      },
     },
   }
 

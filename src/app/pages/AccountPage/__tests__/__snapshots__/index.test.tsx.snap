@@ -966,7 +966,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -989,7 +989,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1013,7 +1013,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1036,7 +1036,7 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
                     class="notranslate"
                     translate="no"
                   >
-                     
+                     TEST
                   </span>
                 </span>
               </span>
@@ -1123,7 +1123,9 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
                       >
                         <span
                           class="c15"
-                        />
+                        >
+                          TEST
+                        </span>
                       </div>
                       <input
                         autocomplete="off"
@@ -1185,4 +1187,4 @@ exports[`<AccountPage  /> should match snapshot 1`] = `
 </div>
 `;
 
-exports[`<AccountPage  /> with missing delegations 1`] = `"Total-Available100.0  Staked-Debonding-"`;
+exports[`<AccountPage  /> with missing delegations 1`] = `"Total-Available100.0 TEST Staked-Debonding-"`;
